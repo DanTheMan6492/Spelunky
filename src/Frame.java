@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Blocks.Block;
+import Blocks.KaliAltar;
+
 import Entities.Player;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
@@ -20,13 +23,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static Player Ana;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
+	Block amogus = new Block(12,122,2);
 
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bg.paint(g);
 		Ana.paint(g);
-		
+		System.out.println(amogus.getClass());
 	}
 	
 	public static void main(String[] arg) {
