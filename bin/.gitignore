@@ -1,6 +1,19 @@
+<<<<<<< HEAD
 /imgs/
 /Background.class
 /Blocks/
 /Camera.class
 /Entities/
 /Frame.class
+=======
+/Entities/
+/imgs/
+/Background.class
+/Camera.class
+/Frame.class
+/Money.class
+/Timer.class
+/Item/
+/Helper.class
+/Test.class
+>>>>>>> branch 'main' of https://github.com/DanTheMan6492/Spelunky.git
