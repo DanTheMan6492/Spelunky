@@ -14,6 +14,10 @@ public class Money
 	
 	public void spendMoney(int x)
 	{
-		money -= x;
+		if (x>money){}
+		else
+		{
+			money -= x;
+		}
 	}
 }
