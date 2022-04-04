@@ -14,10 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Entities.Player;
+import Block.Block;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	static Player Ana;
+	static Block test;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 
@@ -37,10 +39,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		JFrame f = new JFrame("Nyan Cat: Lost In Space");
 		Ana = new Player(0, 0, 0, 0, true, "");
 		Ana.update();
-		f.setSize(new Dimension(400, 600));
+		test = new Block(0, 400, 100, 100);
+		f.setSize(new Dimension(400, 1000));
 		f.setBackground(Color.blue);
 		f.add(this);
-		f.setResizable(false);
+		f.setResizable(true);
 		f.setLayout(new GridLayout(1,2));
 		f.addMouseListener(this);
 		f.addKeyListener(this);

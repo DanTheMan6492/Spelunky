@@ -21,12 +21,26 @@ public class Player extends Entity{
 	
 	public Player(double x, double y, double w, double h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		
+		grounded = false;
 		frame = 0;
 	}
 	
 	@Override
 	public void update() {
+		if(!grounded) {
+			System.out.println(vy);
+			vy-= 2;
+			y -= vy;
+			
+		}
+		
+		double ratiox = -vy/(vy+vx);
+		double ratioy = -vx/(vy+vx);
+		while(checkClipping() != 0) {
+			x += ratiox;
+			y += ratioy;
+		}
+		
 		frame++;
 		if(state.equals("Idle")) {
 			Sprite = splice(0, 2);
@@ -36,7 +50,7 @@ public class Player extends Entity{
 		}
 		
 	
-        
+		tx.setToTranslation(x, y);
 		frame++;
 	}
 	

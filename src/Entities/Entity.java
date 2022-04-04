@@ -6,17 +6,43 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.net.URL;
+import Block.Block;
 
 public class Entity {
 	
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
-	public double x, y;
+	public double  x,  y;
+	public double vx, vy;
 	public double w, h;
 	public boolean visible;
     public Image Sprite;
     public AffineTransform tx;
+    public boolean grounded = false;
 	
+    public int checkClipping() {
+  
+    	for(Block block: Block.Blocks) {
+    		double x2 = x + w;
+    		double y2 = y + h;
+    		
+    		double ex2 = block.x + block.width;
+    		double ey2 = block.y + block.height;
+    		
+    		if((x>block.x) != (x2>block.x))
+    			if((y>block.y) != (y2>block.y))
+    				return 1;
+    		
+    		if((block.x>x) != (ex2>x))
+    			if((block.y>y) != (ey2>y))
+    				return 1;
+    		
+    	}
+    	return 0;
+    }
     
+    public void Destroy() {
+    	
+    }
     public Entity checkCollision() {
     	
     	for(Entity entity: entities) {
@@ -38,6 +64,7 @@ public class Entity {
     	return null;
     }
     
+    
 	public Entity(double x, double y, 
 				  double w, double h, 
 				  boolean visible,
@@ -48,7 +75,7 @@ public class Entity {
 		this.h = h;
 		this.visible = visible;
 		Sprite = getImage(path);
-		
+		tx = AffineTransform.getTranslateInstance(x, y);
 		entities.add(this);
 	}
 	
@@ -61,6 +88,7 @@ public class Entity {
 	}
 	
 	public void update() {
+		tx.setToTranslation(x, y);
 	}
 
 	protected Image getImage(String path) {
