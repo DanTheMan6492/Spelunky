@@ -22,7 +22,8 @@ public class KaliAltar extends Block{
     	//something to detect bodies/corpses
     }
     
-    public void gift(int favor) {
+    public void gift(int favor) 
+    {
     	//add favor to spelunker's favor
     	switch(favor) {
     	case 8:
