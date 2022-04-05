@@ -18,10 +18,12 @@ public class Block {
     public Image Sprite;
     public AffineTransform tx;
 	
-    public Block(int id, int x, int y) {
+    public Block(int id, int x, int y, boolean breakable) {
     	if(this.getClass().equals("class Blocks.Block")) {
     		int random = (int)(Math.random() * 100);
     	}
+    	width = 64;
+    	height = 64;
     }
     
     public int[] getGrid() {
@@ -31,6 +33,10 @@ public class Block {
     
 	public void paint(Graphics g) {
 		
+	}
+	
+	public void Break() {
+		//something to spawn the item that it carries
 	}
 	
 	public void update() {

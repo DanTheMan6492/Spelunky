@@ -8,18 +8,16 @@ import java.util.ArrayList;
 import java.net.URL;
 
 public class KaliAltar extends Block{
-	
-	public int x, y, width, height;
+
 	public static boolean[] rewards = {true, true};
-    public Image Sprite;
-    public AffineTransform tx;
 	
     public KaliAltar(int id, int x, int y) {
-    	super(id, x, y);
+    	super(id, x, y, true);
+    	super.width = 128;
     }
     
     public void detect() {
-    	//something to detect bodies/corpses
+    	//something to detect bodies/corpses, if there is one remove it and call the gift method
     }
     
     public void gift(int favor) 
@@ -47,22 +45,4 @@ public class KaliAltar extends Block{
     public void punish() {
     	
     }
-    
-	public void paint(Graphics g) {
-		
-	}
-	
-	public void update() {
-	}
-
-	protected Image getImage(String path) {
-
-		Image tempImage = null;
-		try {
-			URL imageURL = KaliAltar.class.getResource(path);
-			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {e.printStackTrace();}
-		return tempImage;
-	}
-	
 }

@@ -23,7 +23,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static Player Ana;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
-	Block amogus = new Block(12,122,2);
+	Block amogus = new Block(12,122,2, true);
 
 
 	public void paint(Graphics g) {
