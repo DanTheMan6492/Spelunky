@@ -37,6 +37,7 @@ public class Player extends Entity{
 		double ratiox = -vy/(vy+vx);
 		double ratioy = -vx/(vy+vx);
 		while(checkClipping() != 0) {
+			System.out.println("no Bitches?");
 			x += ratiox;
 			y += ratioy;
 		}
