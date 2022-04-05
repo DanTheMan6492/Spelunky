@@ -19,8 +19,8 @@ public class Entity {
     public AffineTransform tx;
     public boolean grounded = false;
 	
-    public int checkClipping() {
-  
+    public Block checkClipping() {
+    	  
     	for(Block block: Block.Blocks) {
     		double x2 = x + w;
     		double y2 = y + h;
@@ -30,14 +30,53 @@ public class Entity {
     		
     		if((x>block.x) != (x2>block.x))
     			if((y>block.y) != (y2>block.y))
-    				return 1;
+    				return block;
     		
     		if((block.x>x) != (ex2>x))
     			if((block.y>y) != (ey2>y))
-    				return 1;
+    				return block;
     		
     	}
+    	return null;
+    }
+    
+    public int checkClipping(Block block) {
+    	
+    	if(block == null)
+    		return 0;
+    	
+   		double x2 = x + w;
+    	double y2 = y + h;
+    		
+    	double ex2 = block.x + block.width;
+    	double ey2 = block.y + block.height;
+    		
+    	if((x>block.x) != (x2>block.x))
+    		if((y>block.y) != (y2>block.y))
+    			return 1;
+    		
+    	if((block.x>x) != (ex2>x))
+    		if((block.y>y) != (ey2>y))
+    			return 1;
+    		
     	return 0;
+    }
+    
+    public boolean checkStanding(Block block) {
+    	
+    	if(block == null)
+    		return false;
+    	
+    	double x2 = x + w;
+    	double ex2 = block.x + block.width;
+    		
+    	if((x>block.x) != (x2>block.x))
+    		return true;
+    		
+    	if((block.x>x) != (ex2>x))
+    		return true;
+    		
+    	return false;
     }
     
     public void Destroy() {

@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Block.Block;
+
 import java.awt.Graphics2D;
 
 public class Player extends Entity{
@@ -28,29 +30,47 @@ public class Player extends Entity{
 	@Override
 	public void update() {
 		if(!grounded) {
-			System.out.println(vy);
-			vy-= 2;
+			state = "Falling";
+			vy -= 2;
 			y -= vy;
-			
+		} else {
+			if(vx == 0) {
+				state = "Standing";
+			} else {
+				state = "Walking";
+			}
 		}
 		
-		double ratiox = -vy/(vy+vx);
-		double ratioy = -vx/(vy+vx);
-		while(checkClipping() != 0) {
-			System.out.println("no Bitches?");
+		double ratioy = -vy/(vy+vx);
+		double ratiox = -vx/(vy+vx);
+		Block block = checkClipping();
+		while(checkClipping(block) != 0) {
 			x += ratiox;
 			y += ratioy;
 		}
 		
-		frame++;
-		if(state.equals("Idle")) {
-			Sprite = splice(0, 2);
-		}
-		else {
-			Sprite = splice(0, 1 + frame%7);
+		if(checkStanding(block)) {
+			if(!grounded)
+				frame = 0;
+			grounded = true;
 		}
 		
-	
+		switch(state) {
+		case "Standing":
+			Sprite = splice(0, 0);
+			break;
+		case "Falling":
+			if(frame < 6) {
+				Sprite = splice(9, 4+frame/2);
+			} else {
+				Sprite = splice(9, 7);
+			}
+			break;
+		case "Walking":
+			Sprite = splice(0, 1 + frame%7);
+			break;
+		}
+		
 		tx.setToTranslation(x, y);
 		frame++;
 	}
