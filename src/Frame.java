@@ -40,7 +40,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
-		JFrame f = new JFrame("Nyan Cat: Lost In Space");
+		JFrame f = new JFrame("Spelunky Lite");
 		Ana = new Player(0, 0, 0, 0, true, "");
 		Ana.update();
 		test = new Block(0, 400, 100, 100);
