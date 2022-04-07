@@ -17,13 +17,17 @@ public class Block {
 	public Entity item;
     public Image Sprite;
     public AffineTransform tx;
+    public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
     public Block(int id, int x, int y, boolean breakable) {
     	if(this.getClass().equals("class Blocks.Block")) {
     		int random = (int)(Math.random() * 100);
     	}
+    	this.x = x;
+    	this.y = y;
     	width = 64;
     	height = 64;
+    	blocks.add(this);
     }
     
     public int[] getGrid() {

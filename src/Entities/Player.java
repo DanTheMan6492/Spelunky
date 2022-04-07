@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Block.Block;
+import Blocks.Block;
 
 import java.awt.Graphics2D;
 
@@ -29,10 +29,16 @@ public class Player extends Entity{
 	
 	@Override
 	public void update() {
+		double temp = vy;
 		if(!grounded) {
 			state = "Falling";
 			vy -= 2;
 			y -= vy;
+			if(vy < 0) {
+				state = "Falling";
+			} else {
+				state = "Jumping";
+			}
 		} else {
 			if(vx == 0) {
 				state = "Standing";
@@ -56,19 +62,19 @@ public class Player extends Entity{
 		}
 		
 		switch(state) {
-		case "Standing":
-			Sprite = splice(0, 0);
-			break;
-		case "Falling":
-			if(frame < 6) {
-				Sprite = splice(9, 4+frame/2);
-			} else {
-				Sprite = splice(9, 7);
-			}
-			break;
-		case "Walking":
-			Sprite = splice(0, 1 + frame%7);
-			break;
+			case "Standing":
+				Sprite = splice(0, 0);
+				break;
+			case "Falling":
+				if(frame < 6) {
+					Sprite = splice(9, 4+frame/2);
+				} else {
+					Sprite = splice(9, 7);
+				}
+				break;
+			case "Walking":
+				Sprite = splice(0, 1 + frame%7);
+				break;
 		}
 		
 		tx.setToTranslation(x, y);

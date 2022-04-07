@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.net.URL;
-import Block.Block;
+import Blocks.Block;
 
 public class Entity {
 	
@@ -21,7 +21,7 @@ public class Entity {
 	
     public Block checkClipping() {
     	  
-    	for(Block block: Block.Blocks) {
+    	for(Block block: Block.blocks) {
     		double x2 = x + w;
     		double y2 = y + h;
     		
