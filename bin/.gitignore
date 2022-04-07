@@ -1,5 +1,12 @@
-/Blcoks/
-/Entities/
+/imgs/
+/Background.class
 /Block/
 /Blocks/
-/imgs/
+/Camera.class
+/Entities/
+/Frame.class
+/Items/
+/Money.class
+/Objects/
+/Timer.class
+/Treasure/
