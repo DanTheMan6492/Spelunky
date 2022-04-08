@@ -15,9 +15,7 @@ import javax.swing.Timer;
 
 import Blocks.Block;
 import Blocks.KaliAltar;
-
 import Entities.Player;
-import Block.Block;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
@@ -30,9 +28,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		bg.paint(g);
 		Ana.paint(g);
-		System.out.println(amogus.getClass());
 	}
 	
 	public static void main(String[] arg) {
@@ -43,7 +39,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		JFrame f = new JFrame("Spelunky Lite");
 		Ana = new Player(0, 0, 0, 0, true, "");
 		Ana.update();
-		test = new Block(0, 400, 100, 100);
+		test = new Block(0, 0, 400, false);
 		f.setSize(new Dimension(400, 1000));
 		f.setBackground(Color.blue);
 		f.add(this);
@@ -93,7 +89,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-			System.out.println(arg0.getKeyCode());
 
 	}
 
