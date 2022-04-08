@@ -18,7 +18,7 @@ public class Timer
 	public void stageEnd()
 	{
 		totalSeconds += seconds;
-		totalMinutes = totalSeconds/60;
+		totalMinutes += (minutes + totalSeconds/60);
 		totalSeconds = totalSeconds%60;
 		seconds = 0;
 		minutes = 0;
