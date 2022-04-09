@@ -1,2 +1,17 @@
+<<<<<<< HEAD
 /Entities/
 /Blocks/
+=======
+/Controller/
+/imgs/
+/Background.class
+/Blocks/
+/Camera.class
+/Entities/
+/Frame.class
+/Items/
+/Objects/
+/Treasure/
+/Money.class
+/Timer.class
+>>>>>>> branch 'main' of https://github.com/DanTheMan6492/Spelunky.git
