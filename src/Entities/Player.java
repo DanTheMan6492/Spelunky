@@ -20,6 +20,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	BufferedImage spriteSheet;
 	int character = 1;
+	int dir;
 	
 	public Player(double x, double y, double w, double h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
@@ -27,9 +28,21 @@ public class Player extends Entity{
 		frame = 0;
 	}
 	
+	public void jump() {
+		if(grounded) {
+			vy = 30;
+		}
+		grounded = false;
+	}
+	
 	@Override
 	public void update() {
 		double temp = vy;
+		if(vx < 0) {
+			dir = -1;
+		} else {
+			dir = 1;
+		}
 		if(!grounded) {
 			state = "Falling";
 			vy -= 2;
@@ -46,9 +59,11 @@ public class Player extends Entity{
 				state = "Walking";
 			}
 		}
+		x+=vx;
 		
 		double ratioy = -vy/(vy+vx);
 		double ratiox = -vx/(vy+vx);
+		
 		Block block = checkClipping();
 		while(checkClipping(block) != 0) {
 			x += ratiox;
@@ -57,6 +72,7 @@ public class Player extends Entity{
 		
 		if(checkStanding(block)) {
 			if(!grounded)
+				state = "Standing";
 				frame = 0;
 			grounded = true;
 		}

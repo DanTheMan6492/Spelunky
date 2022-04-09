@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,26 +18,79 @@ import Blocks.Block;
 import Blocks.KaliAltar;
 import Entities.Player;
 
+import com.github.strikerx3.jxinput.XInputAxes;
+import com.github.strikerx3.jxinput.XInputAxesDelta;
+import com.github.strikerx3.jxinput.XInputButtons;
+import com.github.strikerx3.jxinput.XInputButtonsDelta;
+import com.github.strikerx3.jxinput.XInputComponents;
+import com.github.strikerx3.jxinput.XInputComponentsDelta;
+import com.github.strikerx3.jxinput.XInputDevice;
+import com.github.strikerx3.jxinput.enums.XInputAxis;
+import com.github.strikerx3.jxinput.enums.XInputButton;
+import com.github.strikerx3.jxinput.exceptions.XInputNotLoadedException;
+import com.github.strikerx3.jxinput.listener.SimpleXInputDeviceListener;
+import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
+
+
+
+
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
+	
 	
 	static Player Ana;
 	static Block test;
+	static XInputDevice[] devices;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 	Block amogus = new Block(12,122,2, true);
 
-
+	
 	public void paint(Graphics g) {
+		for(int i =0 ; i < devices.length; i++) {
+
+			XInputDevice device = devices[i];
+			if (device.poll()) {
+			    // Retrieve the delta
+			    XInputComponentsDelta delta = device.getDelta();
+
+			    XInputButtonsDelta buttons = delta.getButtons();
+			    XInputAxesDelta axes = delta.getAxes();
+
+			    // Retrieve button state change
+			    if (buttons.isPressed(XInputButton.A)) {
+			        Ana.jump();
+			    } else if (buttons.isReleased(XInputButton.A)) {
+			    	System.out.println("A");
+			    }
+
+			    // Retrieve axis state change.
+			    // The class provides methods for each axis and a method for providing an XInputAxis
+			    float accelerationDelta = axes.getRTDelta();
+			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
+			    System.out.println(brakeDelta);
+			    Ana.vx -= brakeDelta*10;
+			} else {
+			    // Controller is not connected; display a message
+			}
+		}
 		super.paintComponent(g);
 		Ana.paint(g);
 	}
 	
 	public static void main(String[] arg) {
+		try {
+			devices = XInputDevice.getAllDevices();
+			System.out.println(devices.length);
+		} catch (XInputNotLoadedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		Frame f = new Frame();
 	}
 	
 	public Frame() {
 		JFrame f = new JFrame("Spelunky Lite");
+		
 		Ana = new Player(0, 0, 0, 0, true, "");
 		Ana.update();
 		test = new Block(0, 0, 400, false);
@@ -103,5 +157,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
 
 }

@@ -25,8 +25,8 @@ public class Block {
     	}
     	this.x = x;
     	this.y = y;
-    	width = 64;
-    	height = 64;
+    	width = 128;
+    	height = 128;
     	blocks.add(this);
     }
     
