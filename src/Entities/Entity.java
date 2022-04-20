@@ -18,6 +18,7 @@ public class Entity {
     public Image Sprite;
     public AffineTransform tx;
     public boolean grounded = false;
+	int dir;
 	
     public Block checkClipping() {
     	  
@@ -123,7 +124,7 @@ public class Entity {
 		if(!visible)
 			return;
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
+		g2.drawImage(Sprite, (int) x, (int) y, dir * (int) w, (int) h, null);
 	}
 	
 	public void update() {

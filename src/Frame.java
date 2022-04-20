@@ -60,14 +60,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    if (buttons.isPressed(XInputButton.A)) {
 			        Ana.jump();
 			    } else if (buttons.isReleased(XInputButton.A)) {
-			    	System.out.println("A");
 			    }
 
 			    // Retrieve axis state change.
 			    // The class provides methods for each axis and a method for providing an XInputAxis
 			    float accelerationDelta = axes.getRTDelta();
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
-			    System.out.println(brakeDelta);
 			    Ana.vx -= brakeDelta*10;
 			} else {
 			    // Controller is not connected; display a message
@@ -91,9 +89,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public Frame() {
 		JFrame f = new JFrame("Spelunky Lite");
 		
-		Ana = new Player(0, 0, 0, 0, true, "");
+		Ana = new Player(0, 0, 128, 128, true, "");
 		Ana.update();
-		test = new Block(0, 0, 400, false);
+		test = new Block(0, 0, 600, false);
 		f.setSize(new Dimension(400, 1000));
 		f.setBackground(Color.blue);
 		f.add(this);
