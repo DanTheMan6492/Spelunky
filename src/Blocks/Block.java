@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class Block {
 	
-	public int x, y, width, height;
+	public int x, y, width, height, killX, killY;
 	boolean breakable;
 	public Entity item;
     public Image Sprite;
@@ -27,6 +27,8 @@ public class Block {
     	this.y = y;
     	width = 128;
     	height = 128;
+    	killX = x + width/2;
+    	killY = y + height/2;
     	blocks.add(this);
     }
     
@@ -36,7 +38,7 @@ public class Block {
     }
     
 	public void paint(Graphics g) {
-		
+		g.drawRect(x, y, width, height);
 	}
 	
 	public void Break() {

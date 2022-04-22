@@ -42,8 +42,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static XInputDevice[] devices;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
-	Block amogus = new Block(12,122,2, true);
-
 	
 	public void paint(Graphics g) {
 		for(int i =0 ; i < devices.length; i++) {

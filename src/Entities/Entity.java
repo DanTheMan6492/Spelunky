@@ -27,7 +27,7 @@ public class Entity {
     		double y2 = y + h;
     		
     		double ex2 = block.x + block.width;
-    		double ey2 = block.y + block.height;
+    		double ey2 = block.y + block.width;
     		
     		if((x>block.x) != (x2>block.x))
     			if((y>block.y) != (y2>block.y))
@@ -42,24 +42,16 @@ public class Entity {
     }
     
     public int checkClipping(Block block) {
-    	
-    	if(block == null)
-    		return 0;
-    	
-   		double x2 = x + w;
-    	double y2 = y + h;
+    	//return 2 if entity will be crushed by block, 1 if they will be pushed by a block, and 0 if they are not touching the block
+    	if(block != null) {
+    		if(block.killX > x && block.killX < x + w && block.killY > y && block.killY < y + h) {
+    			return 2;
+    		}
     		
-    	double ex2 = block.x + block.width;
-    	double ey2 = block.y + block.height;
-    		
-    	if((x>block.x) != (x2>block.x))
-    		if((y>block.y) != (y2>block.y))
+    		if(x + w > block.x && x < block.x + block.width && y + h > block.y && y < block.y + block.height) {
     			return 1;
-    		
-    	if((block.x>x) != (ex2>x))
-    		if((block.y>y) != (ey2>y))
-    			return 1;
-    		
+    		}
+    	}
     	return 0;
     }
     
@@ -83,6 +75,7 @@ public class Entity {
     public void Destroy() {
     	
     }
+    
     public Entity checkCollision() {
     	
     	for(Entity entity: entities) {
