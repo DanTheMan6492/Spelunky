@@ -37,11 +37,11 @@ public class Player extends Entity{
 	
 	@Override
 	public void update() {
-		System.out.println(y);
+		System.out.println(x);
 		double temp = vy;
-		if(vx < 0) 
+		if(vx < -0.5) 
 			dir = -1;
-		else if(vx > 0)
+		else if(vx > 0.5)
 			dir = 1;
 		
 		if(!grounded) {
@@ -108,8 +108,18 @@ public class Player extends Entity{
 		frame++;
 	}
 	
+	@Override
+	public void paint(Graphics g) {
+		update();
+		if(!visible)
+			return;
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(Sprite, (int) x, (int) y, dir * 114, 114, null);
+	}
+	
+	
 	public BufferedImage splice(int row, int col) {
-		int width = 128;
+		int width = 114;
 		int border = 0;
 		BufferedImage sprite = new BufferedImage(width, width, BufferedImage.TYPE_INT_ARGB);
 		String path = "src/imgs/Characters/Spliced/"+String.valueOf(character) + "-" + String.valueOf(row) + "-" + String.valueOf(col) + ".png";

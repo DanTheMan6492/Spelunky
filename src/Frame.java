@@ -64,7 +64,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    // The class provides methods for each axis and a method for providing an XInputAxis
 			    float accelerationDelta = axes.getRTDelta();
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
-			    Ana.vx -= brakeDelta*10;
+			     	Ana.vx -= brakeDelta*10;
 			} else {
 			    // Controller is not connected; display a message
 			}
