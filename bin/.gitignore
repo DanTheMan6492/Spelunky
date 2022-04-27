@@ -1,10 +1,14 @@
+/imgs/
 /Background.class
 /Blocks/
 /Camera.class
 /Entities/
-/Frame.class
 /Items/
+/Objects/
+/Treasure/
+/jxinput-1.0.0.jar
+/Frame.class
+/LevelGen.class
 /Money.class
 /Timer.class
-/imgs/
-/jxinput-1.0.0.jar
+/ChunkGen.class
