@@ -2,6 +2,7 @@ package Entities;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -114,12 +115,12 @@ public class Player extends Entity{
 		if(!visible)
 			return;
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) x, (int) y, dir * 114, 114, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 	
 	
 	public BufferedImage splice(int row, int col) {
-		int width = 114;
+		int width = 128;
 		int border = 0;
 		BufferedImage sprite = new BufferedImage(width, width, BufferedImage.TYPE_INT_ARGB);
 		String path = "src/imgs/Characters/Spliced/"+String.valueOf(character) + "-" + String.valueOf(row) + "-" + String.valueOf(col) + ".png";
@@ -135,11 +136,11 @@ public class Player extends Entity{
 			e.printStackTrace();
 		}
 		
-		int xOffset = border + col*(width+2*border);
-		int yOffset = border + row*(width+2*border);
+		int xOffset = border + col*(width);
+		int yOffset = border + row*(width);
 		
-        for(int y = 0; y < 114; y++){
-        	for(int x = 0; x < 114; x++){
+        for(int y = 0; y < 128; y++){
+        	for(int x = 0; x < 128; x++){
         		sprite.setRGB(x, y, spriteSheet.getRGB(x+xOffset, y+yOffset));
             }
         }
@@ -150,7 +151,6 @@ public class Player extends Entity{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
         return sprite;
 		
 	}
