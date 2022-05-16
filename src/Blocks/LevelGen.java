@@ -49,7 +49,6 @@ public class LevelGen {
 				break;
 			}
 			
-			int temp = dir;
 			dir = (int) (Math.random() * 3) - 1;
 			
 			
