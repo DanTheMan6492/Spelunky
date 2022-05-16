@@ -38,7 +38,6 @@ public class Player extends Entity{
 	
 	@Override
 	public void update() {
-		System.out.println(x);
 		double temp = vy;
 		if(vx < -0.5) 
 			dir = -1;

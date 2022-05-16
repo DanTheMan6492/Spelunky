@@ -1,43 +1,87 @@
 package Blocks;
 
 public class LevelGen {
+	
+	public static int level = 1;
 
 	public static void generateSections(int[][] levelSex) {
+		
+		
 		int eIndex = (int) (Math.random() * 4);
 		levelSex[0][eIndex] = 18;
 		
 		int dir = (int) (Math.random() * 3) - 1;
 		int currlevel = 0;
-		boolean flag = false;
+		
+		if(dir == 0) {
+			currlevel++;
+		} else {
+			eIndex += dir;
+			if(eIndex < 0) {
+				eIndex -= dir;
+				dir = 0;
+				currlevel++;
+			} else if(eIndex > 3) {
+				eIndex -= dir;
+				dir = 0;
+				currlevel++;
+			}
+		}
+		
+		boolean shop = false;
+		if(level == 1) {
+			shop = true;
+		}
 		
 		while(true) {
+			
+			System.out.println(dir);
 			boolean[] index = {false, false, false, false};
-			index[1+dir] = true;
-			if(flag)
+			switch(dir) {
+			case -1:
+				index[2] = true;
+				break;
+			case 0:
 				index[3] = true;
+				break;
+			case 1:
+				index[0] = true;
+				break;
+			}
+			
+			int temp = dir;
+			dir = (int) (Math.random() * 3) - 1;
+			
+			
+			int x = 0;
+			int y = 0;
+			
+			
+			if(dir != 0){
+				x = dir;
+				if(eIndex + x < 0) {
+					dir = 0;
+					x = 0;
+				} else if(eIndex + x > 3) {
+					dir = 0;
+					x = 0;
+				}
+			}
+			
 			if(dir == 0) {
-				currlevel++;
-				if(currlevel > 3) {
+				y++;
+				if(currlevel + y > 3) {
 					levelSex[currlevel][eIndex] = 19;
 					break;
 				}
-			} else {
-				eIndex += dir;
-			}
-			if(eIndex < 0) {
-				eIndex++;
-				currlevel++;
-				index[1+dir] = false;
-				index[1] = true;
-			} else if(eIndex > 3) {
-				eIndex--;
-				currlevel++;
-				index[1+dir] = false;
-				index[1] = true;
 			}
 			
+			index[1+dir] = true;
 			levelSex[currlevel][eIndex] = binToInt(index);
-			dir = (int) (Math.random() * 3) - 1;
+			
+			eIndex += x;
+			currlevel += y;
+
 		}
 		
 	}

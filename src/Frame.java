@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import javax.swing.Timer;
 
 import Blocks.Block;
 import Blocks.KaliAltar;
+import Blocks.LevelGen;
 import Entities.Player;
 
 import com.github.strikerx3.jxinput.XInputAxes;
@@ -76,12 +78,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static void main(String[] arg) {
 		try {
 			devices = XInputDevice.getAllDevices();
-			System.out.println(devices.length);
 		} catch (XInputNotLoadedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
 		Frame f = new Frame();
+		int[][] levelTest = new int[4][4];
+		LevelGen.generateSections(levelTest);
+		for(int[] arr : levelTest) {
+			System.out.println(Arrays.toString(arr));
+		}
 	}
 	
 	public Frame() {
