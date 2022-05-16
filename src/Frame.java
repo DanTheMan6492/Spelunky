@@ -33,9 +33,6 @@ import com.github.strikerx3.jxinput.exceptions.XInputNotLoadedException;
 import com.github.strikerx3.jxinput.listener.SimpleXInputDeviceListener;
 import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 
-
-
-
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	
