@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import Entities.Camera;
 import Entities.Entity;
 
 import java.net.URL;
@@ -19,7 +20,7 @@ public class Block {
     public AffineTransform tx;
     public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
-    public Block(int id, int x, int y, boolean breakable) {
+    public Block(int id, int x, int y) {
     	if(this.getClass().equals("class Blocks.Block")) {
     		int random = (int)(Math.random() * 100);
     	}
@@ -38,7 +39,7 @@ public class Block {
     }
     
 	public void paint(Graphics g) {
-		g.drawRect(x, y, width, height);
+		g.drawRect((int)(x-Camera.x), (int)(y-Camera.y), width, height);
 	}
 	
 	public void Break() {

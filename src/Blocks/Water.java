@@ -15,7 +15,7 @@ public class Water extends Block{
     public AffineTransform tx;
 	
     public Water(int id, int x, int y) {
-    	super(id, x, y, false);
+    	super(id, x, y);
     }
     
     public boolean isLegal() {

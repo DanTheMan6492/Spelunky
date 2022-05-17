@@ -6,9 +6,8 @@ public class LevelGen {
 
 	public static void generateSections(int[][] levelSex) {
 		
-		
 		int eIndex = (int) (Math.random() * 4);
-		levelSex[0][eIndex] = 18;
+		levelSex[0][eIndex] = 16;
 		
 		int dir = (int) (Math.random() * 3) - 1;
 		int currlevel = 0;
@@ -70,7 +69,7 @@ public class LevelGen {
 			if(dir == 0) {
 				y++;
 				if(currlevel + y > 3) {
-					levelSex[currlevel][eIndex] = 19;
+					levelSex[currlevel][eIndex] = 17;
 					break;
 				}
 			}

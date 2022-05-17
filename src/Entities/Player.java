@@ -21,6 +21,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	BufferedImage spriteSheet;
 	int character = 1;
+	public boolean debug = true;
 	
 	public Player(double x, double y, double w, double h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
@@ -29,11 +30,25 @@ public class Player extends Entity{
 	}
 	
 	public void jump() {
+		if(debug){
+			return;
+		}
 		if(grounded) {
 			frame = 0;
 			vy = 30;
 		}
 		grounded = false;
+	}
+
+	public void updateD() {
+		Sprite = splice(0, 0);
+		visible = true;
+		System.out.println(vy);
+		x += vx*5;
+		y -= vy*5;
+		Camera.update();
+		tx.setToTranslation(x-Camera.x, y-Camera.y);
+		frame++;
 	}
 	
 	@Override
@@ -103,16 +118,23 @@ public class Player extends Entity{
 				}
 				break;
 		}
-		
-		tx.setToTranslation(x, y);
+		Camera.update();
+		tx.setToTranslation(x-Camera.x, y-Camera.y);
+		//tx.scale(-1, 1);
 		frame++;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		update();
-		if(!visible)
+		if(debug){
+			updateD();
+		}
+		else{
+			update();
+		}
+		if(!visible){
 			return;
+		}
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);
 	}

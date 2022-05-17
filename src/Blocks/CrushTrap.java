@@ -15,7 +15,7 @@ public class CrushTrap extends Block{
 	public int xv, yv;
 	
     public CrushTrap(int id, int x, int y) {
-    	super(id,x,y, true);
+    	super(id,x,y);
     }
     
     public void detect() {

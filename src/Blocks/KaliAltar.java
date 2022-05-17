@@ -12,7 +12,7 @@ public class KaliAltar extends Block{
 	public static boolean[] rewards = {true, true};
 	
     public KaliAltar(int id, int x, int y) {
-    	super(id, x, y, true);
+    	super(id, x, y);
     	super.width = 128;
     }
     

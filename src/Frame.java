@@ -1,4 +1,6 @@
+
 import java.awt.Color;
+import java.lang.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -9,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -17,7 +20,9 @@ import javax.swing.Timer;
 
 import Blocks.Block;
 import Blocks.KaliAltar;
+import Blocks.LevelBuilder;
 import Blocks.LevelGen;
+import Entities.Camera;
 import Entities.Player;
 
 import com.github.strikerx3.jxinput.XInputAxes;
@@ -39,6 +44,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static Player Ana;
 	static Block test;
 	static XInputDevice[] devices;
+	static Camera camera;
+
+	public static int WIDTH = 1920;
+	public static int HEIGHT = 1080;
+	public long oldTime = 0;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 	
@@ -53,6 +63,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    XInputButtonsDelta buttons = delta.getButtons();
 			    XInputAxesDelta axes = delta.getAxes();
 
+
 			    // Retrieve button state change
 			    if (buttons.isPressed(XInputButton.A)) {
 			        Ana.jump();
@@ -63,16 +74,43 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    // The class provides methods for each axis and a method for providing an XInputAxis
 			    float accelerationDelta = axes.getRTDelta();
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
-			     	Ana.vx -= brakeDelta*10;
+				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
+			    Ana.vx -= brakeDelta*10;
+				if(Ana.debug){
+					Ana.vy -= YDelta*10;
+				}
 			} else {
 			    // Controller is not connected; display a message
 			}
 		}
+
 		super.paintComponent(g);
+		for(Block[] row : LevelBuilder.level){
+			for(Block block : row){
+				if(block != null){
+					block.paint(g);
+				}
+			}
+		}
 		Ana.paint(g);
+
+
+		//fps cap
+		long newTime = System.nanoTime();
+		long deltaT = newTime - oldTime;
+		long fps =  (long) (Math.pow(10, 9) / deltaT);
+		while(fps > 60){
+			newTime = System.nanoTime();
+			deltaT = newTime - oldTime;
+			fps =  (long) (Math.pow(10, 9) / deltaT);
+		}
+
+		oldTime = newTime;
+		//System.out.println(fps);
 	}
 	
 	public static void main(String[] arg) {
+		LevelBuilder.start();
 		try {
 			devices = XInputDevice.getAllDevices();
 		} catch (XInputNotLoadedException e) {
@@ -88,12 +126,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
+		
 		JFrame f = new JFrame("Spelunky Lite");
 		
 		Ana = new Player(0, 0, 128, 128, true, "");
-		Ana.update();
-		test = new Block(0, 0, 600, false);
-		f.setSize(new Dimension(400, 1000));
+		camera = new Camera(Ana);
+		test = new Block(0, 0, 600);
+		f.setSize(new Dimension(WIDTH, HEIGHT));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(true);
