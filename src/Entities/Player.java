@@ -20,7 +20,7 @@ public class Player extends Entity{
 	int frame;
 	String state = "Walk";
 	BufferedImage spriteSheet;
-	int character = 1;
+	int character = 4;
 	public boolean debug = true;
 	
 	public Player(double x, double y, double w, double h, boolean visible, String path) {
@@ -43,7 +43,6 @@ public class Player extends Entity{
 	public void updateD() {
 		Sprite = splice(0, 0);
 		visible = true;
-		System.out.println(vy);
 		x += vx*5;
 		y -= vy*5;
 		Camera.update();

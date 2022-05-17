@@ -21,15 +21,16 @@ public class Block {
     public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
     public Block(int id, int x, int y) {
-    	if(this.getClass().equals("class Blocks.Block")) {
-    		int random = (int)(Math.random() * 100);
-    	}
+		int index = (int)(Math.random() * 6) + 1;
+		Sprite = getImage("/imgs/Tiles/" + id + "_" + index + ".png");
+		//System.out.println("imgs/Tiles/" + id + "_" + index + ".png");
     	this.x = x;
     	this.y = y;
     	width = 128;
     	height = 128;
     	killX = x + width/2;
     	killY = y + height/2;
+		tx = AffineTransform.getTranslateInstance(x, y);
     	blocks.add(this);
     }
     
@@ -39,7 +40,9 @@ public class Block {
     }
     
 	public void paint(Graphics g) {
-		g.drawRect((int)(x-Camera.x), (int)(y-Camera.y), width, height);
+		update();
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(Sprite, tx, null);
 	}
 	
 	public void Break() {
@@ -47,6 +50,7 @@ public class Block {
 	}
 	
 	public void update() {
+		tx.setToTranslation((int)(x-Camera.x), (int)(y-Camera.y));
 	}
 
 	protected Image getImage(String path) {

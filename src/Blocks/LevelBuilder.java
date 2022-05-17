@@ -2,6 +2,7 @@ package Blocks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LevelBuilder {
@@ -20,6 +21,9 @@ public class LevelBuilder {
 		levelNum++;
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);
+		for(int[] arr : sectionIDs) {
+			System.out.println(Arrays.toString(arr));
+		}
 		for(int r = 0; r < 4; r++){
 			for(int c = 0; c < 4; c++){
 				int ID = sectionIDs[r][c];

@@ -42,7 +42,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	static Player Ana;
-	static Block test;
 	static XInputDevice[] devices;
 	static Camera camera;
 
@@ -118,11 +117,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			e.printStackTrace();
 		};
 		Frame f = new Frame();
-		int[][] levelTest = new int[4][4];
-		LevelGen.generateSections(levelTest);
-		for(int[] arr : levelTest) {
-			System.out.println(Arrays.toString(arr));
-		}
+		
+	
 	}
 	
 	public Frame() {
@@ -131,11 +127,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		Ana = new Player(0, 0, 128, 128, true, "");
 		camera = new Camera(Ana);
-		test = new Block(0, 0, 600);
 		f.setSize(new Dimension(WIDTH, HEIGHT));
 		f.setBackground(Color.blue);
 		f.add(this);
-		f.setResizable(true);
+		f.setResizable(false);
 		f.setLayout(new GridLayout(1,2));
 		f.addMouseListener(this);
 		f.addKeyListener(this);
@@ -143,6 +138,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
 	}
 	

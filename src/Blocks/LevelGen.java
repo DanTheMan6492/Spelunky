@@ -33,9 +33,27 @@ public class LevelGen {
 		}
 		
 		while(true) {
-			
 			System.out.println(dir);
-			boolean[] index = {false, false, false, false};
+			if(levelSex[currlevel][eIndex] == 16){
+				dir = (int) (Math.random() * 3) - 1;
+		
+				if(dir == 0) {
+					currlevel++;
+				} else {
+					eIndex += dir;
+					if(eIndex < 0) {
+						eIndex -= dir;
+						dir = 0;
+						currlevel++;
+					} else if(eIndex > 3) {
+						eIndex -= dir;
+						dir = 0;
+						currlevel++;
+					}
+				}
+			}
+			boolean[] index;
+			index = intToBin(levelSex[currlevel][eIndex]);
 			switch(dir) {
 			case -1:
 				index[2] = true;
@@ -91,6 +109,19 @@ public class LevelGen {
 				result += Math.pow(2, i);
 			}
 		}
+		return result;
+	}
+
+	public static boolean[] intToBin(int num) {
+		boolean[] result = {false, false, false, false};
+
+		for(int i = 3; i >= 0; i--){
+			if(num/Math.pow(2, i) != 0){
+				result[3-i] = true;
+			}
+			num = (int) (num % Math.pow(2, i));
+		}
+
 		return result;
 	}
 }
