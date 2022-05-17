@@ -73,7 +73,8 @@ public class Entity {
     	return false;
     }
     
-    public void Destroy() {
+    public void Destroy() 
+    {
     	
     }
     
