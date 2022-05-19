@@ -192,8 +192,4 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
-
 }

@@ -137,7 +137,8 @@ public class Entity {
     }
 
     
-    public void Destroy() {
+    public void Destroy() 
+    {
     	
     }
     
