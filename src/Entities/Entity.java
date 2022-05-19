@@ -12,7 +12,8 @@ import Entities.Camera;
 public class Entity {
 	
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
-	public double  x,  y;
+	public static double  x;
+	public static double y;
 	public double vx, vy;
 	public double w, h;
 	public boolean visible;
