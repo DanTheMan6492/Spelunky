@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import Entities.Player;
+
 public class LevelBuilder {
 	public static Block[][] level;
 	public static int [][]sectionIDs;
@@ -12,7 +14,7 @@ public class LevelBuilder {
 	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 	public static void start(){
-		levelNum = 0;
+		levelNum = -1;
 		level = new Block[32][40];
 		nextLevel();
 	}
@@ -37,11 +39,20 @@ public class LevelBuilder {
 							int blockID = scnnr.nextInt();
 							int x = c*10 + j;
 							int y = r*8  + i;
-							if(blockID != 0){
-								level[y][x] = new Block(blockID, x*128, y*128);
-							} else{
+							switch(blockID){
+								case 0:
 								level[y][x] = null;
+								break;
+								case 2:
+								level[y][x] = null;
+								Player.x = x*128;
+								Player.y = y*128+1;
+								break;
+								default:
+								level[y][x] = new Block(blockID, x*128, y*128);
+								break;
 							}
+	
 						}
 					}
 				} catch (FileNotFoundException e) {

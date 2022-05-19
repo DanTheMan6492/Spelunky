@@ -22,8 +22,15 @@ public class Block {
 	
     public Block(int id, int x, int y) {
 		int index = (int)(Math.random() * 6) + 1;
-		Sprite = getImage("/imgs/Tiles/" + id + "_" + index + ".png");
-		//System.out.println("imgs/Tiles/" + id + "_" + index + ".png");
+		switch(id){
+			case 1:
+			System.out.println("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
+
+			break;
+			default:
+			break;
+		}
     	this.x = x;
     	this.y = y;
     	width = 128;

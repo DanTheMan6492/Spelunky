@@ -21,9 +21,9 @@ public class Player extends Entity{
 	String state = "Walk";
 	BufferedImage spriteSheet;
 	int character = 4;
-	public boolean debug = true;
+	public boolean debug = false;
 	
-	public Player(double x, double y, double w, double h, boolean visible, String path) {
+	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		grounded = false;
 		frame = 0;
@@ -35,7 +35,7 @@ public class Player extends Entity{
 		}
 		if(grounded) {
 			frame = 0;
-			vy = 30;
+			vy = -35;
 		}
 		grounded = false;
 	}
@@ -50,50 +50,40 @@ public class Player extends Entity{
 		frame++;
 	}
 	
-	@Override
 	public void update() {
-		double temp = vy;
+
+		//accelerate downwards if not on ground
+		if(!grounded)
+			vy += 2;
+
+		//update player direction
 		if(vx < -0.5) 
 			dir = -1;
 		else if(vx > 0.5)
 			dir = 1;
-		
+
+		//update player animation and state
 		if(!grounded) {
 			state = "Falling";
-			vy -= 2;
-			y -= vy;
-			if(temp/vy <= 0) {
+
+			//reset animation frame if when switching animations
+			if((vy+2)/vy <= 0) 
 				frame = 0;
-			}
-			if(vy < 0) {
+			
+			if(vy < 0) 
 				state = "Falling";
-			} else {
+			else
 				state = "Jumping";
-			}
+
 		} else {
-			if(Math.abs(vx) < 1) {
+			if(Math.abs(vx) < 1)
 				state = "Standing";
-			} else {
+			else
 				state = "Walking";
-			}
 		}
-		x+=vx;
-		
-		double ratioy = -vy/(vy+vx);
-		double ratiox = -vx/(vy+vx);
-		
-		Block block = checkClipping();
-		while(checkClipping(block) != 0) {
-			x += ratiox;
-			y += ratioy;
-		}
-		
-		if(checkStanding(block)) {
-			if(!grounded)
-				state = "Standing";
-				frame = 0;
-			grounded = true;
-		}
+
+
+		correctClipping();
 		
 		switch(state) {
 			case "Standing":
@@ -122,7 +112,7 @@ public class Player extends Entity{
 		//tx.scale(-1, 1);
 		frame++;
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		if(debug){

@@ -45,6 +45,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	static XInputDevice[] devices;
 	static Camera camera;
 
+	static double controllerPos = 0;
+
 	public static int WIDTH = 1920;
 	public static int HEIGHT = 1080;
 	public long oldTime = 0;
@@ -74,7 +76,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    float accelerationDelta = axes.getRTDelta();
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
 				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
-			    Ana.vx -= brakeDelta*10;
+			    Ana.vx -= brakeDelta*20;
 				if(Ana.debug){
 					Ana.vy -= YDelta*10;
 				}
@@ -109,6 +111,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public static void main(String[] arg) {
+		Ana = new Player(0, 0, 128, 128, true, "");
+		camera = new Camera(Ana);
 		LevelBuilder.start();
 		try {
 			devices = XInputDevice.getAllDevices();
@@ -117,16 +121,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			e.printStackTrace();
 		};
 		Frame f = new Frame();
-		
+	
 	
 	}
 	
 	public Frame() {
 		
 		JFrame f = new JFrame("Spelunky Lite");
-		
-		Ana = new Player(0, 0, 128, 128, true, "");
-		camera = new Camera(Ana);
 		f.setSize(new Dimension(WIDTH, HEIGHT));
 		f.setBackground(Color.blue);
 		f.add(this);
