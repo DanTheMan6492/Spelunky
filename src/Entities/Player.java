@@ -22,6 +22,8 @@ public class Player extends Entity{
 	BufferedImage spriteSheet;
 	int character = 4;
 	public boolean debug = false;
+	public boolean ready = false;
+	public double vxBuffer;
 	
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
@@ -51,6 +53,7 @@ public class Player extends Entity{
 	}
 	
 	public void update() {
+		ready = false;
 
 		//accelerate downwards if not on ground
 		if(!grounded)
@@ -76,7 +79,7 @@ public class Player extends Entity{
 				state = "Jumping";
 
 		} else {
-			if(Math.abs(vx) < 1)
+			if(Math.abs(vx) < 2)
 				state = "Standing";
 			else
 				state = "Walking";
@@ -110,7 +113,9 @@ public class Player extends Entity{
 		Camera.update();
 		tx.setToTranslation(x-Camera.x, y-Camera.y);
 		//tx.scale(-1, 1);
+		vx = vxBuffer;
 		frame++;
+		ready = true;
 	}
 
 	@Override

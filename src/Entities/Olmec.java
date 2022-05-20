@@ -11,7 +11,7 @@ public class Olmec extends Entity
 	public int tickTimer, stompTimer;
 	public boolean jumping;
 	
-	public Olmec(double x, double y, double w, double h, boolean visible, String path) 
+	public Olmec(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub

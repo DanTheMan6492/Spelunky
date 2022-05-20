@@ -18,7 +18,8 @@ public class Entity {
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	public static double  x;
 	public static double y;
-	public double vx, vy;
+	public double vx;
+	protected double vy;
 	public int w, h;
 	public boolean visible;
     public Image Sprite;
@@ -57,7 +58,7 @@ public class Entity {
 
 		int result = 0;
 
-		if(vx == 0 && vy == 0){
+		if(Math.abs(vx) > 2 && vy == 0){
 			return result;
 		}
 		//What tile is the player in
@@ -70,54 +71,53 @@ public class Entity {
 						   LevelBuilder.level[Y-1][X], LevelBuilder.level[Y-1][X+1], LevelBuilder.level[Y-1][X-1]};
 		
 		//check x collision
-
-		if(Math.abs(vx) > 2 || vy != 0){
-			if(Math.abs(vx) > 2){
-				x += vx;
-			}
-			y += vy;
-
-			double ratioX;
-			double ratioY;
-
-			if(Math.abs(vx) > 2){
-				ratioX = -vx/(Math.abs(vx)+Math.abs(vy));
-				ratioY = -vy/(Math.abs(vx)+Math.abs(vy));
-			} else{
-				ratioX = 0;
-				ratioY = -1 * vy/Math.abs(vy);
-			}
-
-			for(Block block : toCheck){
-				if(block != null){
-					while(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
-						x += ratioX;
-						y += ratioY;
+		if(Math.abs(vx) > 2){
+			for(int i = 0; i < Math.abs(vx); i++){
+				x += vx/(Math.abs(vx));
+				for(Block block : toCheck){
+					if(block != null){
+						if(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
+							x -= vx/(Math.abs(vx));
+							break;
+						}
 					}
 				}
 			}
-
-			boolean flag = true;
-			for(Block block : toCheck){
-				if(block != null){
-					if(checkClipping(x, y+1, w-2, h-2, block.x, block.y, block.width, block.height)){
-						frame = 0;
-						flag = false;
-						vy = 0;
-						grounded = true;
-						break;
-					}
-
-				}
-			}
-			if(flag){
-				grounded = false;
-				frame = 0;
-			} 
-
-
 		}
 
+		//check y collision
+		for(int i = 0; i < Math.abs(vy); i++){
+			y += vy/(Math.abs(vy));
+			for(Block block : toCheck){
+				if(block != null){
+					if(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
+						y -= vy/(Math.abs(vy));
+						if(vy < 0){
+							frame = 0;
+							grounded = true;
+							vy = 0;
+						}
+						break;
+					}
+				}
+			}
+		}
+		
+		boolean flag = true;
+		for(Block block : toCheck){
+			if(block != null){
+				if(checkClipping(x, y+1, w-2, h-2, block.x, block.y, block.width, block.height)){
+					flag = false;
+					grounded = true;
+					break;
+				}
+				}
+		}
+		if(flag){
+			grounded = false;
+			vx = 0;
+			frame = 0;
+		} 
 
 		return result;
     }
@@ -137,8 +137,7 @@ public class Entity {
     }
 
     
-    public void Destroy() 
-    {
+    public void Destroy() {
     	
     }
     

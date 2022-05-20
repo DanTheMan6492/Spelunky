@@ -46,7 +46,7 @@ public class LevelBuilder {
 								case 2:
 								level[y][x] = null;
 								Player.x = x*128;
-								Player.y = y*128+1;
+								Player.y = y*128-2;
 								break;
 								default:
 								level[y][x] = new Block(blockID, x*128, y*128);

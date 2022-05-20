@@ -76,10 +76,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    float accelerationDelta = axes.getRTDelta();
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
 				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
-			    Ana.vx -= brakeDelta*20;
-				if(Ana.debug){
-					Ana.vy -= YDelta*10;
-				}
+			    Ana.vxBuffer -= brakeDelta*20;
 			} else {
 			    // Controller is not connected; display a message
 			}

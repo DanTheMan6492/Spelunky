@@ -24,7 +24,6 @@ public class Block {
 		int index = (int)(Math.random() * 6) + 1;
 		switch(id){
 			case 1:
-			System.out.println("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
 
 			break;

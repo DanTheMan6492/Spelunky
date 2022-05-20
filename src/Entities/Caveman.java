@@ -14,7 +14,7 @@ public class Caveman extends Entity
 	public int frame;
 	public boolean frenzy;
 	public long oldTime;
-	public Caveman(double x, double y, double w, double h, boolean visible, String path) 
+	public Caveman(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
 		frenzy = false;
