@@ -163,59 +163,69 @@ public class Entity {
     }
     
     public int collide(Block b) {
-    	int result = 0;
-    	
-    	if(b == null) {
-    		return result;
-    	}
-    	
-    	if(x + w > b.x
-    	&& x + w < b.x + b.width
-    	&& y + h > b.y
-    	&& y < b.y + b.height
-    	&& y + h - 10 > b.y
-    	&& y + 10 < b.y + b.height) {
-    		while(x + w > b.x) {
-    			x --;
-    		}
-    	}
-    	if(x < b.x + b.width
-    	&& x > b.x
-   		&& y + h > b.y
-   	    && y < b.y + b.height
-        && y + h - 10 > b.y
-        && y + 10 < b.y + b.height) {
-    		while(x < b.x + b.width) {
-    			x ++;
-   		   	}
-    	}
-    	
-    	if(y + h > b.y
-    	&& y + h < b.y + b.height
-    	&& x + w > b.x
-    	&& x < b.x + b.width
-    	&& x + w - 10 > b.x
-    	&& x + 10 < x + b.width) {
-    		while(y + h > b.y) {
-    			y --;
-    		}
-    		vy = 0;
-    		grounded = true;
-    	}
+        int result = 0;
+       
+        if(b == null) {
+        return result;
+        }
+       
+        if(x + w > b.x
+        && x + w < b.x + b.width
+        && y + h > b.y
+        && y < b.y + b.height
+        && y + h - 20 > b.y
+        && y + 20 < b.y + b.height) {
+        	/*
+        	while(x + w > b.x) {
+        		x --;
+        	}*/
+        	if(vx > 0) {
+        		x -= vx;
+        	}
+        	result = 1;
+        }
+        if(x < b.x + b.width
+        && x > b.x
+        && y + h > b.y
+        && y < b.y + b.height
+        && y + h - 20 > b.y
+        && y + 20 < b.y + b.height) {
+	        //while(x < b.x + b.width) {
+	        //	x ++;
+	        //}
+        	if(vx < 0) {
+        		x -= vx;
+        	}
+        result = 2;
+        }
+       
+        if(y + h > b.y
+        && y + h < b.y + b.height
+        && x + w > b.x
+        && x < b.x + b.width
+        && x + w - 20 > b.x
+        && x + 20 < x + b.width) {
+        	y = b.y - h;
+        result = 3;
+        }
 
-    	
-    	if(y < b.y + b.height
-    	&& y > b.y
-    	&& x + w > x
-    	&& x < b.x + b.width
-    	&& x + w - 10 > b.x
-    	&& x + 10 < b.x + b.width) {
-    		while(y < b.y + b.height) {
-    			y ++;
-    		}
-    		vy = 0;
-    	}
-		return result;
+       
+        if(y < b.y + b.height
+        && y > b.y
+        && x + w > x
+        && x < b.x + b.width
+        && x + w - 20 > b.x
+        && x + 20 < b.x + b.width) {
+	        //while(y < b.y + b.height) {
+	        //	y ++;
+	        //}
+        	if(vy < 0) {
+        		y -= vy;
+        	}
+	        result = 4;
+        }
+       
+        return result;
     }
     
     

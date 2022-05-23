@@ -1,9 +1,6 @@
 /Sections/
 /imgs/
-/Background.class
 /Blocks/
 /Constants/
 /Entities/
-/Frame.class
-/Money.class
-/Timer.class
+/General/

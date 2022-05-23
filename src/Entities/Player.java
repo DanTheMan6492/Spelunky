@@ -38,7 +38,7 @@ public class Player extends Entity{
 		}
 		if(grounded) {
 			frame = 0;
-			vy = -35;
+			vy = -30;
 		}
 		grounded = false;
 	}
@@ -85,18 +85,41 @@ public class Player extends Entity{
 			else
 				state = "Walking";
 		}
-
-
-		//correctClipping();
 		
-		x += vx;
-		y += vy;
+		boolean falling = true;
 		
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
-				collide(block);
+				switch(collide(block)) {
+				case 1:
+					break;
+	
+				case 2:
+					break;
+	
+				case 3:
+					if(falling == true) {
+						vy = 0;
+					    grounded = true;
+					    falling = false;
+					}
+				    break;
+	
+				case 4:
+					break;
+					
+				case 0:
+					break;
+				}
+				if(falling == true) {
+					grounded = false;
+				}
 			}
 		}
+		
+		x += vx;
+		y += vy;
+
 		
 		switch(state) {
 			case "Standing":
