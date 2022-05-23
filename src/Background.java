@@ -7,6 +7,9 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
+import Blocks.LevelBuilder;
+import Entities.Camera;
+
 public class Background{
 	
 	//add location attributes
@@ -14,7 +17,7 @@ public class Background{
 	private AffineTransform tx;
 
 	public Background(int x, int y) {
-		//img = getImage("/imgs/bg.png"); //load the image for Tree
+		img = getImage("/imgs/Background/1.png");
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
@@ -29,9 +32,6 @@ public class Background{
 		//call update to update the actualy picture location
 		update();
 		
-		
-		
-		
 		g2.drawImage(img, tx, null);
 		
 		
@@ -40,13 +40,13 @@ public class Background{
 	/* update the picture variable location */
 	private void update() {
 
-		
+		img = getImage("/imgs/Background/"  + Integer.toString(1+(LevelBuilder.levelNum/4)) +".png");
+		tx.setToTranslation(-Camera.x, -Camera.y);
 		
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(2.7, 2.5);
 	}
 
 	private Image getImage(String path) {

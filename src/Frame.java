@@ -55,7 +55,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public void paint(Graphics g) {
 		for(int i =0 ; i < devices.length; i++) {
-
 			XInputDevice device = devices[i];
 			if (device.poll()) {
 			    // Retrieve the delta
@@ -77,12 +76,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
 				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
 			    Ana.vxBuffer -= brakeDelta*20;
+				if(Ana.debug){
+					Ana.vy -= YDelta*20;
+				}
 			} else {
 			    // Controller is not connected; display a message
 			}
 		}
 
 		super.paintComponent(g);
+
+		bg.paint(g);
+
 		for(Block[] row : LevelBuilder.level){
 			for(Block block : row){
 				if(block != null){
@@ -97,7 +102,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		long newTime = System.nanoTime();
 		long deltaT = newTime - oldTime;
 		long fps =  (long) (Math.pow(10, 9) / deltaT);
-		while(fps > 60){
+		while(fps > 30){
 			newTime = System.nanoTime();
 			deltaT = newTime - oldTime;
 			fps =  (long) (Math.pow(10, 9) / deltaT);

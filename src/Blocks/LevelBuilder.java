@@ -11,10 +11,10 @@ public class LevelBuilder {
 	public static Block[][] level;
 	public static int [][]sectionIDs;
 	public static int levelNum;
-	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 	public static void start(){
-		levelNum = -1;
+		levelNum = 5;
 		level = new Block[32][40];
 		nextLevel();
 	}
