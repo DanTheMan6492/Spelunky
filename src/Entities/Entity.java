@@ -162,6 +162,60 @@ public class Entity {
     	return null;
     }
     
+    public void collide(Block b) {
+    	if(b == null) {
+    		return;
+    	}
+    	
+    	if(x + w > b.x
+    	&& x + w < b.x + b.width
+    	&& y + h > b.y
+    	&& y < b.y + b.height
+    	&& y + h - 10 > b.y
+    	&& y + 10 < b.y + b.height) {
+    		while(x + w > b.x) {
+    			x --;
+    		}
+    	}
+    	if(x < b.x + b.width
+    	&& x > b.x
+   		&& y + h > b.y
+   	    && y < b.y + b.height
+        && y + h - 10 > b.y
+        && y + 10 < b.y + b.height) {
+    		while(x < b.x + b.width) {
+    			x ++;
+   		   	}
+    	}
+    	
+    	if(y + h > b.y
+    	&& y + h < b.y + b.height
+    	&& x + w > b.x
+    	&& x < b.x + b.width
+    	&& x + w - 10 > b.x
+    	&& x + 10 < x + b.width) {
+    		while(y + h > b.y) {
+    			y --;
+    		}
+    		grounded = true;
+    	}else {
+    		grounded = false;
+    	}
+
+    	
+    	if(y < b.y + b.height
+    	&& y > b.y
+    	&& x + w > x
+    	&& x < b.x + b.width
+    	&& x + w - 10 > b.x
+    	&& x + 10 < b.x + b.width) {
+    		while(y < b.y + b.height) {
+    			y ++;
+    		}
+    		vy = 0;
+    	}
+    }
+    
     
 	public Entity(int x, int y, 
 				  int w, int h, 

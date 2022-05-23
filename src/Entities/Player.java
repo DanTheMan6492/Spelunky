@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Blocks.Block;
+import Blocks.LevelBuilder;
 
 import java.awt.Graphics2D;
 
@@ -86,7 +87,16 @@ public class Player extends Entity{
 		}
 
 
-		correctClipping();
+		//correctClipping();
+		
+		x += vx;
+		y += vy;
+		
+		for(Block[] blockArray : LevelBuilder.level) {
+			for(Block block : blockArray) {
+				collide(block);
+			}
+		}
 		
 		switch(state) {
 			case "Standing":
