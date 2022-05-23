@@ -162,9 +162,11 @@ public class Entity {
     	return null;
     }
     
-    public void collide(Block b) {
+    public int collide(Block b) {
+    	int result = 0;
+    	
     	if(b == null) {
-    		return;
+    		return result;
     	}
     	
     	if(x + w > b.x
@@ -197,9 +199,8 @@ public class Entity {
     		while(y + h > b.y) {
     			y --;
     		}
+    		vy = 0;
     		grounded = true;
-    	}else {
-    		grounded = false;
     	}
 
     	
