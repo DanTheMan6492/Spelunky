@@ -215,6 +215,7 @@ public class Entity {
     		}
     		vy = 0;
     	}
+		return result;
     }
     
     

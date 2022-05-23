@@ -49,6 +49,7 @@ public class Block {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);
+
 	}
 	
 	public void Break() {

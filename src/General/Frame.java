@@ -1,3 +1,4 @@
+package General;
 
 import java.awt.Color;
 import java.lang.*;
