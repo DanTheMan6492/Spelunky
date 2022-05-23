@@ -197,8 +197,9 @@ public class Entity {
     		while(y + h > b.y) {
     			y --;
     		}
-    		y -= vy/(Math.abs(vy));
     		grounded = true;
+    	}else {
+    		grounded = false;
     	}
 
     	
