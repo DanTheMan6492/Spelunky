@@ -46,7 +46,7 @@ public class Player extends Entity{
 	public void updateD() {
 		Sprite = splice(0, 0);
 		visible = true;
-		x += vx*5;
+		x += vxBuffer*5;
 		y -= vy*5;
 		Camera.update();
 		tx.setToTranslation(x-Camera.x, y-Camera.y);

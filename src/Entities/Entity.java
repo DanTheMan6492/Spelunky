@@ -19,7 +19,7 @@ public class Entity {
 	public static double  x;
 	public static double y;
 	public double vx;
-	protected double vy;
+	public double vy;
 	public int w, h;
 	public boolean visible;
     public Image Sprite;
@@ -74,7 +74,7 @@ public class Entity {
 		if(Math.abs(vx) > 2){
 			for(int i = 0; i < Math.abs(vx); i++){
 				x += vx/(Math.abs(vx));
-				for(Block block : toCheck){
+				for(Block block : Block.blocks){
 					if(block != null){
 						if(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
 							x -= vx/(Math.abs(vx));
