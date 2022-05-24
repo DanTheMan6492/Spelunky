@@ -7,12 +7,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 import Blocks.Block;
 import Blocks.LevelBuilder;
-import General.Fade;
 import General.Transition;
 
 import java.awt.Graphics2D;
@@ -24,7 +22,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	BufferedImage spriteSheet;
 	int character = 4;
-	public boolean debug = true;
+	public boolean debug = false;
 	public boolean ready = false;
 	public double vxBuffer;
 	
@@ -36,9 +34,6 @@ public class Player extends Entity{
 	
 	public void jump() {
 		if(!LevelBuilder.ready){
-			if(!LevelBuilder.buildRoom || Fade.transition){
-				return;
-			}
 			Thread transition = new Thread(new Transition());
 			transition.start();
 		}
@@ -47,7 +42,8 @@ public class Player extends Entity{
 		}
 		if(grounded) {
 			frame = 0;
-			vy = -30;
+			y--;
+			vy = -35; //30
 		}
 		grounded = false;
 	}
@@ -95,8 +91,7 @@ public class Player extends Entity{
 				state = "Walking";
 		}
 		
-		boolean falling = true;
-		
+		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
 				switch(collide(block)) {
@@ -107,11 +102,9 @@ public class Player extends Entity{
 					break;
 	
 				case 3:
-					if(falling == true) {
-						vy = 0;
-					    grounded = true;
-					    falling = false;
-					}
+					vy = 0;
+					grounded = true;
+					flag = true;
 				    break;
 	
 				case 4:
@@ -120,12 +113,12 @@ public class Player extends Entity{
 				case 0:
 					break;
 				}
-				if(falling == true) {
-					grounded = false;
-				}
 			}
 		}
 		
+		if(!flag) {
+			grounded = false;
+		}
 		x += vx;
 		y += vy;
 

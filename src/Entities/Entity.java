@@ -165,7 +165,7 @@ public class Entity {
     public int collide(Block b) {
         int result = 0;
        
-        if(b == null) {
+        if(b == null || !b.solid) {
         return result;
         }
        
@@ -175,10 +175,6 @@ public class Entity {
         && y < b.y + b.height
         && y + h - 20 > b.y
         && y + 20 < b.y + b.height) {
-        	/*
-        	while(x + w > b.x) {
-        		x --;
-        	}*/
         	if(vx > 0) {
         		x -= vx;
         	}
@@ -190,40 +186,35 @@ public class Entity {
         && y < b.y + b.height
         && y + h - 20 > b.y
         && y + 20 < b.y + b.height) {
-	        //while(x < b.x + b.width) {
-	        //	x ++;
-	        //}
         	if(vx < 0) {
         		x -= vx;
         	}
         result = 2;
         }
        
+        if(y < b.y + b.height
+                && y > b.y
+                && x + w > x
+                && x < b.x + b.width
+                && x + w - 20 > b.x
+                && x + 20 < b.x + b.width) {
+                	y = b.y + b.height;
+        	        result = 4;
+        	        vy = 0;
+                }
+        
         if(y + h > b.y
         && y + h < b.y + b.height
         && x + w > b.x
         && x < b.x + b.width
         && x + w - 20 > b.x
         && x + 20 < x + b.width) {
-        	y = b.y - h;
+        	y = b.y - h + 1;
         result = 3;
         }
 
        
-        if(y < b.y + b.height
-        && y > b.y
-        && x + w > x
-        && x < b.x + b.width
-        && x + w - 20 > b.x
-        && x + 20 < b.x + b.width) {
-	        //while(y < b.y + b.height) {
-	        //	y ++;
-	        //}
-        	if(vy < 0) {
-        		y -= vy;
-        	}
-	        result = 4;
-        }
+  
        
         return result;
     }
