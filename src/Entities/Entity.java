@@ -75,7 +75,7 @@ public class Entity {
 			for(int i = 0; i < Math.abs(vx); i++){
 				x += vx/(Math.abs(vx));
 				for(Block block : Block.blocks){
-					if(block != null){
+					if(block != null && block.solid){
 						if(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
 							x -= vx/(Math.abs(vx));
 							break;
@@ -89,7 +89,7 @@ public class Entity {
 		for(int i = 0; i < Math.abs(vy); i++){
 			y += vy/(Math.abs(vy));
 			for(Block block : toCheck){
-				if(block != null){
+				if(block != null && block.solid){
 					if(checkClipping(x, y, w-2, h-2, block.x, block.y, block.width, block.height)){
 						y -= vy/(Math.abs(vy));
 						if(vy < 0){
@@ -105,7 +105,7 @@ public class Entity {
 		
 		boolean flag = true;
 		for(Block block : toCheck){
-			if(block != null){
+			if(block != null && block.solid){
 				if(checkClipping(x, y+1, w-2, h-2, block.x, block.y, block.width, block.height)){
 					flag = false;
 					grounded = true;

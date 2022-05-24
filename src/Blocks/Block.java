@@ -14,20 +14,26 @@ import java.net.URL;
 public class Block {
 	
 	public int x, y, width, height, killX, killY;
+	public int id;
 	boolean breakable;
 	public Entity item;
     public Image Sprite;
+	public boolean solid;
     public AffineTransform tx;
     public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
     public Block(int id, int x, int y) {
 		int index = (int)(Math.random() * 6) + 1;
+		this.id = id;
 		switch(id){
 			case 1:
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
-
+			solid = true;
 			break;
 			default:
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
+			System.out.println("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
+			solid = false;
 			break;
 		}
     	this.x = x;

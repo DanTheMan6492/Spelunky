@@ -6,19 +6,26 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import Entities.Player;
+import General.Fade;
 
 public class LevelBuilder {
 	public static Block[][] level;
 	public static int [][]sectionIDs;
 	public static int levelNum;
+	public static boolean loading = false;
+	public static boolean buildRoom = false;
+	public static boolean ready = true;
 	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 	public static void start(){
-		levelNum = 5;
+		levelNum = -1;
 		level = new Block[32][40];
 		nextLevel();
 	}
 	public static void nextLevel(){
+		if(levelNum != 0)
+			transition();
+		level = new Block[32][40];
 		File f = new File(".\\src\\Sections\\1");
 		levelNum++;
 		sectionIDs = new int[4][4];
@@ -43,7 +50,7 @@ public class LevelBuilder {
 								case 0:
 								level[y][x] = null;
 								break;
-								case 2:
+								case 8:
 								level[y][x] = null;
 								Player.x = x*128;
 								Player.y = y*128-2;
@@ -60,6 +67,53 @@ public class LevelBuilder {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	private static void transition() {
+		buildRoom = false;
+		ready = false;
+		Fade.fade();
+		while(!ready){
+			System.out.print("");
+		}
+		buildRoom = false;
+		loading = false;
+	}
+	
+	public static void loadTransitionRoom() {
+		if(buildRoom){
+			ready = true;
+		} else {
+			level = new Block[9][16];
+			for(int i = 0; i < 5; i++){
+				for(int j = 0; j < 16; j++){
+					level[i][j] = new Block(1, j*128, i*128);
+				}
+			}
+
+			for(int i = 5; i < 9; i++){
+				level[i][00] =  new Block(1, 0, i*128);
+				level[i][15] =  new Block(1, 15*128, i*128);
+			}
+			for(int j = 4; j < 12; j++){
+				level[5][j] = new Block(1, j*128, 5*128);
+			}
+
+
+			for(int j = 0; j < 16; j++){
+				level[8][j] = new Block(1, j*128, 8*128);
+			}
+
+			buildRoom = true;
+		}
+
+
+
+	}
+	public static void skip() {
+		if(buildRoom && !loading){
+			loading = true;
+			Fade.fade();
 		}
 	}
 

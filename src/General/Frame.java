@@ -54,39 +54,47 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 	
+
 	public void paint(Graphics g) {
+
 		for(int i =0 ; i < devices.length; i++) {
 			XInputDevice device = devices[i];
 			if (device.poll()) {
-			    // Retrieve the delta
-			    XInputComponentsDelta delta = device.getDelta();
+				// Retrieve the delta
+				XInputComponentsDelta delta = device.getDelta();
 
-			    XInputButtonsDelta buttons = delta.getButtons();
-			    XInputAxesDelta axes = delta.getAxes();
+				XInputButtonsDelta buttons = delta.getButtons();
+				XInputAxesDelta axes = delta.getAxes();
 
 
-			    // Retrieve button state change
-			    if (buttons.isPressed(XInputButton.A)) {
-			        Ana.jump();
-			    } else if (buttons.isReleased(XInputButton.A)) {
-			    }
+				// Retrieve button state change
+				if (buttons.isPressed(XInputButton.A)) {
+					Ana.jump();
+				} else if (buttons.isReleased(XInputButton.A)) {
+				}
 
-			    // Retrieve axis state change.
-			    // The class provides methods for each axis and a method for providing an XInputAxis
-			    float accelerationDelta = axes.getRTDelta();
-			    float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
+				if(buttons.isPressed(XInputButton.RIGHT_SHOULDER)){
+					Ana.door();
+				}
+
+				// Retrieve axis state change.
+				// The class provides methods for each axis and a method for providing an XInputAxis
+				float accelerationDelta = axes.getRTDelta();
+				float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
 				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
-			    Ana.vxBuffer -= brakeDelta*20;
+				Ana.vxBuffer -= brakeDelta*20;
 				if(Ana.debug){
 					Ana.vy -= YDelta*20;
 				}
 			} else {
-			    // Controller is not connected; display a message
+				// Controller is not connected; display a message
 			}
 		}
 
+		camera.update();
 		super.paintComponent(g);
 
+		
 		bg.paint(g);
 
 		for(Block[] row : LevelBuilder.level){
@@ -98,6 +106,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		Ana.paint(g);
 
+		Fade.paint(g);
 
 		//fps cap
 		long newTime = System.nanoTime();

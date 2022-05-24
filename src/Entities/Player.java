@@ -7,11 +7,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.System.Logger.Level;
 
 import javax.imageio.ImageIO;
 
 import Blocks.Block;
 import Blocks.LevelBuilder;
+import General.Transition;
 
 import java.awt.Graphics2D;
 
@@ -22,7 +24,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	BufferedImage spriteSheet;
 	int character = 4;
-	public boolean debug = false;
+	public boolean debug = true;
 	public boolean ready = false;
 	public double vxBuffer;
 	
@@ -33,6 +35,10 @@ public class Player extends Entity{
 	}
 	
 	public void jump() {
+		if(!LevelBuilder.ready){
+			Thread transition = new Thread(new Transition());
+			transition.start();
+		}
 		if(debug){
 			return;
 		}
@@ -153,11 +159,16 @@ public class Player extends Entity{
 
 	@Override
 	public void paint(Graphics g) {
-		if(debug){
-			updateD();
-		}
-		else{
-			update();
+		if(LevelBuilder.buildRoom)
+			return;
+		
+		if(LevelBuilder.ready){
+			if(debug){
+				updateD();
+			}
+			else{
+				update();
+			}
 		}
 		if(!visible){
 			return;
@@ -201,6 +212,25 @@ public class Player extends Entity{
         }
         return sprite;
 		
+	}
+
+	public void door() {
+
+		if(!LevelBuilder.ready)
+			return;
+		int X = (int) x / 128;
+		int Y = (int) y / 128;
+
+		Thread transition = new Thread(new Transition());
+		if(LevelBuilder.level[Y][X].id == 6)
+			transition.start();
+		if(LevelBuilder.level[Y+1][X].id == 6)
+			transition.start();
+		if(LevelBuilder.level[Y][X+1].id == 6)
+			transition.start();
+		if(LevelBuilder.level[Y+1][X+1].id == 6)
+			transition.start();
+
 	}
 
 }
