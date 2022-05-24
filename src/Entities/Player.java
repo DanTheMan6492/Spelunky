@@ -7,12 +7,12 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
 
 import javax.imageio.ImageIO;
 
 import Blocks.Block;
 import Blocks.LevelBuilder;
+import General.Fade;
 import General.Transition;
 
 import java.awt.Graphics2D;
@@ -36,6 +36,9 @@ public class Player extends Entity{
 	
 	public void jump() {
 		if(!LevelBuilder.ready){
+			if(!LevelBuilder.buildRoom || Fade.transition){
+				return;
+			}
 			Thread transition = new Thread(new Transition());
 			transition.start();
 		}
