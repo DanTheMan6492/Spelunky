@@ -32,7 +32,6 @@ public class Block {
 			break;
 			default:
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
-			System.out.println("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
 			solid = false;
 			break;
 		}

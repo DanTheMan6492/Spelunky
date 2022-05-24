@@ -23,7 +23,7 @@ public class LevelBuilder {
 		nextLevel();
 	}
 	public static void nextLevel(){
-		if(levelNum != 0)
+		if(levelNum != -1)
 			transition();
 		level = new Block[32][40];
 		File f = new File(".\\src\\Sections\\1");
