@@ -13,7 +13,7 @@ public class spikeShoes extends Item{
 		if (Frame.Ana.x + Frame.Ana.w > x && Frame.Ana.x < x + w && Frame.Ana.y + Frame.Ana.h > y && Frame.Ana.y < y + w)
 		{
 			pickedUp = true;
-			Frame.Ana.spikeShoes = true;
+			Frame.Ana.equipables[3] = true;
 		}
 	}
 

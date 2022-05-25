@@ -14,7 +14,7 @@ public class pitchersMitt extends Item{
 		if (Frame.Ana.x + Frame.Ana.w > x && Frame.Ana.x < x + w && Frame.Ana.y + Frame.Ana.h > y && Frame.Ana.y < y + w)
 		{
 			pickedUp = true;
-			Frame.Ana.pitchersMitt = true;
+			Frame.Ana.equipables[1] = true;
 		}
 	}
 }
