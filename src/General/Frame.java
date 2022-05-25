@@ -123,7 +123,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public static void main(String[] arg) {
-		Ana = new Player(0, 0, 128, 128, true, "");
+		Ana = new Player(0, 0, 90, 120, true, "");
 		camera = new Camera(Ana);
 		LevelBuilder.start();
 		try {

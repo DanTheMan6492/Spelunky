@@ -212,10 +212,7 @@ public class Entity {
         	y = b.y - h + 1;
         result = 3;
         }
-
-       
-  
-       
+        
         return result;
     }
     
