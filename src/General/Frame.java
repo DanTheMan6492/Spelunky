@@ -42,7 +42,7 @@ import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	
-	static Player Ana;
+	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
 
