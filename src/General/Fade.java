@@ -42,6 +42,7 @@ public class Fade{
     public static void fade(){
 
         alpha = 0;
+        transition = true;
         
         while(alpha < 255){
             alpha++;
@@ -52,6 +53,8 @@ public class Fade{
             alpha--;
             wait(1);
         }
+
+        transition = false;
 
     }
 
