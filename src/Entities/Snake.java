@@ -27,9 +27,12 @@ public class Snake extends Entity
 			return;
 		}
 		
-		if(mapX == 32 && vx > 0) {
-			
-		}
+		//if(mapY != 40) {
+		//	if((LevelBuilder.level[mapX - 1][mapY] != null
+		//	 && LevelBuilder.level[mapX - 1][mapY] )) {
+		//		
+		//	}
+		//}
 	}
 	
 	public void update() {

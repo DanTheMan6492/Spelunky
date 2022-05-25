@@ -25,7 +25,9 @@ public class Player extends Entity{
 	public boolean debug = false;
 	public boolean ready = false;
 	public double vxBuffer;
-	public boolean[] equipables = new boolean[9];
+	public boolean[] equipables = {false, false, false, 
+								   false, false, false, 
+								   false, false, false};
 	/*Indexes:
 	 * 0 climbingGloves
 	 * 1 pitchersMitt
@@ -33,8 +35,8 @@ public class Player extends Entity{
 	 * 3 spikeShoes
 	 * 4 bombPaste
 	 * 5 spectacles
-	 * 6 cape
-	 * 7 jetpack
+	 * 6 compass
+	 * 7 parachute
 	 * 8 kapala
 	 */
 	
