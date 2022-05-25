@@ -25,7 +25,7 @@ public class Player extends Entity{
 	public boolean debug = false;
 	public boolean ready = false;
 	public double vxBuffer;
-	public boolean climbingGloves, pitchersMitt, springShoes, spikeShoes, bombPaste, spectacles, cape, jetpack, kapala;
+	public boolean climbingGloves, pitchersMitt, springShoes, spikeShoes, bombPaste, spectacles, cape, jetpack, kapala; 
 	
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
