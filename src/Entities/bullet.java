@@ -6,10 +6,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public class jiangShi extends Entity
+public class bullet extends Entity
 {
 
-	public jiangShi(int x, int y, int w, int h, boolean visible, String path) {
+	public bullet(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 	}

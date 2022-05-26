@@ -6,9 +6,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public class vampire extends Entity{
+public class mummyFly extends Entity
+{
 
-	public vampire(int x, int y, int w, int h, boolean visible, String path) {
+	public mummyFly(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 	}
