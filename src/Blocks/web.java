@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import Entities.Camera;
 import Entities.Entity;
 
 public class web extends Entity{
@@ -18,7 +19,6 @@ public class web extends Entity{
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
 	}
 
 	protected Image getImage(String path) {
@@ -30,4 +30,8 @@ public class web extends Entity{
 		} catch (Exception e) {e.printStackTrace();}
 		return tempImage;
 	}	
+	
+	public String toString() {
+		return "web";
+	}
 }

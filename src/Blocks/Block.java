@@ -98,4 +98,8 @@ public class Block {
 		return tempImage;
 	}
 	
+	public String toString() {
+		return "block";
+	}
+	
 }

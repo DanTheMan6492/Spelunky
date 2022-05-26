@@ -19,14 +19,27 @@ public class Water extends Block{
     }
     
     public boolean isLegal() {
-    	return false;//return true if there are blocks/legal water blocks on left, right, and down
+    	int mapX = x / 128;
+    	int mapY = y / 128;
+    	
+    	if(LevelBuilder.level[mapX - 1][mapY] != null
+    	&& LevelBuilder.level[mapX + 1][mapY] != null
+    	&& LevelBuilder.level[mapX][mapY + 1] != null) {
+    		return true;
+    	}
+    	return false;
     }
+    
+    public void update() {
+    	if(isLegal() == false) {
+    		int mapX = x / 128;
+        	int mapY = y / 128;
+        	LevelBuilder.level[mapX][mapY] = null;
+    	}
+	}
     
 	public void paint(Graphics g) {
 		
-	}
-	
-	public void update() {
 	}
 
 	protected Image getImage(String path) {
@@ -39,4 +52,7 @@ public class Water extends Block{
 		return tempImage;
 	}
 	
+	public String toString() {
+		return "water";
+	}
 }
