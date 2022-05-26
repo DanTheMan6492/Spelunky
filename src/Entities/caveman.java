@@ -9,12 +9,12 @@ import java.util.concurrent.TimeUnit;
 import Blocks.Block;
 import Blocks.LevelBuilder;
 
-public class Caveman extends Entity
+public class caveman extends Entity
 {
 	public int frame;
 	public boolean frenzy;
 	public long oldTime;
-	public Caveman(int x, int y, int w, int h, boolean visible, String path) 
+	public caveman(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
 		frenzy = false;
@@ -24,6 +24,9 @@ public class Caveman extends Entity
 	
 	public void detects()
 	{
+		int mapX = (int) (x / 128);
+		int mapY = (int) (y / 128);
+		
 		if (frenzy == false && entities.get(0).y == this.y && Math.abs(entities.get(0).x-this.x) <= 5)
 		{
 			if ((dir == 1 && entities.get(0).x > this.x || dir == -1 && entities.get(0).x < this.x))
@@ -64,10 +67,6 @@ public class Caveman extends Entity
 		if(!grounded) {
 			vy -= 2;
 			y -= vy;
-			if(temp/vy <= 0) 
-			{
-				frame = 0;
-			}
 		}
 		
 		if (frenzy = true)
@@ -118,7 +117,10 @@ public class Caveman extends Entity
 				oldTime = newTime;
 			}
 			detects();
-		}	
+		
+		}
+		x += vx;
+		y += vy;
 	}
 
 	public void paint(Graphics g) {
