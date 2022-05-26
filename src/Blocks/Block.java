@@ -15,7 +15,7 @@ public class Block {
 	
 	public int x, y, width, height, killX, killY;
 	public int id;
-	boolean breakable;
+	boolean breakable, climbable;
 	public Entity item;
     public Image Sprite;
 	public boolean solid;
