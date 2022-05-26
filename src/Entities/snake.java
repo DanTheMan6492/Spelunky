@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit;
 import Blocks.Block;
 import Blocks.LevelBuilder;
 
-public class Snake extends Entity
+public class snake extends Entity
 {
 
-	public Snake(int x, int y, int w, int h, boolean visible, String path) 
+	public snake(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
 	}
