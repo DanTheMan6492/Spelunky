@@ -44,6 +44,10 @@ public class spider extends Entity
 	}
 	
 	public void update() {
+		if(!grounded) { 
+			vy += 2;
+		}
+		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {

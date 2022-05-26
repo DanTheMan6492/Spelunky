@@ -6,6 +6,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import Blocks.Block;
+import Blocks.LevelBuilder;
+import General.Frame;
+
 public class piranha extends Entity{
 
 	public piranha(int x, int y, int w, int h, boolean visible, String path) {
@@ -16,6 +20,46 @@ public class piranha extends Entity{
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+	}
+	
+	public void detect() {
+		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
+		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
+		
+		if(LevelBuilder.level[spelunkerX][spelunkerY].toString().equals("water")
+		&& Math.abs(mapX - spelunkerX) <= 10) {
+			if(mapX < spelunkerX) {
+				vx = -5;
+			}else if(spelunkerX < mapX){
+				vx = 5;
+			}else {
+				vy = 0;
+			}
+			
+			if(mapY < spelunkerY) {
+				vy = -5;
+			}else if(spelunkerY < mapY){
+				vy = 5;
+			}else {
+				vy = 0;
+			}
+		}
+	}
+	
+	public void update() {
+		boolean flag = false;
+		for(Block[] blockArray : LevelBuilder.level) {
+			for(Block block : blockArray) {
+				collide(block);
+			}
+		}
+		
+		x += vx;
+		if(vy < 0 && !LevelBuilder.level[(int) (x/128)][(int) (y/128 - 1)].toString().equals("water")) {
+			
+		}else {
+			y += vy;
+		}
 	}
 
 	protected Image getImage(String path) {

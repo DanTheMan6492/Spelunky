@@ -89,8 +89,7 @@ public class snake extends Entity
 		
 		
 		if(!grounded) {
-			vy -= 2;
-			y -= vy;
+			vy += 2;
 			vx = 0;
 		}else {
 			if(moveTimer > 0) {
