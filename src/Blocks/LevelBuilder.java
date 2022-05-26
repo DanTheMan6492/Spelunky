@@ -85,13 +85,20 @@ public class LevelBuilder {
 			ready = true;
 		} else {
 			level = new Block[9][16];
+			int world = (levelNum+1)/4+1;
 			for(int i = 0; i < 5; i++){
 				for(int j = 0; j < 16; j++){
 					level[i][j] = new Block(1, j*128, i*128);
 				}
 			}
 
-			for(int i = 5; i < 9; i++){
+			for(int i = 2; i < 4; i++){
+				for(int j = 16-i; j < 16; j++){
+					level[i][j] = new Block(1, j*128, i*128, world);
+				}
+			}
+
+			for(int i = 2; i < 4; i++){
 				level[i][00] =  new Block(1, 0, i*128);
 				level[i][15] =  new Block(1, 15*128, i*128);
 			}

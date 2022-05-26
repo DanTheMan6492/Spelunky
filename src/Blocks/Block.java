@@ -44,6 +44,29 @@ public class Block {
 		tx = AffineTransform.getTranslateInstance(x, y);
     	blocks.add(this);
     }
+
+	public Block(int id, int x, int y, int world) {
+		int index = (int)(Math.random() * 6) + 1;
+		this.id = id;
+		switch(id){
+			case 1:
+			Sprite = getImage("/imgs/Tiles/" + world + "/" + id + "_" + index + ".png");
+			solid = true;
+			break;
+			default:
+			Sprite = getImage("/imgs/Tiles/" + world + "/" + id  + ".png");
+			solid = false;
+			break;
+		}
+    	this.x = x;
+    	this.y = y;
+    	width = 128;
+    	height = 128;
+    	killX = x + width/2;
+    	killY = y + height/2;
+		tx = AffineTransform.getTranslateInstance(x, y);
+    	blocks.add(this);
+    }
     
     public int[] getGrid() {
     	int[] result = {x/64, y/64};
