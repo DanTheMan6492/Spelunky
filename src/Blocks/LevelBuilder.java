@@ -15,17 +15,27 @@ public class LevelBuilder {
 	public static boolean loading = false;
 	public static boolean buildRoom = false;
 	public static boolean ready = true;
-	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1}};
 
 	public static void start(){
 		levelNum = -1;
-		level = new Block[32][40];
 		nextLevel();
 	}
 	public static void nextLevel(){
 		if(levelNum != -1)
 			transition();
-		level = new Block[32][40];
+		level = new Block[33][41];
+		int world = levelNum/4+1;
+
+		for(int i = 0; i < 33; i++){
+			level[i][0] = new Block(0, 0, i*128);
+			level[i][40] = new Block(0, 40*128, i*128);
+		}
+		for(int i = 0; i < 41; i++){
+			level[0][i] = new Block(0, i*128, 0);
+			if(world != 3)
+				level[32][i] = new Block(0, 32*128, i*128);
+		}
 		File f = new File(".\\src\\Sections\\1");
 		levelNum++;
 		sectionIDs = new int[4][4];
@@ -36,7 +46,6 @@ public class LevelBuilder {
 		for(int r = 0; r < 4; r++){
 			for(int c = 0; c < 4; c++){
 				int ID = sectionIDs[r][c];
-				int world = levelNum/4+1;
 				String path = ".\\src\\Sections\\" + Integer.toString(world) + "\\" + Integer.toString(ID) + "-" + Integer.toString((int)(Math.random()*SECTIONSTATS[world-1][ID] + 1)) + ".room";
 				File text = new File(path);
 				try {
@@ -48,15 +57,15 @@ public class LevelBuilder {
 							int y = r*8  + i;
 							switch(blockID){
 								case 0:
-								level[y][x] = null;
+								level[y+1][x+1] = null;
 								break;
 								case 8:
-								level[y][x] = null;
-								Player.x = x*128;
-								Player.y = y*128-2;
+								level[y+1][x+1] = null;
+								Player.x = (x)*128 + 128;
+								Player.y = (y)*128-2 + 128;
 								break;
 								default:
-								level[y][x] = new Block(blockID, x*128, y*128);
+								level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
 								break;
 							}
 	

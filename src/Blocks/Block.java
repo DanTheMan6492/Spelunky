@@ -26,6 +26,10 @@ public class Block {
 		int index = (int)(Math.random() * 6) + 1;
 		this.id = id;
 		switch(id){
+			case 0:
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/1_" + index + ".png");
+			solid = true;
+			break;
 			case 1:
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
 			solid = true;
@@ -49,6 +53,10 @@ public class Block {
 		int index = (int)(Math.random() * 6) + 1;
 		this.id = id;
 		switch(id){
+			case 0:
+			Sprite = getImage("/imgs/Tiles/" + world + "/1_" + index + ".png");
+			solid = true;
+			break;
 			case 1:
 			Sprite = getImage("/imgs/Tiles/" + world + "/" + id + "_" + index + ".png");
 			solid = true;
