@@ -1,10 +1,12 @@
-package Entities;
+package Blocks;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+
+import Entities.Entity;
 
 public class web extends Entity{
 
