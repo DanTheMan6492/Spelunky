@@ -12,7 +12,7 @@ public class Water extends Block{
 	public int x, y, width, height;
 	public boolean legal;
     public Image Sprite;
-    public AffineTransform tx;
+    public AffineTransform tx; 
 	
     public Water(int id, int x, int y) {
     	super(id, x, y);
