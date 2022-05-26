@@ -1,5 +1,6 @@
 package General;
 
+import java.awt.Image;
 import java.awt.Color;
 import java.lang.*;
 import java.awt.Dimension;
@@ -14,7 +15,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Arrays;
+import java.awt.Toolkit;
+import java.net.URL;
 
+import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -95,6 +99,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		super.paintComponent(g);
 
 		
+	
+
 		bg.paint(g);
 
 		for(Block[] row : LevelBuilder.level){
@@ -105,6 +111,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 		}
 		Ana.paint(g);
+
+
+		//Hud
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
 
 		Fade.paint(g);
 
@@ -203,5 +214,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	protected Image getImage(String path) {
+
+		Image tempImage = null;
+		try {
+			URL imageURL = Frame.class.getResource(path);
+			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {e.printStackTrace();}
+		return tempImage;
 	}
 }

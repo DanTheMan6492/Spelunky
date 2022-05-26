@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import Blocks.Block;
@@ -40,6 +43,7 @@ public class Player extends Entity{
 	 * 8 kapala
 	 */
 	
+	public ArrayList<Integer> items = new ArrayList<Integer>();
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		grounded = false;
