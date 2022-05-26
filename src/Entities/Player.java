@@ -31,6 +31,7 @@ public class Player extends Entity{
 	public boolean[] equipables = {false, false, false, 
 								   false, false, false, 
 								   false, false, false};
+	public boolean parachuting = false;
 	/*Indexes:
 	 * 0 climbingGloves
 	 * 1 pitchersMitt
@@ -61,7 +62,11 @@ public class Player extends Entity{
 		if(grounded) {
 			frame = 0;
 			y--;
-			vy = -35; //30
+			if(!equipables[2]) {
+				vy = -35; //30
+			}else {
+				vy = -45;
+			}
 		}
 		grounded = false;
 	}
@@ -80,8 +85,18 @@ public class Player extends Entity{
 		ready = false;
 
 		//accelerate downwards if not on ground
-		if(!grounded)
-			vy += 2;
+		if(!grounded) { 
+			if(parachuting == false || (parachuting && vy < 2)) {
+				vy += 2;
+			}else {
+				vy = 5;
+			}
+		}
+		
+		if(!grounded && vy > 40 && equipables[7]) {
+			parachuting =true;
+			vy = -4;
+		}
 
 		//update player direction
 		if(vx < -0.5) 
@@ -114,21 +129,37 @@ public class Player extends Entity{
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
+					if(equipables[0]) {
+						vy = 0;
+						grounded = true;
+						flag = true;
+					}
 					break;
 	
 				case 2:
+					if(equipables[0]) {
+						vy = 0;
+						grounded = true;
+						flag = true;
+					}
 					break;
 	
 				case 3:
 					vy = 0;
 					grounded = true;
 					flag = true;
+					if(parachuting) {
+						parachuting = false;
+					}
 				    break;
 	
 				case 4:
 					break;
 					
 				case 0:
+					if(flag == false) {
+						grounded = false;
+					}
 					break;
 				}
 			}
