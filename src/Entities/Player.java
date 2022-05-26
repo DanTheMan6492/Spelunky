@@ -30,7 +30,7 @@ public class Player extends Entity{
 	public double vxBuffer;
 	public boolean[] equipables = {false, false, false, 
 								   false, false, false, 
-								   false, false, false};
+								   false, true, false};
 	public boolean parachuting = false;
 	/*Indexes:
 	 * 0 climbingGloves
@@ -93,9 +93,10 @@ public class Player extends Entity{
 			}
 		}
 		
-		if(!grounded && vy > 40 && equipables[7]) {
+		if(!grounded && vy > 60 && equipables[7]) {
+			equipables[7] = false;
 			parachuting =true;
-			vy = -4;
+			vy = -10;
 		}
 
 		//update player direction

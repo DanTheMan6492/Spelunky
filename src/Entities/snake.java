@@ -11,13 +11,16 @@ import Blocks.LevelBuilder;
 
 public class snake extends Entity
 {
+	
+	public int moveDuration, moveTimer;
 
 	public snake(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
+		moveTimer = 0;
 	}
 	
-	public void detect() {
+	public void checkGround() {
 		int mapX = (int) (x / 128);
 		int mapY = (int) (y / 128);
 		
@@ -27,16 +30,57 @@ public class snake extends Entity
 			return;
 		}
 		
-		//if(mapY != 40) {
-		//	if((LevelBuilder.level[mapX - 1][mapY] != null
-		//	 && LevelBuilder.level[mapX - 1][mapY] )) {
-		//		
-		//	}
-		//}
+		if(mapY != 40) {
+			if(dir == -1) {
+				if(LevelBuilder.level[mapX-1][mapY+1] != null) {
+					vx *= -1;
+					dir = 1;
+				}
+			}else {
+				if(LevelBuilder.level[mapX+1][mapY+1] != null) {
+					vx *= -1;
+					dir = -1;
+				}
+			}
+		}
 	}
 	
 	public void update() {
 		tx.setToTranslation(x, y);
+		
+		boolean flag = false;
+		for(Block[] blockArray : LevelBuilder.level) {
+			for(Block block : blockArray) {
+				switch(collide(block)) {
+				case 1:
+					vx = 0;
+					dir *= -1;
+					break;
+	
+				case 2:
+					vx = 0;
+					dir *= -1;
+					break;
+	
+				case 3:
+					vy = 0;
+					grounded = true;
+					flag = true;
+				    break;
+	
+				case 4:
+					break;
+					
+				case 0:
+					if(flag == false) {
+						grounded = false;
+					}
+					break;
+				}
+			}
+		}
+		
+		checkGround();
 		
 		if(vx < -0.5) 
 			dir = -1;
@@ -47,6 +91,24 @@ public class snake extends Entity
 		if(!grounded) {
 			vy -= 2;
 			y -= vy;
+			vx = 0;
+		}else {
+			if(moveTimer > 0) {
+				if(moveDuration == 0) {
+					moveTimer --;
+				}
+				if(moveTimer == 0) {
+					moveDuration = 30;
+				}
+				if(moveDuration > 0) {
+					moveDuration --;
+					if(dir == 1) {
+						vx = 8;
+					}else {
+						vx = -8;
+					}
+				}
+			}
 		}
 		
 		x += vx;
