@@ -15,7 +15,7 @@ public class Block {
 	
 	public int x, y, width, height, killX, killY;
 	public int id;
-	boolean breakable;
+	boolean breakable, climbable;
 	public Entity item;
     public Image Sprite;
 	public boolean solid;
@@ -104,6 +104,10 @@ public class Block {
 			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {e.printStackTrace();}
 		return tempImage;
+	}
+	
+	public String toString() {
+		return "block";
 	}
 	
 }
