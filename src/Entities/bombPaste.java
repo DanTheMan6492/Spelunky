@@ -4,7 +4,8 @@ import General.Frame;
 
 public class bombPaste extends Item{
 
-	public bombPaste(int x, int y, int w, int h, boolean visible, String path) {
+	public bombPaste(int x, int y, int w, int h, boolean visible, String path) 
+	{
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 	}
