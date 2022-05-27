@@ -134,7 +134,7 @@ public class snake extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
+		g2.drawImage(Sprite, tx, null); 
 	}
 
 	protected Image getImage(String path) {
