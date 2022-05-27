@@ -47,7 +47,7 @@ public class snake extends Entity
 	}
 	
 	public void update() {
-		tx.setToTranslation(x, y);
+		tx.setToTranslation(x-Camera.x, y-Camera.y);
 		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {

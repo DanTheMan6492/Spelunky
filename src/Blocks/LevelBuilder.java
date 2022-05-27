@@ -43,6 +43,8 @@ public class LevelBuilder {
 		for(int[] arr : sectionIDs) {
 			System.out.println(Arrays.toString(arr));
 		}
+		int X = 0;
+		int Y = 0;
 		for(int r = 0; r < 4; r++){
 			for(int c = 0; c < 4; c++){
 				int ID = sectionIDs[r][c];
@@ -61,8 +63,8 @@ public class LevelBuilder {
 								break;
 								case 8:
 								level[y+1][x+1] = null;
-								Player.x = (x)*128 + 128;
-								Player.y = (y)*128-2 + 128;
+								X = (x)*128+128;
+								Y = (y)*128-2+128;
 								break;
 								default:
 								level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
@@ -77,6 +79,8 @@ public class LevelBuilder {
 				}
 			}
 		}
+		Player.x = X;
+		Player.y = Y;
 	}
 	private static void transition() {
 		buildRoom = false;

@@ -51,7 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
-	Entity snake = new snake(0, 0, 90, 120, true, "");
+	static Entity snake = new snake(0, 0, 90, 120, true, "");
 
 	static double controllerPos = 0;
 
@@ -140,7 +140,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static void main(String[] arg) {
 		Ana = new Player(0, 0, 90, 120, true, "");
 		camera = new Camera(Ana);
-		LevelBuilder.start();
 		try {
 			devices = XInputDevice.getAllDevices();
 		} catch (XInputNotLoadedException e) {
@@ -149,7 +148,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		};
 		Frame f = new Frame();
 	
-	
+		Fade.wait(10);
+		LevelBuilder.start();
+		snake.x = Player.x+128;
+		snake.y = Player.y;
 	}
 	
 	public Frame() {

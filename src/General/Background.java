@@ -20,7 +20,7 @@ public class Background{
 	public Background(int x, int y) {
 		img = getImage("/imgs/Background/1.png");
 		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 				//initialize the location of the image
+		init(128, 128); 				//initialize the location of the image
 									//use your variables
 	}
 
@@ -42,7 +42,7 @@ public class Background{
 	private void update() {
 
 		img = getImage("/imgs/Background/"  + Integer.toString(1+(LevelBuilder.levelNum/4)) +".png");
-		tx.setToTranslation(-Camera.x, -Camera.y);
+		tx.setToTranslation(128-Camera.x, 128-Camera.y);
 		
 	}
 	
