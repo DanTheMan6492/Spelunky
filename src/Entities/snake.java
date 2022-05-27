@@ -25,7 +25,7 @@ public class snake extends Entity
 		vy = 0;
 		grounded = true;
 		waitTimer = 20;
-		Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+		Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 	}
 	
 	public void checkGround() {
@@ -33,7 +33,7 @@ public class snake extends Entity
 		
 		if((mapX == 0 && vx < 0)
 		|| (mapX == 32 && vx > 0)) {
-			Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 			waitTimer = 20;
 			vx = 0;
 			dir *= -1;
@@ -42,7 +42,7 @@ public class snake extends Entity
 		
 		if(mapX == 0) {
 			if(vx < 0) {
-				Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 				waitTimer = 20;
 				vx = 0;
 				dir *= -1;
@@ -50,7 +50,7 @@ public class snake extends Entity
 			return;
 		}else if(mapX == 39) {
 			if(vx > 0) {
-				Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 				waitTimer = 20;
 				vx = 0;
 				dir *= -1;
@@ -63,7 +63,7 @@ public class snake extends Entity
 
 		if(LevelBuilder.level[YProj+1][XProj] == null
 		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
-			Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 			waitTimer = 20;
 			vx = 0;
 			dir *= -1;
@@ -82,14 +82,14 @@ public class snake extends Entity
 				switch(collide(block)) {
 				case 1:
 					waitTimer = 20;
-					Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+					Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 					vx = 0;
 					dir *= -1;
 					break;
 	
 				case 2:
 					waitTimer = 20;
-					Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+					Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 					vx = 0;
 					dir *= -1;
 					break;
@@ -128,10 +128,10 @@ public class snake extends Entity
 					moveTimer = 22;
 				}
 			} else if(moveTimer > 0){
-				Sprite = getImage("/imgs/Monsters/Snake/snakeWalkRight.gif");
+				Sprite = getImage("/imgs/Monsters/Snake/snakeWalk.gif");
 				moveTimer--;
 			} else{
-				Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 				vx = 0;
 				waitTimer = 20;
 			}
