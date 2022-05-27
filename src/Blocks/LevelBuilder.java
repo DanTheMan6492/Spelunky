@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import Entities.Player;
 import General.Fade;
+import General.Frame;
 
 public class LevelBuilder {
 	public static Block[][] level;
@@ -24,12 +25,14 @@ public class LevelBuilder {
 	public static void nextLevel(){
 		if(levelNum != -1)
 			transition();
-		level = new Block[33][41];
+		else
+			ready = false;
+		level = new Block[33][42];
 		int world = levelNum/4+1;
 
 		for(int i = 0; i < 33; i++){
 			level[i][0] = new Block(0, 0, i*128);
-			level[i][40] = new Block(0, 40*128, i*128);
+			level[i][41] = new Block(0, 40*128, i*128);
 		}
 		for(int i = 0; i < 41; i++){
 			level[0][i] = new Block(0, i*128, 0);
@@ -79,8 +82,9 @@ public class LevelBuilder {
 				}
 			}
 		}
-		Player.x = X;
-		Player.y = Y;
+		ready = true;
+		Frame.Ana.x = X;
+		Frame.Ana.y = Y;
 	}
 	private static void transition() {
 		buildRoom = false;

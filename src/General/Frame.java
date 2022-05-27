@@ -115,6 +115,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		Ana.paint(g);
 
+		snake.paint(g);
 
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
@@ -134,7 +135,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		oldTime = newTime;
 		//System.out.println(fps);
-		snake.paint(g2);
+	
 	}
 	
 	public static void main(String[] arg) {
@@ -146,12 +147,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
+		LevelBuilder.start();
+
+		while(!LevelBuilder.ready){
+			System.out.print("");
+		}
+
+		snake.x = Frame.Ana.x;
+		snake.y = Frame.Ana.y;
+
 		Frame f = new Frame();
 	
-		Fade.wait(10);
-		LevelBuilder.start();
-		snake.x = Player.x;
-		snake.y = Player.y-10;
+
+
 	}
 	
 	public Frame() {

@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import General.Frame;
+
 public class Olmec extends Entity
 {
 	public int tickTimer, stompTimer;
@@ -18,15 +20,15 @@ public class Olmec extends Entity
 	}
 	
 	public void detect() {
-		if(Math.abs(x - Player.x) <= 800) {
+		if(Math.abs(x - Frame.Ana.x) <= 800) {
 			jump();
 		}
 	}
 	
 	public void jump() {
-		if(x > Player.x) {
+		if(x > Frame.Ana.x) {
 			//change velocity
-		}else if(x < Player.x){
+		}else if(x < Frame.Ana.x){
 			
 		}
 		jumping = true;
@@ -55,7 +57,7 @@ public class Olmec extends Entity
 			}
 		}
 		
-		if(jumping == true && Player.y > y) {
+		if(jumping == true && Frame.Ana.x > y) {
 			stomp();
 		}
 		
