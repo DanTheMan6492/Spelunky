@@ -119,7 +119,7 @@ public class snake extends Entity
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		//g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 
 	protected Image getImage(String path) {
