@@ -6,9 +6,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public class hawkMan extends Entity{
+public class crocMan extends Entity{
 
-	public hawkMan(int x, int y, int w, int h, boolean visible, String path) {
+	public crocMan(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 	}

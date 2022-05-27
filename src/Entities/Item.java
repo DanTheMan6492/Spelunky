@@ -10,8 +10,5 @@ public class Item extends Entity
 		pickedUp = false;
 	}
 	
-	public void pickup()
-	{
-		
-	}
+	public void pickup(){}
 }
