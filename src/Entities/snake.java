@@ -52,7 +52,6 @@ public class snake extends Entity
 			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
 		else
 			tx.setToTranslation(x-Camera.x, y-Camera.y);
-		
 		tx.scale(dir, 1);
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {

@@ -47,6 +47,7 @@ public class Player extends Entity{
 	public ArrayList<Integer> items = new ArrayList<Integer>();
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
+		dir = -1;
 		grounded = false;
 		frame = 0;
 	}
@@ -195,8 +196,11 @@ public class Player extends Entity{
 				break;
 		}
 		Camera.update();
-		tx.setToTranslation(x-Camera.x, y-Camera.y);
-		//tx.scale(-1, 1);
+		if(dir == -1)
+			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
+		else
+			tx.setToTranslation(x-Camera.x, y-Camera.y);
+		tx.scale(dir, 1);
 		vx = vxBuffer;
 		frame++;
 		ready = true;
