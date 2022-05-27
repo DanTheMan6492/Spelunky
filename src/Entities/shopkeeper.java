@@ -12,7 +12,7 @@ import General.Frame;
 
 public class shopkeeper extends Entity
 {
-	public boolean aggro;
+	public boolean aggro, angry;
 
 	public shopkeeper(int x, int y, int w, int h, boolean visible, String path, boolean aggro) {
 		super(x, y, w, h, visible, path);
@@ -32,18 +32,55 @@ public class shopkeeper extends Entity
 	}
 	
 	public void detect() {
+		if(angry && !aggro) {
+			int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
+			int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
+			
+			if(Math.abs(mapX - spelunkerX) <= 5
+			&& Math.abs(mapY - spelunkerY) <= 5) {
+				aggro = true;
+				if(dir == -1) {
+					vx = -8;
+				}else if(dir == 1) {
+					vx = 8;
+				}
+			}
+		}
+	}
+	
+	public void checkGround() {
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
 		
-		if(Math.abs(mapX - spelunkerX) <= 10) {
-			if(mapY - spelunkerY > 0) {
-				jump();
+		if(mapY != spelunkerY) {
+			int XProj = (int) ((x+vx+64) / 128);
+			int YProj = (int) ((y+vy) / 128);
+			
+			if(mapX != 0 && mapX != 1 && mapX != 30 && mapX != 31) {
+				if(LevelBuilder.level[YProj][XProj + 1].solid == true && dir == 1) {
+					jump();
+					return;
+				}
 			}
-			//shoot();
+			
+			if(mapX != 0 && mapX != 31) {
+				if(LevelBuilder.level[YProj+1][XProj] == null
+				|| LevelBuilder.level[YProj+1][XProj].solid == false) {
+					jump();
+					return;
+				}
+			}
 		}
 	}
 	
 	public void update() {
+		
+		if(dir == -1)
+			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
+		else
+			tx.setToTranslation(x-Camera.x, y-Camera.y);
+		tx.scale(dir, 1);
+		
 		if(!grounded) { 
 			vy += 2;
 		}
@@ -77,6 +114,10 @@ public class shopkeeper extends Entity
 					break;
 				}
 			}
+		}
+		
+		if(aggro) {
+			checkGround();
 		}
 		
 		x += vx;

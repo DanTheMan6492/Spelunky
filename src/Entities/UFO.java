@@ -12,12 +12,14 @@ import General.Frame;
 
 public class UFO extends Entity{	
 	
-	public int shootTimer;
+	public boolean ejected;
+	public int shootTimer, turnTimer;
 
 	public UFO(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 		vx = 10;
+		ejected = false;
 	}
 	
 	public void shoot() {
@@ -34,7 +36,7 @@ public class UFO extends Entity{
 			shoot();
 		}
 		
-		if(Math.abs(mapX - spelunkerX) <= 10 && spelunkerY - mapY > 7) {
+		if(Math.abs(mapX - spelunkerX) <= 10 && spelunkerY - mapY > 4) {
 			vy = 15;
 		}else {
 			vy = 0;
@@ -52,14 +54,11 @@ public class UFO extends Entity{
 				case 2:
 					vx *= -1;
 					break;
-	
-				case 3:
-				    break;
-	
-				case 4:
-					break;
 					
-				case 0:
+				case 4:
+					if(ejected) {
+						//explode
+					}
 					break;
 				}
 			}
@@ -69,6 +68,18 @@ public class UFO extends Entity{
 		
 		if(shootTimer > 0) {
 			shootTimer --;
+			vx = 0;
+			if(shootTimer == 0) {
+				//make a bullet object
+			}
+		}else {
+			if(turnTimer > 0) {
+				turnTimer --;
+				if(turnTimer == 0) {
+					turnTimer = 300;
+					vx *= -1;
+				}
+			}
 		}
 		
 		x += vx;
