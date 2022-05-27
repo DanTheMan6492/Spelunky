@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import Entities.Player;
 import General.Fade;
 import General.Frame;
 
@@ -39,7 +38,6 @@ public class LevelBuilder {
 			if(world != 3)
 				level[32][i] = new Block(0, 32*128, i*128);
 		}
-		File f = new File(".\\src\\Sections\\1");
 		levelNum++;
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);
@@ -54,26 +52,27 @@ public class LevelBuilder {
 				String path = ".\\src\\Sections\\" + Integer.toString(world) + "\\" + Integer.toString(ID) + "-" + Integer.toString((int)(Math.random()*SECTIONSTATS[world-1][ID] + 1)) + ".room";
 				File text = new File(path);
 				try {
-					Scanner scnnr = new Scanner(text);
-					for(int i = 0; i < 8; i++){
-						for(int j = 0; j < 10; j++){
-							int blockID = scnnr.nextInt();
-							int x = c*10 + j;
-							int y = r*8  + i;
-							switch(blockID){
-								case 0:
-								level[y+1][x+1] = null;
-								break;
-								case 8:
-								level[y+1][x+1] = null;
-								X = (x)*128+128;
-								Y = (y)*128-2+128;
-								break;
-								default:
-								level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
-								break;
+					try (Scanner scnnr = new Scanner(text)) {
+						for(int i = 0; i < 8; i++){
+							for(int j = 0; j < 10; j++){
+								int blockID = scnnr.nextInt();
+								int x = c*10 + j;
+								int y = r*8  + i;
+								switch(blockID){
+									case 0:
+									level[y+1][x+1] = null;
+									break;
+									case 8:
+									level[y+1][x+1] = null;
+									X = (x)*128+128;
+									Y = (y)*128-2+128;
+									break;
+									default:
+									level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
+									break;
+								}
+
 							}
-	
 						}
 					}
 				} catch (FileNotFoundException e) {
