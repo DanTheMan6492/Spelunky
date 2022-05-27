@@ -51,7 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
-	static Entity snake = new snake(0, 0, 90, 120, true, "");
+	static Entity snake = new snake(10, 0, 90, 120, true, "");
 
 	static double controllerPos = 0;
 

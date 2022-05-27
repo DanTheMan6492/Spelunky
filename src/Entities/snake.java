@@ -18,7 +18,8 @@ public class snake extends Entity
 	{
 		super(x, y, w, h, visible, path);
 		dir = -1;
-		moveTimer = 0;
+		grounded = true;
+		moveTimer = 10;
 		Sprite = getImage("/imgs/Characters/Spliced/snakeStandRight.gif");
 	}
 	
@@ -44,7 +45,7 @@ public class snake extends Entity
 			return;
 		}
 		
-		if(mapY < 31 && x != 0 && x != 39) {
+		if(mapY < 31 && mapX != 0 && mapY != 39) {
 			if(LevelBuilder.level[mapX + 1][mapY + 1] == null
 			|| LevelBuilder.level[mapX + 1][mapY + 1].solid == false) {
 				if(vx > 0) {
@@ -70,12 +71,12 @@ public class snake extends Entity
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
-					vx = 0;
+					vx *= -1;
 					dir *= -1;
 					break;
 	
 				case 2:
-					vx = 0;
+					vx *= -1;
 					dir *= -1;
 					break;
 	
