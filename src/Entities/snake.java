@@ -17,6 +17,7 @@ public class snake extends Entity
 	public snake(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
+		dir = -1;
 		moveTimer = 0;
 		Sprite = getImage("/imgs/Characters/Spliced/snakeStandRight.gif");
 	}
@@ -59,8 +60,11 @@ public class snake extends Entity
 	}
 	
 	public void update() {
-		tx.setToTranslation(x-Camera.x, y-Camera.y);
-		
+		if(dir == -1)
+			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
+		else
+			tx.setToTranslation(x-Camera.x, y-Camera.y);
+		tx.scale(dir, 1);
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {

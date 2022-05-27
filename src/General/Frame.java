@@ -150,8 +150,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 		Fade.wait(10);
 		LevelBuilder.start();
-		snake.x = Player.x+128;
-		snake.y = Player.y;
+		snake.x = Player.x;
+		snake.y = Player.y-10;
 	}
 	
 	public Frame() {
