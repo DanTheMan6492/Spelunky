@@ -6,11 +6,20 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import General.Frame;
+
 public class ghost extends Entity{
 
 	public ghost(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void follow() {
+		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
+		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
+
+		
 	}
 
 	public void paint(Graphics g) {
