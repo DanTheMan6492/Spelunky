@@ -18,6 +18,7 @@ public class snake extends Entity
 	{
 		super(x, y, w, h, visible, path);
 		moveTimer = 0;
+		Sprite = getImage("/imgs/Characters/Spliced/snakeStandRight.gif");
 	}
 	
 	public void checkGround() {
@@ -80,7 +81,7 @@ public class snake extends Entity
 			}
 		}
 		
-		checkGround();
+		//checkGround();
 		
 		if(vx < -0.5) 
 			dir = -1;
@@ -117,7 +118,8 @@ public class snake extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		//g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 
 	protected Image getImage(String path) {
