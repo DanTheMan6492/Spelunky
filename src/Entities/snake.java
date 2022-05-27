@@ -31,16 +31,28 @@ public class snake extends Entity
 			return;
 		}
 		
-		if(mapY != 40) {
-			if(dir == -1) {
-				if(LevelBuilder.level[mapX-1][mapY+1] != null) {
+		if(mapX == 0) {
+			if(vx < 0) {
+				vx *= -1;
+			}
+			return;
+		}else if(mapX == 39) {
+			if(vx > 0) {
+				vx *= -1;
+			}
+			return;
+		}
+		
+		if(mapY < 31 && x != 0 && x != 39) {
+			if(LevelBuilder.level[mapX + 1][mapY + 1] == null
+			|| LevelBuilder.level[mapX + 1][mapY + 1].solid == false) {
+				if(vx > 0) {
 					vx *= -1;
-					dir = 1;
 				}
-			}else {
-				if(LevelBuilder.level[mapX+1][mapY+1] != null) {
+			}else if(LevelBuilder.level[mapX - 1][mapY + 1] == null
+			|| LevelBuilder.level[mapX - 1][mapY + 1].solid == false) {
+				if(vx < 0) {
 					vx *= -1;
-					dir = -1;
 				}
 			}
 		}
@@ -81,7 +93,7 @@ public class snake extends Entity
 			}
 		}
 		
-		//checkGround();
+		checkGround();
 		
 		if(vx < -0.5) 
 			dir = -1;
@@ -118,7 +130,6 @@ public class snake extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		//g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
 		g2.drawImage(Sprite, tx, null);
 	}
 
