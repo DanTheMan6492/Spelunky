@@ -28,7 +28,9 @@ import Blocks.KaliAltar;
 import Blocks.LevelBuilder;
 import Blocks.LevelGen;
 import Entities.Camera;
+import Entities.Entity;
 import Entities.Player;
+import Entities.snake;
 
 import com.github.strikerx3.jxinput.XInputAxes;
 import com.github.strikerx3.jxinput.XInputAxesDelta;
@@ -49,6 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
+	Entity snake = new snake(0, 0, 90, 120, true, "");
 
 	static double controllerPos = 0;
 
@@ -131,6 +134,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		oldTime = newTime;
 		//System.out.println(fps);
+		snake.paint(g2);
 	}
 	
 	public static void main(String[] arg) {
