@@ -20,13 +20,15 @@ public class alien extends Entity
 		super(x, y, w, h, visible, path);
 		dir = 1;
 		vx = 0;
-		vy = 0;
+		vy = -30;
 		grounded = true;
-		//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
+		Sprite = getImage("/imgs/Monsters/Alien/alienEject.gif");
 	}
 	
-	public void jump() {
+	public void jump() 
+	{
 		vy = -30;
+		Sprite = getImage("/imgs/Monsters/Alien/alienJump.gif");
 	}
 	
 	public void checkGround() {
@@ -35,26 +37,9 @@ public class alien extends Entity
 		int mapX = (int) (x / 128);
 		
 		if((mapX == 0 && vx < 0)
-		|| (mapX == 32 && vx > 0)) {
-			//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-			vx = 0;
+		|| (mapX == 39 && vx > 0)) { //mapx == 32 maybe
+			Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
 			dir *= -1;
-			return;
-		}
-		
-		if(mapX == 0) {
-			if(vx < 0) {
-				//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-				vx = 0;
-				dir *= -1;
-			}
-			return;
-		}else if(mapX == 39) {
-			if(vx > 0) {
-				//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-				vx = 0;
-				dir *= -1;
-			}
 			return;
 		}
 
@@ -63,8 +48,7 @@ public class alien extends Entity
 
 		if(LevelBuilder.level[YProj+1][XProj] == null
 		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
-			//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-			vx = 0;
+			Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
 			dir *= -1;
 		}
 	}
@@ -81,19 +65,16 @@ public class alien extends Entity
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
-					//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-					vx = 0;
+					Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
 					dir *= -1;
 					break;
 	
 				case 2:
-					//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
-					vx = 0;
+					Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
 					dir *= -1;
 					break;
 	
 				case 3:
-					vy = 0;
 					grounded = true;
 					flag = true;
 				    break;
