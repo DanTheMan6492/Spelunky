@@ -12,7 +12,7 @@ import Blocks.LevelBuilder;
 public class mantrap extends Entity
 {
 	
-	public int moveDuration, moveTimer;
+	public int moveDuration, waitTimer;
 
 	public mantrap(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
@@ -25,26 +25,43 @@ public class mantrap extends Entity
 	
 	public void checkGround() {
 		int mapX = (int) (x / 128);
-		int mapY = (int) (y / 128);
 		
 		if((mapX == 0 && vx < 0)
 		|| (mapX == 32 && vx > 0)) {
-			vx *= -1;
+			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+			waitTimer = 20;
+			vx = 0;
+			dir *= -1;
 			return;
 		}
 		
-		if(mapY != 40) {
-			if(dir == -1) {
-				if(LevelBuilder.level[mapX-1][mapY+1] != null) {
-					vx *= -1;
-					dir = 1;
-				}
-			}else {
-				if(LevelBuilder.level[mapX+1][mapY+1] != null) {
-					vx *= -1;
-					dir = -1;
-				}
+		if(mapX == 0) {
+			if(vx < 0) {
+				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+				waitTimer = 20;
+				vx = 0;
+				dir *= -1;
 			}
+			return;
+		}else if(mapX == 39) {
+			if(vx > 0) {
+				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+				waitTimer = 20;
+				vx = 0;
+				dir *= -1;
+			}
+			return;
+		}
+
+		int XProj = (int) ((x+vx+64) / 128);
+		int YProj = (int) ((y+vy) / 128);
+
+		if(LevelBuilder.level[YProj+1][XProj] == null
+		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
+			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+			waitTimer = 20;
+			vx = 0;
+			dir *= -1;
 		}
 	}
 	
@@ -88,11 +105,11 @@ public class mantrap extends Entity
 			y -= vy;
 			vx = 0;
 		}else {
-			if(moveTimer > 0) {
+			if(waitTimer > 0) {
 				if(moveDuration == 0) {
-					moveTimer --;
+					waitTimer --;
 				}
-				if(moveTimer == 0) {
+				if(waitTimer == 0) {
 					moveDuration = 30;
 				}
 				if(moveDuration > 0) {

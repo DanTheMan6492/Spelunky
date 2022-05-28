@@ -10,7 +10,9 @@ import Blocks.Block;
 import Blocks.LevelBuilder;
 
 public class alien extends Entity
-{
+{	
+	
+	public int waitTimer;
 	public int moveTimer;
 	
 	public alien(int x, int y, int w, int h, boolean visible, String path) 
@@ -20,14 +22,21 @@ public class alien extends Entity
 		vx = 0;
 		vy = 0;
 		grounded = true;
-		Sprite = getImage("/imgs/Characters/Spliced/snakeStandRight.gif");
+		//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 	}
 	
+	public void jump() {
+		vy = -30;
+	}
 	
 	public void checkGround() {
+		if(!grounded) {return;}
+		
 		int mapX = (int) (x / 128);
 		
-		if((mapX == 0 && vx < 0) || (mapX == 32 && vx > 0)) {
+		if((mapX == 0 && vx < 0)
+		|| (mapX == 32 && vx > 0)) {
+			//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 			vx = 0;
 			dir *= -1;
 			return;
@@ -35,15 +44,14 @@ public class alien extends Entity
 		
 		if(mapX == 0) {
 			if(vx < 0) {
+				//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 				vx = 0;
 				dir *= -1;
 			}
 			return;
-		}
-		else if(mapX == 39) 
-		{
-			if(vx > 0) 
-			{
+		}else if(mapX == 39) {
+			if(vx > 0) {
+				//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 				vx = 0;
 				dir *= -1;
 			}
@@ -55,6 +63,7 @@ public class alien extends Entity
 
 		if(LevelBuilder.level[YProj+1][XProj] == null
 		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
+			//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 			vx = 0;
 			dir *= -1;
 		}
@@ -72,11 +81,13 @@ public class alien extends Entity
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
+					//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 					vx = 0;
 					dir *= -1;
 					break;
 	
 				case 2:
+					//Sprite = getImage("/imgs/Monsters/Snake/snakeStandRight.gif");
 					vx = 0;
 					dir *= -1;
 					break;
@@ -101,16 +112,16 @@ public class alien extends Entity
 		
 		checkGround();
 		
-		
-		
 		if(!grounded) {
 			vy += 2;
-			vx = 0;
-		}
-		else 
-		{
-			vx = 8*dir;
-			moveTimer = 20;
+			waitTimer = 20;
+		}else {
+			if(waitTimer > 0){
+				waitTimer--;
+				if(waitTimer == 0){
+					jump();
+				}
+			}
 		}
 		
 		x += vx;
@@ -120,6 +131,7 @@ public class alien extends Entity
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g.drawRect((int) x, (int) y, w, h);
 	}
 
 	protected Image getImage(String path) {
