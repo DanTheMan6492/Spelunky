@@ -14,9 +14,14 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
+import java.awt.FontFormatException;
+import java.awt.Graphics;
 import java.util.Arrays;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 import java.awt.Graphics2D;
 import javax.swing.JFrame;
@@ -48,6 +53,7 @@ import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	
+	public static Font font;
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
@@ -100,7 +106,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		camera.update();
 		super.paintComponent(g);
 
-		
 	
 
 		bg.paint(g);
@@ -118,6 +123,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
 
+		g.setColor(Color.white);
+		g.setFont(font);
+		g.drawString("5", 75, 77);
 		Fade.paint(g);
 
 		//fps cap
@@ -138,6 +146,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static void main(String[] arg) {
 		Ana = new Player(0, 0, 90, 120, true, "");
 		camera = new Camera(Ana);
+		try {
+			Font f = Font.createFont(Font.TRUETYPE_FONT, new File("Ubuntu-Bold.ttf"));
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(f);
+			font = new Font("Ubuntu", Font.PLAIN, 32);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		try {
 			devices = XInputDevice.getAllDevices();
 		} catch (XInputNotLoadedException e) {
