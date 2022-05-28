@@ -175,7 +175,6 @@ public class Player extends Entity{
 		y += vy;
 
 		
-		System.out.println(state);
 		switch(state) {
 			case "Standing":
 				Sprite = splice(0, 0);

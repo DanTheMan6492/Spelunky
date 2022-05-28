@@ -16,7 +16,7 @@ public class LevelBuilder {
 	public static boolean loading = false;
 	public static boolean buildRoom = false;
 	public static boolean ready = true;
-	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+	public static int[][] SECTIONSTATS = {{6, 1, 2, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}};
 
 	public static void start(){
 		levelNum = -1;

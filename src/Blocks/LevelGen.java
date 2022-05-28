@@ -15,7 +15,7 @@ public class LevelGen {
 		boolean Overriding = false;
 
 		while(true){
-			if(prevDown){
+			if(prevDown || indexes[row][col] == 3){
 				indexes[row][col] = 3;
 				if(col == 0)
 					col++;
@@ -44,9 +44,9 @@ public class LevelGen {
 				} else{
 					if(indexes[row][col] > 3)
 						indexes[row][col] = 5;
-					else{
+					else if(indexes[row][col] == 0)
 						indexes[row][col] = 1;
-					}
+					
 					
 					if(col == 0)
 						dir = 1;
