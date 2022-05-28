@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
-import java.lang.System.Logger.Level;
 import java.net.URL;
 
 import Blocks.LevelBuilder;
