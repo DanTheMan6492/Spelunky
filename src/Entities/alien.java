@@ -100,10 +100,17 @@ public class alien extends Entity
 		checkGround();
 		
 		if(!grounded) {
-			if(parachuting == true) {
+			if(parachuting == true && vy > 0) {
 				vy = 5;
-			}else {
+				Sprite = getImage("/imgs/Monsters/Alien/alienFall.gif");
+			}
+			else if(parachuting == true && vy <= 0) {
 				vy += 2;
+				Sprite = getImage("/imgs/Monsters/Alien/alienEject.gif");
+			}
+			else {
+				vy += 2;
+				Sprite = getImage("/imgs/Monsters/Alien/alienJump.gif");
 			}
 			waitTimer = 20;
 		}else {
