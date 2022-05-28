@@ -32,6 +32,7 @@ public class Player extends Entity{
 	public boolean[] equipables = {false, false, false, 
 								   false, false, false, 
 								   false, false, false, };
+	
 	public boolean parachuting = false;
 	/*Indexes:
 	 * 0 climbingGloves
