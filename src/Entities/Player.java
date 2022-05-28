@@ -28,15 +28,9 @@ public class Player extends Entity{
 	public boolean debug = false;
 	public boolean ready = false;
 	public double vxBuffer;
-<<<<<<< HEAD
-	public boolean[] equipables = {false, false, false, 
-								   false, false, false, 
-								   false, false, false, };
-=======
 	public boolean[] equipables = {false, false, false,
 								   false, false, false,
 								   false, false, false};
->>>>>>> 3a4f7937564dfd1b8cee3f0e7b4c75d8660dcfbc
 	public boolean parachuting = false;
 	/*Indexes:
 	 * 0 climbingGloves
