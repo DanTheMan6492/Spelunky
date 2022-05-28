@@ -1,5 +1,4 @@
 package Entities;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,29 +13,32 @@ public class bat extends Entity
 {
 	public boolean hanging, aggro;
 
-	public bat(int x, int y, int w, int h, boolean visible, String path) {
+	public bat(int x, int y, int w, int h, boolean visible, String path) 
+	{
 		super(x, y, w, h, visible, path);
-		hanging = false;
-		// TODO Auto-generated constructor stub
+		hanging = true;
+		Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
+
 	}
 	
-	public boolean detect() {
+	public boolean detect() 
+	{
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
 		
-		if(Math.abs(mapX - spelunkerX) <= 6
-		&& Math.abs(mapY - spelunkerY) <= 6
-		&& mapY < spelunkerY) {
+		if(Math.abs(mapX - spelunkerX) <= 6 && Math.abs(mapY - spelunkerY) <= 6 && mapY < spelunkerY) 
+		{
 			hanging = false;
+			Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
 			return true;
 		}
-		
 		return false;
 	}
 	
 	public void follow(){
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
+		Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
 		
 		if(mapX < spelunkerX) {
 			vx = -5;
@@ -65,6 +67,7 @@ public class bat extends Entity
 					if(!aggro) {
 						hanging = true;
 						vy = 0;
+						Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
 					}
 				}
 			}
@@ -81,7 +84,8 @@ public class bat extends Entity
 		else if(vx > 0.5)
 			dir = 1;
 		
-		if(aggro) {
+		if(aggro) 
+		{
 			follow();
 		}else {
 			vx = 0;
