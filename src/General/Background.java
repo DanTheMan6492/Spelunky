@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
+import java.lang.System.Logger.Level;
 import java.net.URL;
 
 import Blocks.LevelBuilder;
@@ -31,6 +32,8 @@ public class Background{
 		
 		
 		//call update to update the actualy picture location
+
+		
 		update();
 		
 		g2.drawImage(img, tx, null);
@@ -42,7 +45,10 @@ public class Background{
 	private void update() {
 
 		img = getImage("/imgs/Background/"  + Integer.toString(1+(LevelBuilder.levelNum/4)) +".png");
-		tx.setToTranslation(128-Camera.x, 128-Camera.y);
+		if(LevelBuilder.TransistionRoom)
+			init(0-Camera.x, 0-Camera.y);
+		else
+			init(128-Camera.x, 128-Camera.y);
 		
 	}
 	

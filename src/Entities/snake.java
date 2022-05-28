@@ -142,9 +142,7 @@ public class snake extends Entity
 	}
 
 	public void paint(Graphics g) {
-		System.out.println(x);
 		update();
-		System.out.println(x);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null); 
 	}

@@ -51,7 +51,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
-	static Entity snake = new snake(10, 0, 90, 120, true, "");
 
 	static double controllerPos = 0;
 
@@ -115,8 +114,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		Ana.paint(g);
 
-		snake.paint(g);
-
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
@@ -153,8 +150,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			System.out.print("");
 		}
 
-		snake.x = Frame.Ana.x;
-		snake.y = Frame.Ana.y;
 
 		Frame f = new Frame();
 	

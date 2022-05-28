@@ -12,10 +12,11 @@ public class LevelBuilder {
 	public static Block[][] level;
 	public static int [][]sectionIDs;
 	public static int levelNum;
+	public static boolean TransistionRoom = false;
 	public static boolean loading = false;
 	public static boolean buildRoom = false;
 	public static boolean ready = true;
-	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1}};
+	public static int[][] SECTIONSTATS = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 	public static void start(){
 		levelNum = -1;
@@ -26,19 +27,22 @@ public class LevelBuilder {
 			transition();
 		else
 			ready = false;
+
+		TransistionRoom = false;
 		level = new Block[33][42];
 		int world = levelNum/4+1;
 
+		levelNum++;
+		
 		for(int i = 0; i < 33; i++){
 			level[i][0] = new Block(0, 0, i*128);
 			level[i][41] = new Block(0, 40*128, i*128);
 		}
-		for(int i = 0; i < 41; i++){
+		for(int i = 0; i < 42; i++){
 			level[0][i] = new Block(0, i*128, 0);
 			if(world != 3)
 				level[32][i] = new Block(0, 32*128, i*128);
 		}
-		levelNum++;
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);
 		for(int[] arr : sectionIDs) {
@@ -86,6 +90,7 @@ public class LevelBuilder {
 		Frame.Ana.y = Y;
 	}
 	private static void transition() {
+		TransistionRoom = true;
 		buildRoom = false;
 		ready = false;
 		Fade.fade();
@@ -108,11 +113,7 @@ public class LevelBuilder {
 				}
 			}
 
-			for(int i = 2; i < 4; i++){
-				for(int j = 16-i; j < 16; j++){
-					level[i][j] = new Block(1, j*128, i*128, world);
-				}
-			}
+
 
 			for(int i = 2; i < 4; i++){
 				level[i][00] =  new Block(1, 0, i*128);
@@ -125,6 +126,12 @@ public class LevelBuilder {
 
 			for(int j = 0; j < 16; j++){
 				level[8][j] = new Block(1, j*128, 8*128);
+			}
+
+			for(int i = 2; i < 4; i++){
+				for(int j = 16-i; j < 16; j++){
+					level[i][j] = new Block(1, j*128, i*128, world);
+				}
 			}
 
 			buildRoom = true;

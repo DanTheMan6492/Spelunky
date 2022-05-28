@@ -24,13 +24,13 @@ public class Player extends Entity{
 	int frame;
 	String state = "Walk";
 	BufferedImage spriteSheet;
-	int character = 4;
+	int character = 14;
 	public boolean debug = false;
 	public boolean ready = false;
 	public double vxBuffer;
-	public boolean[] equipables = {true, true, true, 
-								   true, true, true, 
-								   true, true, true};
+	public boolean[] equipables = {false, false, false, 
+								   false, false, false, 
+								   false, false, false, };
 	public boolean parachuting = false;
 	/*Indexes:
 	 * 0 climbingGloves
