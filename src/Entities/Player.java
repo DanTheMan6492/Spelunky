@@ -113,7 +113,7 @@ public class Player extends Entity{
 			if((vy+2)/vy <= 0) 
 				frame = 0;
 			
-			if(vy < 0) 
+			if(vy > 0) 
 				state = "Falling";
 			else
 				state = "Jumping";
@@ -173,11 +173,12 @@ public class Player extends Entity{
 		y += vy;
 
 		
+		System.out.println(state);
 		switch(state) {
 			case "Standing":
 				Sprite = splice(0, 0);
 				break;
-			case "Falling":
+				case "Falling":
 				if(frame < 6) {
 					Sprite = splice(9, 4+frame/2);
 				} else {
@@ -271,14 +272,17 @@ public class Player extends Entity{
 		int X = (int) x / 128;
 		int Y = (int) y / 128;
 
+		if(LevelBuilder.level[Y][X] == null)
+			return;
+		
 		Thread transition = new Thread(new Transition());
-		if(LevelBuilder.level[Y][X].id == 6)
+		if(LevelBuilder.level[Y][X].id == 2)
 			transition.start();
-		if(LevelBuilder.level[Y+1][X].id == 6)
+		if(LevelBuilder.level[Y+1][X].id == 2)
 			transition.start();
-		if(LevelBuilder.level[Y][X+1].id == 6)
+		if(LevelBuilder.level[Y][X+1].id == 2)
 			transition.start();
-		if(LevelBuilder.level[Y+1][X+1].id == 6)
+		if(LevelBuilder.level[Y+1][X+1].id == 2)
 			transition.start();
 
 	}

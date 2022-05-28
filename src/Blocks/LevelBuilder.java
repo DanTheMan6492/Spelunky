@@ -66,7 +66,7 @@ public class LevelBuilder {
 									case 0:
 									level[y+1][x+1] = null;
 									break;
-									case 8:
+									case 3:
 									level[y+1][x+1] = null;
 									X = (x)*128+128;
 									Y = (y)*128-2+128;
