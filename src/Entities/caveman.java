@@ -10,12 +10,12 @@ import Blocks.Block;
 import Blocks.LevelBuilder;
 import General.Frame;
 
-public class crocMan extends Entity{
+public class caveman extends Entity{
 
 	public int waitTimer, moveTimer;
 	public boolean frenzy;
 	
-	public crocMan(int x, int y, int w, int h, boolean visible, String path) {
+	public caveman(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		frenzy = false;
 		// TODO Auto-generated constructor stub
@@ -27,12 +27,6 @@ public class crocMan extends Entity{
 		
 		if(mapY == spelunkerY && Math.abs(mapX - spelunkerX) <= 8) {
 			frenzy = true;
-		}
-	}
-	
-	public void jump() {
-		if(grounded) {
-			vy = -45;
 		}
 	}
 	
@@ -101,9 +95,6 @@ public class crocMan extends Entity{
 					waitTimer = 20;
 				}
 			}
-		}else {
-			vx = dir * 10;
-			jump();
 		}
 		
 		x += vx;
