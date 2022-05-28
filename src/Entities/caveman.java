@@ -15,10 +15,12 @@ public class caveman extends Entity{
 	public int waitTimer, moveTimer;
 	public boolean frenzy;
 	
-	public caveman(int x, int y, int w, int h, boolean visible, String path) {
+	public caveman(int x, int y, int w, int h, boolean visible, String path) 
+	{
 		super(x, y, w, h, visible, path);
 		frenzy = false;
-		// TODO Auto-generated constructor stub
+		Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
+
 	}
 	
 	public void detect() {
@@ -27,6 +29,8 @@ public class caveman extends Entity{
 		
 		if(mapY == spelunkerY && Math.abs(mapX - spelunkerX) <= 8) {
 			frenzy = true;
+			Sprite = getImage("/imgs/Monsters/Caveman/cavemanFrenzy.gif");
+
 		}
 	}
 	
@@ -87,12 +91,16 @@ public class caveman extends Entity{
 					if(waitTimer <= 0){
 						vx = 8*dir;
 						moveTimer = 22;
+						Sprite = getImage("/imgs/Monsters/Caveman/cavemanWalk.gif");
+
 					}
 				} else if(moveTimer > 0){
 					moveTimer--;
 				} else{
 					vx = 0;
 					waitTimer = 20;
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
+
 				}
 			}
 		}
