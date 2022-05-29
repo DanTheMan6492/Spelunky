@@ -7,7 +7,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import Entities.Entity;
+import Entities.alien;
 import Entities.bat;
+import Entities.blueFrog;
+import Entities.caveman;
 import Entities.snake;
 import General.Fade;
 import General.Frame;
@@ -85,7 +88,7 @@ public class LevelBuilder {
 									//spawn snake, delete later
 									case 11:
 										//if((int)(Math.random()*5) == 0) {
-											enemies.add(new bat((x)*128+128, (y)*128+128, 40, 40, true, ""));
+											enemies.add(new blueFrog((x)*128+128, (y)*128+128, 128, 128, true, ""));
 										//}
 										level[y+1][x+1] = null;
 										break;

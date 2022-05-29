@@ -31,8 +31,8 @@ public class Player extends Entity{
 	public double vxBuffer;
 	public int itemHeld;
 
-	public boolean[] equipables = {false, false, false, 
-								   false, false, false, 
+	public boolean[] equipables = {false, false, false,
+								   false, false, false,
 								   false, false, false};
 	
 	public boolean parachuting = false;
