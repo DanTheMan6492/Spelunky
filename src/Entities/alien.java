@@ -21,7 +21,7 @@ public class alien extends Entity
 		super(x, y, w, h, visible, path);
 		dir = 1;
 		vx = 0;
-		vy = -10;
+		vy = -20;
 		parachuting = true;
 		grounded = false;
 		Sprite = getImage("/imgs/Monsters/Alien/alienEject.gif");
@@ -34,53 +34,44 @@ public class alien extends Entity
 	}
 	
 	public void checkGround() {
-		if(!grounded) {return;}
-		
-		int mapX = (int) (x / 128);
-		
-		if((mapX == 0 && vx < 0)
-		|| (mapX == 39 && vx > 0)) { //mapx == 32 maybe
-			Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
-			dir *= -1;
-			return;
-		}
+		int XProj = (int) ((x+dir*vx+Math.signum(vx)*64) / 128);;
+		int YProj = (int) ((y) / 128 + 1);
 
-		int XProj = (int) ((x+vx+64) / 128);
-		int YProj = (int) ((y+vy) / 128);
-
-		if(LevelBuilder.level[YProj+1][XProj] == null
-		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
-			Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
+		if(LevelBuilder.level[YProj][XProj] == null
+		|| LevelBuilder.level[YProj][XProj].solid == false) {
+			waitTimer = 20;
+			vx *= -1;
 			dir *= -1;
 		}
 	}
 	
-	
 	public void update() {
 		if(dir == -1)
-			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
+			tx.setToTranslation(x-Camera.x+128, y-Camera.y+20);
 		else
-			tx.setToTranslation(x-Camera.x, y-Camera.y);
+			tx.setToTranslation(x-Camera.x, y-Camera.y+20);
 		tx.scale(dir, 1);
-		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
-					Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
+					vx *= -1;
 					dir *= -1;
 					break;
 	
 				case 2:
-					Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
+					vx *= -1;
 					dir *= -1;
 					break;
 	
 				case 3:
+					vy = 0;
 					grounded = true;
 					flag = true;
+					Sprite = getImage("/imgs/Monsters/Alien/alienWalk.gif");
 					if(parachuting) {
+						vx = 5;
 						parachuting = false;
 					}
 				    break;
@@ -96,24 +87,18 @@ public class alien extends Entity
 				}
 			}
 		}
+		if(!flag) {
+			grounded = false;
+		}
 		
-		checkGround();
-		
-		if(!grounded) {
-			if(parachuting == true && vy > 0) {
+		if(!grounded) { 
+			if(parachuting == false || (parachuting && vy < 2)) {
+				vy += 2;
+			}else {
 				vy = 5;
-				Sprite = getImage("/imgs/Monsters/Alien/alienFall.gif");
 			}
-			else if(parachuting == true && vy <= 0) {
-				vy += 2;
-				Sprite = getImage("/imgs/Monsters/Alien/alienEject.gif");
-			}
-			else {
-				vy += 2;
-				Sprite = getImage("/imgs/Monsters/Alien/alienJump.gif");
-			}
-			waitTimer = 20;
 		}else {
+			checkGround();
 			if(waitTimer > 0){
 				waitTimer--;
 				if(waitTimer == 0){
@@ -128,8 +113,8 @@ public class alien extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
-		g.drawRect((int) x, (int) y, w, h);
+		g2.drawImage(Sprite, tx, null);
+		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
 	}
 
 	protected Image getImage(String path) {
