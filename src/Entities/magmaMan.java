@@ -27,6 +27,14 @@ public class magmaMan extends Entity{
 		vy = -30;
 		Sprite = getImage("/imgs/Monsters/Magmar/magmar_spawn.gif");
 	}
+	
+	public void detect() {
+		int mapX = x/128, mapY = y/128;
+		
+		if(LevelBuilder.level[mapY][mapX].solid) {
+			
+		}
+	}
 
 	public void update() {
 		if(dir == -1)
