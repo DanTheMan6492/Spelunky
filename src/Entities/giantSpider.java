@@ -12,25 +12,25 @@ import General.Frame;
 
 public class giantSpider extends Entity
 {
-	public int jumpTimer;
+	public int jumpTimer, dropTimer;
 	public boolean hanging;
 	
-	public giantSpider(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
-		jumpTimer = 60;
+	public giantSpider(int x, int y, boolean visible, String path) {
+		super(x, y, 256, 128, visible, path);
+		jumpTimer = 20;
 		hanging = true;
-		Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderNeutral.gif");
+		Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderNeutral.png");
 		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean detect() {
-		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
-		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
+	public void detect() {
+		int mapX = x/128, spelunkerX = Frame.Ana.x/128;
+		int mapY = y/128, spelunkerY = Frame.Ana.y/128;
 		
-		if(mapX == spelunkerX && spelunkerY - mapY <= 7) {
-			return true;
+		if((mapX == spelunkerX || mapX + 1 == spelunkerX) && Math.abs(mapY - spelunkerY) <= 6 && mapY < spelunkerY) {
+			hanging = false;
+			dropTimer = 20;
 		}
-		return false;
 	}
 	
 	public void jump() {
@@ -44,10 +44,10 @@ public class giantSpider extends Entity
 	}
 	
 	public void update() {
-		
-		
-		if(!grounded && detect() == true) { 
-			vy += 2;
+		if(hanging) {
+			tx.setToTranslation((int)(x - Camera.x), (int)(x - Camera.y));
+		}else {
+			tx.setToTranslation((int)(x - Camera.x), (int)(x - Camera.y));
 		}
 		
 		boolean flag = false;
@@ -67,6 +67,7 @@ public class giantSpider extends Entity
 					vx = 0;
 					grounded = true;
 					flag = true;
+					Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderStand.gif");
 				    break;
 	
 				case 4:
@@ -81,33 +82,18 @@ public class giantSpider extends Entity
 				}
 			}
 		}
-		
-		if(detect()) {
-			hanging = false;
-			Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderDrop.gif");
+		if(flag == false && hanging == false) {
+			grounded = false;
 		}
 		
-		if(hanging == false) {
-			if(jumpTimer > 0) {
-				if(grounded) 
-				{
-					Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderStand.gif");
-					jumpTimer --;
-					if(jumpTimer == 0) 
-					{
-						jump();
-						Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderJump.gif");
-					}
-				}
-			}
-			x += vx;
-			y += vy;
-		}
+		x += vx;
+		y += vy;
 	}
 	
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
+		g.drawRect((int)(x - Camera.x), (int)(x - Camera.y), w,h);
 	}
 }
