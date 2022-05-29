@@ -2,9 +2,13 @@ package Blocks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import Entities.Entity;
 import Entities.alien;
@@ -28,6 +32,7 @@ public class LevelBuilder {
 	public static boolean buildRoom = false;
 	public static boolean ready = true;
 	public static boolean damsel =  false;
+	public static int track;
 	public static int[][] SECTIONSTATS = {{6, 1, 2, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}};
 	
 	
@@ -43,9 +48,14 @@ public class LevelBuilder {
 
 		TransistionRoom = false;
 		level = new Block[33][42];
-		int world = levelNum/4+1;
+
 
 		levelNum++;
+		int world = levelNum/4+1;
+
+		track = (int) (Math.random() * 3);
+		Frame.Tracks[world-1][track].play();
+
 		
 		for(int i = 0; i < 33; i++){
 			level[i][0] = new Block(0, 0, i*128);
@@ -54,13 +64,15 @@ public class LevelBuilder {
 		for(int i = 0; i < 42; i++){
 			level[0][i] = new Block(0, i*128, 0);
 			if(world != 3)
-				level[32][i] = new Block(0, 32*128, i*128);
+				level[32][i] = new Block(0, i*128, 32*128);
 		}
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);
 		for(int[] arr : sectionIDs) {
 			System.out.println(Arrays.toString(arr));
 		}
+
+		Entity.entities = new ArrayList<Entity>();
 		int X = 0;
 		int Y = 0;
 		for(int r = 0; r < 4; r++){
@@ -122,6 +134,18 @@ public class LevelBuilder {
 		TransistionRoom = true;
 		buildRoom = false;
 		ready = false;
+		try {
+			Frame.Tracks[levelNum/4][track].stop();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Fade.fade();
 		while(!ready){
 			System.out.print("");

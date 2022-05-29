@@ -29,6 +29,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -65,6 +67,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
+	public static Music[][] Tracks;
 
 	static double controllerPos = 0;
 
@@ -78,6 +81,27 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 
 	public void paint(Graphics g) {
+
+		super.paintComponent(g);
+
+		g.setFont(font);
+		if(!character_selected){
+			
+			g.setColor(Color.black);
+			g.fillRect(0, 0, 5000, 5000);
+			Graphics2D g2 = (Graphics2D) g;
+			AffineTransform tx = AffineTransform.getTranslateInstance(6, 100);
+			for(int i = 1; i <= 21; i++){
+				tx = AffineTransform.getTranslateInstance(6 + ((i-1)%7)*(273), 80 + ((i-1)/7) * (327));
+				tx.scale(0.545, 0.545);
+
+				g2.drawImage(splice(i), tx, null);
+
+			}
+			g.setColor(Color.white);
+			g.drawString("Select Your Character", 0, 0);
+			return;
+		}
 
 		for(int i =0 ; i < devices.length; i++) {
 			XInputDevice device = devices[i];
@@ -130,26 +154,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 		}
 
-		super.paintComponent(g);
-
-		g.setFont(font);
-		if(!character_selected){
-			
-			g.setColor(Color.black);
-			g.fillRect(0, 0, 5000, 5000);
-			Graphics2D g2 = (Graphics2D) g;
-			AffineTransform tx = AffineTransform.getTranslateInstance(6, 100);
-			for(int i = 1; i <= 21; i++){
-				tx = AffineTransform.getTranslateInstance(6 + ((i-1)%7)*(273), 80 + ((i-1)/7) * (327));
-				tx.scale(0.545, 0.545);
-
-				g2.drawImage(splice(i), tx, null);
-
-			}
-			g.setColor(Color.white);
-			g.drawString("Select Your Character", 0, 0);
-
-		} else {
+		
 		Camera.update();
 
 		bg.paint(g);
@@ -191,12 +196,28 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		oldTime = newTime;
 
-		}
 	}
 	
 	public static void main(String[] arg) {
-		Ana = new Player(0, 0, 90, 120, true, "");
-		camera = new Camera(Ana);
+		
+		try {
+			Tracks = new Music[][]{
+				{new Music(".\\src\\Music\\1-1.wav", true), new Music(".\\src\\Music\\1-2.wav", true), new Music(".\\src\\Music\\1-3.wav", true)},
+				{new Music(".\\src\\Music\\2-1.wav", true), new Music(".\\src\\Music\\2-2.wav", true), new Music(".\\src\\Music\\2-3.wav", true)},
+				{new Music(".\\src\\Music\\3-1.wav", true), new Music(".\\src\\Music\\3-2.wav", true), new Music(".\\src\\Music\\3-3.wav", true)},
+				{new Music(".\\src\\Music\\4-1.wav", true), new Music(".\\src\\Music\\4-2.wav", true), new Music(".\\src\\Music\\4-3.wav", true)}
+			};
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+
 		try {
 			Font f = Font.createFont(Font.TRUETYPE_FONT, new File("Ubuntu-Bold.ttf"));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -213,15 +234,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		LevelBuilder.start();
 
-		while(!LevelBuilder.ready){
-			System.out.print("");
-		}
-
-		for(int i = 1; i <= 20; i++){
-			splice(i);
-		}
 		Frame f = new Frame();
 	
 
@@ -266,7 +279,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(!character_selected){
 			int x = arg0.getX();
 			int y = arg0.getY();
+			Ana = new Player(0, 0, 90, 120, true, "");
+			camera = new Camera(Ana);
 			Ana.character = 1 + (x/272) + (y/327)*7;
+			LevelBuilder.start();
+
+			while(!LevelBuilder.ready){
+				System.out.print("");
+			}
 			character_selected = true;
 		}
 	}
