@@ -14,17 +14,19 @@ public class shopkeeper extends Entity
 {
 	public boolean aggro, angry;
 
-	public shopkeeper(int x, int y, int w, int h, boolean visible, String path, boolean aggro) {
+	public shopkeeper(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		this.aggro = aggro;
+		angry = true;
 		Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStand.gif");
+		dir = 1;
+		vx = 15;
 
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void jump() {
 		if(grounded) {
-			vy = -45;
+			vy = -35;
 		}	
 	}
 	
@@ -34,59 +36,35 @@ public class shopkeeper extends Entity
 	}
 	
 	public void detect() {
-		if(angry && !aggro) {
-			int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
-			int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
-			
-			if(Math.abs(mapX - spelunkerX) <= 5
-			&& Math.abs(mapY - spelunkerY) <= 5) {
-				aggro = true;
-				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepWalk.gif");
-				if(dir == -1) {
-					vx = -8;
-				}else if(dir == 1) {
-					vx = 8;
-				}
-			}
-		}
-	}
-	
-	public void checkGround() {
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
 		
-		if(mapY != spelunkerY) {
-			int XProj = (int) ((x+vx+64) / 128);
-			int YProj = (int) ((y+vy) / 128);
-			
-			if(mapX != 0 && mapX != 1 && mapX != 30 && mapX != 31) {
-				if(LevelBuilder.level[YProj][XProj + 1].solid == true && dir == 1) {
-					jump();
-					return;
-				}
+		if(!aggro) {
+			if(Math.abs(mapX - spelunkerX) <= 6 && Math.abs(mapY - spelunkerY) < 4) {
+				aggro = true;
 			}
-			
-			if(mapX != 0 && mapX != 31) {
-				if(LevelBuilder.level[YProj+1][XProj] == null
-				|| LevelBuilder.level[YProj+1][XProj].solid == false) {
-					jump();
-					return;
-				}
+		}else{
+			if(Math.abs(mapX - spelunkerX) <= 3 && Math.abs(mapY - spelunkerY) < 4) {
+				System.out.println("shoot");
+			}else if(Math.abs(mapX - spelunkerX) > 6 && Math.abs(mapY - spelunkerY) < 4) {
+				jump();
 			}
 		}
 	}
 	
 	public void update() {
 		
+		if(vx > 0) {
+			dir = 1;
+		}else if(vx < 0) {
+			dir = -1;
+		}
+		
 		if(dir == -1)
 			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
 		else
 			tx.setToTranslation(x-Camera.x, y-Camera.y);
 		tx.scale(dir, 1);
-		
-		if(!grounded) { 
-			vy += 2;
-		}
 		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
@@ -118,9 +96,22 @@ public class shopkeeper extends Entity
 				}
 			}
 		}
+		if(flag == false) {
+			grounded = false;
+		}
 		
-		if(aggro) {
-			checkGround();
+		if(angry) {
+			detect();
+		}
+		
+		if(!grounded) { 
+			vy += 2;
+		}
+		
+		if(vx == 0) {
+			Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStand.gif");
+		}else {
+			Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepWalk.gif");
 		}
 		
 		x += vx;
@@ -130,6 +121,7 @@ public class shopkeeper extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
+		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
 	}
 }
