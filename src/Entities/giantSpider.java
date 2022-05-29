@@ -12,14 +12,14 @@ import General.Frame;
 
 public class giantSpider extends Entity
 {
-	
 	public int jumpTimer;
 	public boolean hanging;
-
+	
 	public giantSpider(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		jumpTimer = 60;
 		hanging = true;
+		Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderNeutral.gif");
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -44,7 +44,9 @@ public class giantSpider extends Entity
 	}
 	
 	public void update() {
-		if(!grounded) { 
+		
+		
+		if(!grounded && detect() == true) { 
 			vy += 2;
 		}
 		
@@ -82,15 +84,20 @@ public class giantSpider extends Entity
 		
 		if(detect()) {
 			hanging = false;
+			Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderDrop.gif");
 		}
 		
 		if(hanging == false) {
 			if(jumpTimer > 0) {
-				if(grounded) {
+				if(grounded) 
+				{
+					Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderStand.gif");
 					jumpTimer --;
-				}
-				if(jumpTimer == 0) {
-					jump();
+					if(jumpTimer == 0) 
+					{
+						jump();
+						Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderJump.gif");
+					}
 				}
 			}
 			x += vx;
