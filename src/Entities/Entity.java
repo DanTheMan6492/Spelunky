@@ -22,6 +22,7 @@ public class Entity {
 	public double vy;
 	public int w, h;
 	public boolean visible;
+	public boolean interactable;
     public Image Sprite;
     public AffineTransform tx;
     public boolean grounded = false;

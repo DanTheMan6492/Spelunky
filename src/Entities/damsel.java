@@ -14,7 +14,7 @@ public class damsel extends Entity
 {
 	
 	public boolean panic;
-	public boolean exit;
+	public boolean interactable;
 	public int exitTimer;
 
 	public damsel(int x, int y, int w, int h, boolean visible, String path) 
@@ -35,7 +35,7 @@ public class damsel extends Entity
 		if(LevelBuilder.level[Y][X].id == 2 || LevelBuilder.level[Y+1][X].id == 2 || LevelBuilder.level[Y+1][X].id == 2 || LevelBuilder.level[Y][X+1].id == 2 || LevelBuilder.level[Y+1][X+1].id == 2)
 		{
 			LevelBuilder.damsel = true;
-			exit = true;
+			interactable = false;
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class damsel extends Entity
 		}
 		
 		detect();
-		if(exit == true)
+		if(interactable == false)
 		{
 			exitTimer = 30;
 			vx = 0;
@@ -108,9 +108,10 @@ public class damsel extends Entity
 		y += vy;
 	}
 	
-	public void paint(Graphics g) {
-		if(exit && exitTimer <= 0)
-			return;
+	public void paint(Graphics g) 
+	{
+		if(!interactable && exitTimer <= 0)
+			visible = false;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
