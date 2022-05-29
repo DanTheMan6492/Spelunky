@@ -27,11 +27,13 @@ public class Player extends Entity{
 	int character = 14;
 	public boolean debug = false;
 	public boolean ready = false;
+	public boolean carrying;
 	public double vxBuffer;
+	public int itemHeld;
 
 	public boolean[] equipables = {false, false, false, 
 								   false, false, false, 
-								   false, false, false, };
+								   false, false, false};
 	
 	public boolean parachuting = false;
 	/*Indexes:

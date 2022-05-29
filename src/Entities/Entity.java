@@ -26,7 +26,7 @@ public class Entity {
     public AffineTransform tx;
     public boolean grounded = false;
 	public int frame;
-	int dir;
+	public int dir;
 	
 
 	//check if two rectangles are clipping

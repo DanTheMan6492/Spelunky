@@ -7,7 +7,7 @@ public class parachute extends Item
 
 	public parachute(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/item_7.png");
+		Sprite = getImage("/imgs/object/HUD/item_7.png");
 		// TODO Auto-generated constructor stub
 	}
 	public void pickup()

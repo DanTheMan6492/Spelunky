@@ -10,10 +10,13 @@ import Entities.Entity;
 import Entities.snake;
 import General.Fade;
 import General.Frame;
+import object.Rock;
+import object.object;
 
 public class LevelBuilder {
 	public static Block[][] level;
 	public static ArrayList<Entity> enemies = new ArrayList<Entity>();
+	public static ArrayList<object> objects = new ArrayList<object>();
 	public static int [][]sectionIDs;
 	public static int levelNum;
 	public static boolean TransistionRoom = false;
@@ -76,11 +79,19 @@ public class LevelBuilder {
 									Y = (y)*128+128;
 									break;
 									
+									//spawn snake, delete later
 									case 11:
 										//if((int)(Math.random()*5) == 0) {
 											enemies.add(new snake((x)*128+128, (y)*128+128, 40, 40, true, ""));
 										//}
 										level[y+1][x+1] = null;
+										break;
+										
+									//spawn rock, delete later
+									case 12:
+										objects.add(new Rock((x)*128+128, (y)*128+128));
+										level[y+1][x+1] = null;
+										System.out.print("hasRock");
 										break;
 										
 									default:

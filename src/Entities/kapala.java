@@ -12,7 +12,7 @@ public class kapala extends Item{
 
 	public kapala(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/kapala/0.png");
+		Sprite = getImage("/imgs/object/HUD/kapala/0.png");
 		// TODO Auto-generated constructor stub
 	}
 

@@ -12,7 +12,7 @@ public class compass extends Item{
 
 	public compass(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/item_6.png");
+		Sprite = getImage("/imgs/object/HUD/item_6.png");
 
 		// TODO Auto-generated constructor stub
 	}

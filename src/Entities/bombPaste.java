@@ -13,7 +13,7 @@ public class bombPaste extends Item{
 	public bombPaste(int x, int y, int w, int h, boolean visible, String path) 
 	{
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/item_4.png");
+		Sprite = getImage("/imgs/object/HUD/item_4.png");
 		// TODO Auto-generated constructor stub
 	}
 	public void pickup()

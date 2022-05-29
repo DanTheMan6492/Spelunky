@@ -35,8 +35,11 @@ import Blocks.LevelBuilder;
 import Blocks.LevelGen;
 import Entities.Camera;
 import Entities.Entity;
+import Entities.Item;
 import Entities.Player;
 import Entities.snake;
+import object.Rock;
+import object.object;
 import Entities.bat;
 
 import com.github.strikerx3.jxinput.XInputAxes;
@@ -54,7 +57,6 @@ import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	Entity bat = new bat(40, 40, 20, 20, true, "");
 	public static Font font;
 	public static Player Ana;
 	static XInputDevice[] devices;
@@ -90,6 +92,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				if(buttons.isPressed(XInputButton.RIGHT_SHOULDER)){
 					Ana.door();
 				}
+				
+				if(buttons.isPressed(XInputButton.X)) {
+					if(!Frame.Ana.carrying) {
+						for(int j = 0; j < LevelBuilder.objects.size(); j ++) {
+								if(LevelBuilder.objects.get(j).checkPickUp()) {
+								Frame.Ana.carrying = true;
+								LevelBuilder.objects.get(j).carried = true;
+								Frame.Ana.itemHeld = j;
+								break;
+							}
+						}
+					}else {
+						Frame.Ana.carrying = false;
+						LevelBuilder.objects.get(Frame.Ana.itemHeld).thrown();
+						System.out.println("throwing item");
+					}
+				}
 
 				// Retrieve axis state change.
 				// The class provides methods for each axis and a method for providing an XInputAxis
@@ -123,6 +142,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for(Entity e : LevelBuilder.enemies) {
 			e.paint(g);
 		}
+		
+		for(object o : LevelBuilder.objects) {
+			o.paint(g);
+		}
 		Ana.paint(g);
 
 		//Hud
@@ -145,8 +168,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 
 		oldTime = newTime;
-		//System.out.println(fps);
-		bat.paint(g2);
 	}
 	
 	public static void main(String[] arg) {

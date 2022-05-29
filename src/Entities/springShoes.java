@@ -6,7 +6,7 @@ public class springShoes extends Item{
 
 	public springShoes(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/item_2.png");
+		Sprite = getImage("/imgs/object/HUD/item_2.png");
 		// TODO Auto-generated constructor stub
 	}
 

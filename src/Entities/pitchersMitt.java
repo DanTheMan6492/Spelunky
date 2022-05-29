@@ -6,7 +6,7 @@ public class pitchersMitt extends Item{
 
 	public pitchersMitt(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
-		Sprite = getImage("/imgs/Items/HUD/item_1.png");
+		Sprite = getImage("/imgs/object/HUD/item_1.png");
 
 		// TODO Auto-generated constructor stub
 	}
