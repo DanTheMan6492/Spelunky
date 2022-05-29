@@ -59,7 +59,7 @@ public class bat extends Entity
 	
 	public void update() 
 	{
-		tx.setToTranslation(x, y);
+		tx.setToTranslation(x-Camera.x, y-Camera.y);
 		
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
@@ -95,9 +95,9 @@ public class bat extends Entity
 		}
 		
 		if(hanging) {
-			Sprite = getImage("imgs/Monsters/Bat/batFly.gif");
+			Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
 		}else {
-			Sprite = getImage("imgs/Monsters/Bat/batIdle.gif");
+			Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
 		}
 
 		x += vx;
