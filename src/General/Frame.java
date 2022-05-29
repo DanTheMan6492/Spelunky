@@ -64,6 +64,7 @@ import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	public static Font font;
+	public static Font sfont;
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
@@ -76,7 +77,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public long oldTime = 0;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
-
+	TimerCount timer = new TimerCount();
 	boolean character_selected = false;
 	
 
@@ -179,12 +180,26 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/bomb.png"), 130, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/rope.png"), 210, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/money.png"), 1200, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/time.png"), 1500, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/level.png"), 1700, 30, null);
 
 		g.setColor(Color.white);
-		g.drawString("5", 75, 77);
+		g.drawString("" + Ana.HP, 75, 77);
+		g.setFont(sfont);
+		g.drawString("" + Ana.bombs, 165, 58);
+		g.drawString("" + Ana.ropes, 260, 58);
+		g.drawString("" + Ana.money, 1240, 52);
+		g.drawString(timer.minutes + ":" + timer.seconds, 1540, 52);
+		g.drawString(LevelBuilder.levelNum/4+1 + "-" + (LevelBuilder.levelNum%4+1), 1740, 52);
+
 		Fade.paint(g);
 
+
 		//fps cap
+		timer.update();
 		long newTime = System.nanoTime();
 		long deltaT = newTime - oldTime;
 		long fps =  (long) (Math.pow(10, 9) / deltaT);
@@ -223,6 +238,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(f);
 			font = new Font("Ubuntu", Font.PLAIN, 32);
+			sfont = new Font("Ubuntu", Font.PLAIN, 22);
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

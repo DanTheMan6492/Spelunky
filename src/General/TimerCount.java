@@ -1,5 +1,5 @@
 package General;
-public class Timer 
+public class TimerCount 
 {
 	public int totalSeconds;
 	public int totalMinutes;
@@ -7,13 +7,13 @@ public class Timer
 	public int minutes;
 	public int increment;
 	
-	public Timer()
+	public TimerCount()
 	{
 		totalSeconds = 0;
 		totalMinutes = 0;
 		seconds = 0;
 		minutes = 0;
-		increment = 60;
+		increment = 30;
 	}
 
 	public void stageEnd()
