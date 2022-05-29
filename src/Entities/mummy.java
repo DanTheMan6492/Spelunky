@@ -19,10 +19,14 @@ public class mummy extends Entity{
 		super(x, y, w, h, visible, path);
 		// TODO Auto-generated constructor stub
 		vx = 5;
+		Sprite = getImage("/imgs/Monsters/Mummy/mummyStand.gif");
 	}
 	
 	public void detect() {
-		if(vomitTimer > 0) {return;}
+		if(vomitTimer > 0) 
+		{	
+			Sprite = getImage("/imgs/Monsters/Mummy/mummyStand.gif");
+			return;}
 		
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
@@ -81,11 +85,15 @@ public class mummy extends Entity{
 		
 		if(vomitTimer > 0) {
 			vomitTimer --;
-			if(vomitTimer < 30 && vomitTimer > 20) {
-				//make a new fly
+			if(vomitTimer < 30 && vomitTimer > 20) 
+			{
+				Sprite = getImage("/imgs/Monsters/Mummy/mummyVomit.gif");
+				new mummyFly((int) x, (int) y, w, h, visible, "/imgs/Monsters/Fly.gif", dir);
 			}
 		}else {
 			vx = dir * 8;
+			Sprite = getImage("/imgs/Monsters/Mummy/mummyWalk.gif");
+
 		}
 		
 		x += vx;
