@@ -20,6 +20,8 @@ public class UFO extends Entity{
 		// TODO Auto-generated constructor stub
 		vx = 10;
 		ejected = false;
+		Sprite = getImage("/imgs/Monsters/UFO/UFORoam.gif");
+
 	}
 	
 	public void shoot() {

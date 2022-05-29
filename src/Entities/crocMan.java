@@ -18,6 +18,7 @@ public class crocMan extends Entity{
 	public crocMan(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
 		frenzy = false;
+		Sprite = getImage("/imgs/Monsters/Crocman/crocman_Stand.gif");
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -27,6 +28,8 @@ public class crocMan extends Entity{
 		
 		if(mapY == spelunkerY && Math.abs(mapX - spelunkerX) <= 8) {
 			frenzy = true;
+			Sprite = getImage("/imgs/Monsters/Crocman/crocman_walk.gif");
+
 		}
 	}
 	
@@ -93,12 +96,15 @@ public class crocMan extends Entity{
 					if(waitTimer <= 0){
 						vx = 8*dir;
 						moveTimer = 22;
+						Sprite = getImage("/imgs/Monsters/Crocman/crocman_walk.gif");
 					}
 				} else if(moveTimer > 0){
 					moveTimer--;
 				} else{
 					vx = 0;
 					waitTimer = 20;
+					Sprite = getImage("/imgs/Monsters/Crocman/crocman_stand.gif");
+
 				}
 			}
 		}else {

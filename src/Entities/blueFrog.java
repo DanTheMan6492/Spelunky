@@ -10,12 +10,13 @@ import Blocks.Block;
 import Blocks.LevelBuilder;
 import General.Frame;
 
-public class fireFrog extends Entity
+public class blueFrog extends Entity
 {
 	public int jumpTimer;
 
-	public fireFrog(int x, int y, int w, int h, boolean visible, String path) {
+	public blueFrog(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
+		Sprite = getImage("/imgs/Monsters/BlueFrog/blueFrogStand.gif");
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -29,7 +30,8 @@ public class fireFrog extends Entity
 		return false;
 	}
 	
-	public void jump() {
+	public void jump() 
+	{
 		jumpTimer = 60;
 		vy = 30;
 		if(Frame.Ana.x < x) {
@@ -57,6 +59,7 @@ public class fireFrog extends Entity
 					vx = 0;
 					grounded = true;
 					flag = true;
+					Sprite = getImage("/imgs/Monsters/BlueFrog/blueFrogStand.gif");
 				    break;
 	
 				case 4:
@@ -66,6 +69,8 @@ public class fireFrog extends Entity
 				case 0:
 					if(flag == false) {
 						grounded = false;
+						Sprite = getImage("/imgs/Monsters/BlueFrog/blueFrogJump.gif");
+
 					}
 					break;
 				}

@@ -6,6 +6,8 @@ public class spectacles extends Item{
 
 	public spectacles(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
+		Sprite = getImage("/imgs/Items/HUD/item_5.png");
+
 		// TODO Auto-generated constructor stub
 	}
 	public void pickup()

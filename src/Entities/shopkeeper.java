@@ -17,6 +17,8 @@ public class shopkeeper extends Entity
 	public shopkeeper(int x, int y, int w, int h, boolean visible, String path, boolean aggro) {
 		super(x, y, w, h, visible, path);
 		this.aggro = aggro;
+		Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStand.gif");
+
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -39,6 +41,7 @@ public class shopkeeper extends Entity
 			if(Math.abs(mapX - spelunkerX) <= 5
 			&& Math.abs(mapY - spelunkerY) <= 5) {
 				aggro = true;
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepWalk.gif");
 				if(dir == -1) {
 					vx = -8;
 				}else if(dir == 1) {

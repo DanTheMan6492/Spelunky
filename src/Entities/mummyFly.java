@@ -15,6 +15,8 @@ public class mummyFly extends Entity
 
 	public mummyFly(int x, int y, int w, int h, boolean visible, String path, int dir) {
 		super(x, y, w, h, visible, path);
+		Sprite = getImage("/imgs/Monsters/Fly.gif");
+
 		// TODO Auto-generated constructor stub
 		active = true;
 		this.dir = dir;
