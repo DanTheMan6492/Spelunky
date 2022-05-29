@@ -24,6 +24,7 @@ import java.net.URL;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 
 import java.awt.Graphics2D;
 
@@ -72,6 +73,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public long oldTime = 0;
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
+
+	boolean character_selected = false;
 	
 
 	public void paint(Graphics g) {
@@ -127,10 +130,27 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 		}
 
-		camera.update();
 		super.paintComponent(g);
 
-	
+		g.setFont(font);
+		if(!character_selected){
+			
+			g.setColor(Color.black);
+			g.fillRect(0, 0, 5000, 5000);
+			Graphics2D g2 = (Graphics2D) g;
+			AffineTransform tx = AffineTransform.getTranslateInstance(6, 100);
+			for(int i = 1; i <= 21; i++){
+				tx = AffineTransform.getTranslateInstance(6 + ((i-1)%7)*(273), 80 + ((i-1)/7) * (327));
+				tx.scale(0.545, 0.545);
+
+				g2.drawImage(splice(i), tx, null);
+
+			}
+			g.setColor(Color.white);
+			g.drawString("Select Your Character", 0, 0);
+
+		} else {
+		Camera.update();
 
 		bg.paint(g);
 
@@ -156,7 +176,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
 
 		g.setColor(Color.white);
-		g.setFont(font);
 		g.drawString("5", 75, 77);
 		Fade.paint(g);
 
@@ -171,6 +190,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 
 		oldTime = newTime;
+
+		}
 	}
 	
 	public static void main(String[] arg) {
@@ -242,7 +263,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-	
+		if(!character_selected){
+			int x = arg0.getX();
+			int y = arg0.getY();
+			Ana.character = 1 + (x/272) + (y/327)*7;
+			character_selected = true;
+		}
 	}
 
 	@Override
