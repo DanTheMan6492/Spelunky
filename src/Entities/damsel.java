@@ -25,8 +25,6 @@ public class damsel extends Entity
 	
 	public void detect() 
 	{
-		if(!LevelBuilder.ready)
-			return;
 		
 		int X = (int) x / 128;
 		int Y = (int) y / 128;
@@ -93,11 +91,6 @@ public class damsel extends Entity
 			if(exitTimer > 0)
 			{
 				exitTimer--;
-				if(exitTimer-- <= 0)
-				{
-					
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanWalk.gif");
-				}
 			} 
 		}
 		
@@ -116,6 +109,8 @@ public class damsel extends Entity
 	}
 	
 	public void paint(Graphics g) {
+		if(exit && exitTimer <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
