@@ -18,10 +18,11 @@ public class damsel extends Entity
 	{
 		super(x, y, w, h, visible, path);
 		panic = false;
-		// TODO Auto-generated constructor stub
 	}
 	
-	public void detect() {
+	public void detect() 
+	{
+		Sprite = getImage("/imgs/Monsters/Damsel/damsel_enter.gif");
 		//detect the door
 	}
 	
