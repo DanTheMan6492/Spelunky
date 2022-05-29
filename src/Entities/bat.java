@@ -93,6 +93,12 @@ public class bat extends Entity
 				vy = -5;
 			}
 		}
+		
+		if(hanging) {
+			Sprite = getImage("imgs/Monsters/Bat/batFly.gif");
+		}else {
+			Sprite = getImage("imgs/Monsters/Bat/batIdle.gif");
+		}
 
 		x += vx;
 		y += vy;
@@ -101,7 +107,7 @@ public class bat extends Entity
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 
 	protected Image getImage(String path) {

@@ -21,7 +21,7 @@ public class snake extends Entity
 	{
 		super(x, y, w, h, visible, path);
 		dir = 1;
-		vx = 0;
+		vx = 8;
 		vy = 0;
 		grounded = true;
 		waitTimer = 20;
@@ -29,40 +29,11 @@ public class snake extends Entity
 	}
 	
 	public void checkGround() {
-		int mapX = (int) (x / 128);
-		
-		if((mapX == 0 && vx < 0)
-		|| (mapX == 32 && vx > 0)) {
-			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
-			waitTimer = 20;
-			vx = 0;
-			dir *= -1;
-			return;
-		}
-		
-		if(mapX == 0) {
-			if(vx < 0) {
-				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
-				waitTimer = 20;
-				vx = 0;
-				dir *= -1;
-			}
-			return;
-		}else if(mapX == 39) {
-			if(vx > 0) {
-				Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
-				waitTimer = 20;
-				vx = 0;
-				dir *= -1;
-			}
-			return;
-		}
+		int XProj = (int) ((x+vx+Math.signum(vx)*64) / 128);;
+		int YProj = (int) ((y) / 128 + 1);
 
-		int XProj = (int) ((x+vx+64) / 128);
-		int YProj = (int) ((y+vy) / 128);
-
-		if(LevelBuilder.level[YProj+1][XProj] == null
-		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
+		if(LevelBuilder.level[YProj][XProj] == null
+		|| LevelBuilder.level[YProj][XProj].solid == false) {
 			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
 			waitTimer = 20;
 			vx = 0;
@@ -72,9 +43,9 @@ public class snake extends Entity
 	
 	public void update() {
 		if(dir == -1)
-			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
+			tx.setToTranslation(x-Camera.x+128-40, y-Camera.y-85);
 		else
-			tx.setToTranslation(x-Camera.x, y-Camera.y);
+			tx.setToTranslation(x-Camera.x-40, y-Camera.y-85);
 		tx.scale(dir, 1);
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
@@ -111,6 +82,9 @@ public class snake extends Entity
 				}
 			}
 		}
+		if(!flag) {
+			grounded = false;
+		}
 		
 		checkGround();
 		
@@ -119,7 +93,7 @@ public class snake extends Entity
 		if(!grounded) {
 			vy += 2;
 			waitTimer = 20;
-			vx = 0;
+			//vx = 0;
 		}else {
 			if(waitTimer > 0){
 				waitTimer--;

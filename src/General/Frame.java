@@ -1,6 +1,7 @@
 package General;
 
 import java.awt.Image;
+
 import java.awt.Color;
 import java.lang.*;
 import java.awt.Dimension;
@@ -36,6 +37,7 @@ import Entities.Camera;
 import Entities.Entity;
 import Entities.Player;
 import Entities.snake;
+import Entities.bat;
 
 import com.github.strikerx3.jxinput.XInputAxes;
 import com.github.strikerx3.jxinput.XInputAxesDelta;
@@ -52,7 +54,7 @@ import com.github.strikerx3.jxinput.listener.XInputDeviceListener;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	
+	Entity bat = new bat(40, 40, 20, 20, true, "");
 	public static Font font;
 	public static Player Ana;
 	static XInputDevice[] devices;
@@ -117,6 +119,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 		}
+		
+		for(Entity e : LevelBuilder.enemies) {
+			e.paint(g);
+		}
 		Ana.paint(g);
 
 		//Hud
@@ -140,7 +146,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		oldTime = newTime;
 		//System.out.println(fps);
-	
+		bat.paint(g2);
 	}
 	
 	public static void main(String[] arg) {

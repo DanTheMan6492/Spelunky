@@ -2,14 +2,18 @@ package Blocks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import Entities.Entity;
+import Entities.snake;
 import General.Fade;
 import General.Frame;
 
 public class LevelBuilder {
 	public static Block[][] level;
+	public static ArrayList<Entity> enemies = new ArrayList<Entity>();
 	public static int [][]sectionIDs;
 	public static int levelNum;
 	public static boolean TransistionRoom = false;
@@ -69,8 +73,16 @@ public class LevelBuilder {
 									case 3:
 									level[y+1][x+1] = null;
 									X = (x)*128+128;
-									Y = (y)*128-2+128;
+									Y = (y)*128+128;
 									break;
+									
+									case 11:
+										//if((int)(Math.random()*5) == 0) {
+											enemies.add(new snake((x)*128+128, (y)*128+128, 40, 40, true, ""));
+										//}
+										level[y+1][x+1] = null;
+										break;
+										
 									default:
 									level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
 									break;
