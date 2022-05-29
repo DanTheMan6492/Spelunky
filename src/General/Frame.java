@@ -23,8 +23,11 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
 
 import java.awt.Graphics2D;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -195,7 +198,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			System.out.print("");
 		}
 
-
+		for(int i = 1; i <= 20; i++){
+			splice(i);
+		}
 		Frame f = new Frame();
 	
 
@@ -278,5 +283,34 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {e.printStackTrace();}
 		return tempImage;
+	}
+
+	public static BufferedImage splice(int ind) {
+		BufferedImage sprite = new BufferedImage(500, 600, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage spriteSheet;
+		String path = "src/imgs/Characters/Spliced/"+ ind + "-charArt.png";
+		try {
+			BufferedImage result = ImageIO.read(new File(path));
+			return result;
+		} catch(IOException e) {}
+		try {
+			spriteSheet = ImageIO.read(new File("src/imgs/Characters/"+ ind + ".png"));
+			for(int y = 200; y < 800; y++){
+				for(int x = 1540; x < 2040; x++){
+					sprite.setRGB(x-1540, y-200, spriteSheet.getRGB(x, y));
+				}
+			}
+		} catch (IOException e) {}
+		
+		
+        File output = new File(path);
+        
+        try {
+            ImageIO.write(sprite, "png", output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sprite;
+		
 	}
 }
