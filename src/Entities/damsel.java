@@ -94,8 +94,6 @@ public class damsel extends Entity
 			} 
 		}
 		
-		
-		
 		if(panic) {
 			if(dir == 1) {
 				vx = 8;
