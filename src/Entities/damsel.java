@@ -8,11 +8,14 @@ import java.net.URL;
 
 import Blocks.Block;
 import Blocks.LevelBuilder;
+import General.Transition;
 
 public class damsel extends Entity
 {
 	
 	public boolean panic;
+	public boolean exit;
+	public int exitTimer;
 
 	public damsel(int x, int y, int w, int h, boolean visible, String path) 
 	{
@@ -22,8 +25,20 @@ public class damsel extends Entity
 	
 	public void detect() 
 	{
-		Sprite = getImage("/imgs/Monsters/Damsel/damsel_enter.gif");
-		//detect the door
+		if(!LevelBuilder.ready)
+			return;
+		
+		int X = (int) x / 128;
+		int Y = (int) y / 128;
+		
+		if(LevelBuilder.level[Y][X] == null)
+			return;
+		
+		if(LevelBuilder.level[Y][X].id == 2 || LevelBuilder.level[Y+1][X].id == 2 || LevelBuilder.level[Y+1][X].id == 2 || LevelBuilder.level[Y][X+1].id == 2 || LevelBuilder.level[Y+1][X+1].id == 2)
+		{
+			LevelBuilder.damsel = true;
+			exit = true;
+		}
 	}
 	
 	public void update() {
@@ -67,6 +82,26 @@ public class damsel extends Entity
 				}
 			}
 		}
+		
+		detect();
+		if(exit == true)
+		{
+			exitTimer = 30;
+			vx = 0;
+			vy = 0;
+			Sprite = getImage("/imgs/Monsters/Damsel/damsel_enter.gif");
+			if(exitTimer > 0)
+			{
+				exitTimer--;
+				if(exitTimer-- <= 0)
+				{
+					
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanWalk.gif");
+				}
+			} 
+		}
+		
+		
 		
 		if(panic) {
 			if(dir == 1) {
