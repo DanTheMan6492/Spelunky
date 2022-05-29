@@ -18,53 +18,64 @@ public class bat extends Entity
 		super(x, y, w, h, visible, path);
 		hanging = true;
 		Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
-
+		dir = 1;
 	}
 	
-	public boolean detect() 
+	public void detect() 
 	{
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
 		
-		if(Math.abs(mapX - spelunkerX) <= 6 && Math.abs(mapY - spelunkerY) <= 6 && mapY < spelunkerY) 
-		{
-			hanging = false;
-			Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
-			return true;
+		if(hanging == true) {
+			if(Math.abs(mapX - spelunkerX) <= 6 && Math.abs(mapY - spelunkerY) <= 6 && mapY < spelunkerY) 
+			{
+				hanging = false;
+				aggro = true;
+			}
+		}else {
+			if(aggro) {
+				if(Math.abs(mapX - spelunkerX) <= 5 && Math.abs(mapY - spelunkerY) <= 5) 
+				{
+					follow();
+				}else {
+					vx = 0;
+					vy = -5;
+				}
+			}
 		}
-		return false;
 	}
 	
 	public void follow(){
-		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
-		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
-		Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
-		
-		if(mapX < spelunkerX) {
-			vx = -5;
-		}else if(spelunkerX < mapX){
+		if(Frame.Ana.x + Frame.Ana.w/2 > x + w/2) {
 			vx = 5;
-		}else {
-			vy = 0;
 		}
 		
-		if(mapY < spelunkerY) {
-			vy = -5;
-		}else if(spelunkerY < mapY){
+		if(Frame.Ana.x + Frame.Ana.w/2 < x + w/2) {
+			vx = -5;
+		}
+		
+		if(Frame.Ana.y + Frame.Ana.h/2 > y + h/2) {
 			vy = 5;
-		}else {
-			vy = 0;
+		}
+		
+		if(Frame.Ana.y + Frame.Ana.h/2 < y + h/2) {
+			vy = -5;
 		}
 	}
 	
 	public void update() 
 	{
-		tx.setToTranslation(x-Camera.x, y-Camera.y);
+		if(dir == 1) {
+			tx.setToTranslation((int)(x - Camera.x), (int)(y - Camera.y));
+		}else {
+			tx.setToTranslation((int)(x - Camera.x + 128), (int)(y - Camera.y));
+		}
+		tx.scale(dir, 1);
 		
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
 				if(collide(block) == 4) {
-					if(!aggro) {
+					if(aggro) {
 						hanging = true;
 						vy = 0;
 						Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
@@ -73,28 +84,16 @@ public class bat extends Entity
 			}
 		}
 		
-		if(detect()) {
-			aggro = true;
-		}else {
-			aggro = false;
-		}
+		
 		
 		if(vx < -0.5) 
 			dir = -1;
 		else if(vx > 0.5)
 			dir = 1;
 		
-		if(aggro) 
-		{
-			follow();
-		}else {
-			vx = 0;
-			if(!hanging) {
-				vy = -5;
-			}
-		}
+		detect();
 		
-		if(hanging) {
+		if(!hanging) {
 			Sprite = getImage("/imgs/Monsters/Bat/batFly.gif");
 		}else {
 			Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
@@ -108,6 +107,7 @@ public class bat extends Entity
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);
+		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
 	}
 
 	protected Image getImage(String path) {
