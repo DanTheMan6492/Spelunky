@@ -30,7 +30,7 @@ public class Player extends Entity{
 	public boolean carrying;
 	public double vxBuffer;
 	public int itemHeld;
-	public int HP = 3;
+	public int health = 0;
 	public int bombs = 4;
 	public int ropes = 4;
 	public int money = 0;

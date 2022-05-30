@@ -67,6 +67,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public static Font font;
 	public static Font sfont;
+	public static Font bfont;
 	public static Player Ana;
 	//whip placeholder, delete later
 	public Whip whip = new Whip();
@@ -108,7 +109,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawString("Click on Your Character", 770, 50);
 			return;
 		}
-
+		
 		for(int i =0 ; i < devices.length; i++) {
 			XInputDevice device = devices[i];
 			if (device.poll()) {
@@ -223,7 +224,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		g.setColor(Color.white);
-		g.drawString("" + Ana.HP, 90, 72);
+		g.drawString("" + Ana.health, 90, 72);
 		g.setFont(sfont);
 		g.drawString("" + Ana.bombs, 163, 70);
 		g.drawString("" + Ana.ropes, 240, 70);
@@ -248,6 +249,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		System.out.println(fps);
 		oldTime = newTime;
 
+		if(Ana.health <= 0)
+		{
+			g.setColor(Color.white);
+			g.setFont(bfont);
+			g.drawString("You Died!", 770, 300);
+			g.setFont(font);
+			g.drawString("Final Score:" + Ana.money, 720, 500);
+		}
 	}
 	
 	public static void main(String[] arg) {
@@ -278,6 +287,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			ge.registerFont(f);
 			font = new Font("Ubuntu", Font.PLAIN, 32);
 			sfont = new Font("Ubuntu", Font.PLAIN, 22);
+			bfont = new Font("Ubuntu", Font.PLAIN, 155);
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

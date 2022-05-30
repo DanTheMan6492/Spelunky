@@ -6,7 +6,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public class Treasure extends Entity{
+public class Treasure extends Entity
+{
 
 	public Treasure(int x, int y, int w, int h, boolean visible, String path) 
 	{
