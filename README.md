@@ -30,20 +30,36 @@ Thoughout your journey, you will encounter a variety of enemies which impedes yo
 ![Skull](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/rock.png)
 ![Arrow](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/arrow.png)
 
-Entities which falls neither in the weapon / equipment class nor in the player / enemies class. Usually generated in the levels randomly, and typically can be broken with a few exceptions. These usually are to be picked up by the player or opened to gain equipment or other items, which serves to be thrown to hit other enemies. Examples include pots, skulls, bombs, etc.
-
-Activity
-
+Entities which falls neither in the weapon / equipment class nor in the player / enemies class. Usually generated in the levels randomly, and typically can be broken with a few exceptions. These usually are to be picked up by the player or opened to gain equipment or other items, which serves to be thrown to hit other enemies. Examples include pots, skulls, bombs, and many more.
 
 ##### ***Equipment:***
+![Kapala Cup](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/kapala/0.png)
+![Spike Shoes](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_3.png)
+![Sticky Paste](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_4.png)
+![Spring Shoes](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_2.png)
 
-#### ***Map Generation Class:***
+Equipment entities typically spawn in shops or crates, though can also drop from enemies dying. They typically change the character's interactions with the world when picked up, such as gaining the ability to climb vertical walls or to be able to safely bounce on certain enemies which would otherwise kill you for it.
 
 ##### ***Map/Subsection/Block Class:***
+In summary, a level consists of 16 total subsections arranged in a 4x4 grid. These individual subsections arranged into a randomly generated path from the top to the bottom of the 2d array. Branching paths that lead to dead-ends or shops also exist. Each of these subsections are further broken up into 10 x 8 grids of blocks, which can vary in type, from blocks, water, lava, or nothing at all. These blocks create the template rooms used for the map, and can be broken / mined through using bombs or pickaxes. The blocks, finally, could also have gold or gems in them and can be broken for them by the player.
+
+![Floor 1](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Tiles/1/1_1.png)
+![Floor 2](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Tiles/2/1_1.png)
+![Floor 3](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Tiles/3/1_1.png)
+![Floor 4](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Tiles/4/1_1.png)
+
+Each of the 4 worlds have a total of 4 levels, each with their own unique block and background sprites.
+
+##### ***Shop Class:***
+
+![Shopkeeper](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Monsters/Shopkeep/shopkeepStand.gif)
+
+A shop is randomly generated within a branching path in a level. In a shop, people can either spend money to directly buy items, or choose to rob the store by taking the items out of it without paying or attacking the shopkeeper, which causes him to be angry and start shooting his shotgun and for armed shopkeepers to appear in most subsequent levels. Shopkeepers have an anger system based on whether the player kills or steals, and drops by 1 value for every level progressed until the level reaches back to 0, where they would stay neutral until the player once again does something.
+
 
 ##### ***Kali Alter Class:***
 
-##### ***Shop Class:***
+Kali alters are special rooms generated like shops, containing a singular alter made by 2 blocks. Players are able to sacrifice stunned living entities or dead entities by placing their bodies on top of the alter, which kills them instantly and gains a favor or two depending on if the entity is alive or not. This favor lasts between levels, and should the player reach 8 favor each additional sacrifice provides a valuable equipment or item. Destroying the alter is also possible, but should be avoided as it results in -16 favor and spawns a hoard of enemies if the final favor value is negative
 
 ##### Other Entities:
 #### Money Class:
