@@ -21,7 +21,7 @@ public class Entity {
 	public double vx;
 	public double vy;
 	public int w, h;
-	public boolean visible;
+	public boolean visible, stunned;
 	public boolean interactable;
     public Image Sprite;
     public AffineTransform tx;
