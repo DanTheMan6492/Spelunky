@@ -17,6 +17,7 @@ public class Whip extends Entity{
 	public void whip() {
 		if(whipTimer == 0) {
 			whipTimer = 15;
+			Player.whip();
 		}
 	}
 	
@@ -44,6 +45,13 @@ public class Whip extends Entity{
 					x = Frame.Ana.x + Frame.Ana.w - 10;
 					y = Frame.Ana.y - 20;
 				}
+				if(whipTimer > 13){
+					Sprite = Player.splice(12, 10);
+				} else if (whipTimer > 11){
+					Sprite = Player.splice(12, 11);
+				} else{
+					Sprite = Player.splice(12, 12);
+				}
 			}else if(whipTimer <= 15){
 				//frontwhip
 				w = 80;
@@ -55,6 +63,13 @@ public class Whip extends Entity{
 					x = Frame.Ana.x - w + 10;
 					y = Frame.Ana.y + 40;
 				}
+				if(whipTimer > 12){
+					Sprite = Player.splice(12, 13);
+				} else if(whipTimer > 10){
+					Sprite = Player.splice(12, 14);
+				} else{
+					Sprite = Player.splice(12, 15);
+				}
 			}
 		}
 	}
@@ -63,7 +78,12 @@ public class Whip extends Entity{
 		if(whipTimer > 0) {
 			update();
 			Graphics2D g2 = (Graphics2D) g;
-			g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+			if(Player.dir == -1)
+				tx.setToTranslation(x-Camera.x+102, y-Camera.y);
+			else
+				tx.setToTranslation(x-Camera.x, y-Camera.y);
+			tx.scale(Player.dir * 0.8, 0.8);
+			g2.drawImage(Sprite, tx, null);
 		}
 	}
 }

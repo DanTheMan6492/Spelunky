@@ -183,8 +183,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for(object o : LevelBuilder.objects) {
 			o.paint(g);
 		}
-		Ana.paint(g);
 		whip.paint(g);
+		Ana.paint(g);
 
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;

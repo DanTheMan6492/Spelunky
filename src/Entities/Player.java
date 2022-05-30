@@ -21,10 +21,10 @@ import java.awt.Graphics2D;
 public class Player extends Entity{
 
 	
-	int frame;
+	static int frame;
 	String state = "Walk";
-	BufferedImage spriteSheet;
-	public int character = 14;
+	static BufferedImage spriteSheet;
+	public static int character = 14;
 	public boolean debug = false;
 	public boolean ready = false;
 	public boolean carrying;
@@ -40,6 +40,7 @@ public class Player extends Entity{
 								   false, false, false};
 	
 	public boolean parachuting = false;
+	public static boolean whipping = false;
 	/*Indexes:
 	 * 0 climbingGloves
 	 * 1 pitchersMitt
@@ -52,6 +53,10 @@ public class Player extends Entity{
 	 * 8 kapala
 	 */
 	
+	public static void whip(){
+		frame = 0;
+		whipping = true;
+	}
 	public ArrayList<Integer> items = new ArrayList<Integer>();
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
@@ -116,26 +121,32 @@ public class Player extends Entity{
 		else if(vx > 0.5)
 			dir = 1;
 
+	
 		//update player animation and state
-		if(!grounded) {
-			state = "Falling";
-
-			//reset animation frame if when switching animations
-			if((vy+2)/vy <= 0) 
-				frame = 0;
-			
-			if(vy > 0) 
+		if(!whipping){
+			if(!grounded) {
 				state = "Falling";
-			else
-				state = "Jumping";
 
-		} else {
-			if(Math.abs(vx) < 2)
-				state = "Standing";
-			else
-				state = "Walking";
+				//reset animation frame if when switching animations
+				if((vy+2)/vy <= 0) 
+					frame = 0;
+
+				if(vy > 0) 
+					state = "Falling";
+				else
+					state = "Jumping";
+
+			} else {
+				if(Math.abs(vx) < 2)
+					state = "Standing";
+				else
+					state = "Walking";
+			}
+		} else{
+			state = "Whipping";
+			if(frame == 15)
+				whipping = false;
 		}
-		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
@@ -205,6 +216,21 @@ public class Player extends Entity{
 					Sprite = splice(9, 3);
 				}
 				break;
+			case "Whipping":
+				if(frame < 3){
+					Sprite = splice(4, 0);
+				} else if(frame < 5){
+					Sprite = splice(4, 1);
+				} else if(frame == 5){
+					Sprite = splice(4, 2);
+				} else if(frame < 8){
+					Sprite = splice(4, 3);
+				} else if(frame < 10){
+					Sprite = splice(4, 4);
+				} else{
+					Sprite = splice(4, 5);
+				}
+				break;
 		}
 		Camera.update();
 		if(dir == -1)
@@ -239,7 +265,7 @@ public class Player extends Entity{
 	}
 	
 	
-	public BufferedImage splice(int row, int col) {
+	public static BufferedImage splice(int row, int col) {
 		int width = 128;
 		int border = 0;
 		BufferedImage sprite = new BufferedImage(width, width, BufferedImage.TYPE_INT_ARGB);
