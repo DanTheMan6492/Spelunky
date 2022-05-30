@@ -43,6 +43,7 @@ import Entities.Camera;
 import Entities.Entity;
 import Entities.Item;
 import Entities.Player;
+import Entities.Whip;
 import Entities.snake;
 import object.Rock;
 import object.object;
@@ -66,6 +67,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Font font;
 	public static Font sfont;
 	public static Player Ana;
+	//whip placeholder, delete later
+	public Whip whip = new Whip();
 	static XInputDevice[] devices;
 	static Camera camera;
 	public static Music title;
@@ -125,7 +128,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Ana.door();
 				}
 				
-				if(buttons.isPressed(XInputButton.X)) {
+				if(buttons.isPressed(XInputButton.Y)) {
 					if(!Frame.Ana.carrying) {
 						for(int j = 0; j < LevelBuilder.objects.size(); j ++) {
 								if(LevelBuilder.objects.get(j).checkPickUp()) {
@@ -140,6 +143,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 						LevelBuilder.objects.get(Frame.Ana.itemHeld).thrown();
 						System.out.println("throwing item");
 					}
+				}
+				
+				if(buttons.isPressed(XInputButton.X)) {
+					whip.whip();
 				}
 
 				// Retrieve axis state change.
@@ -177,6 +184,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			o.paint(g);
 		}
 		Ana.paint(g);
+		whip.paint(g);
 
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;

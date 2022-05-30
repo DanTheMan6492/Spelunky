@@ -12,82 +12,57 @@ import General.Frame;
 
 public class yeti extends Entity{
 	
-	public int waitTimer, moveTimer;
+	public int waitTimer, moveTimer, throwTimer;
 
 	public yeti(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
+		dir = 1;
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void checkGround() {
-		int mapX = (int) (x / 128);
-		
-		if((mapX == 0 && vx < 0)
-		|| (mapX == 32 && vx > 0)) {
-			vx = 0;
-			dir *= -1;
-			return;
-		}
-		
-		if(mapX == 0) {
-			if(vx < 0) {
-				vx = 0;
-				dir *= -1;
-			}
-			return;
-		}else if(mapX == 39) {
-			if(vx > 0) {
-				vx = 0;
-				dir *= -1;
-			}
-			return;
-		}
+		int XProj = (int) ((x+vx+Math.signum(vx)*64) / 128);;
+		int YProj = (int) ((y) / 128 + 1);
 
-		int XProj = (int) ((x+vx+64) / 128);
-		int YProj = (int) ((y+vy) / 128);
-
-		if(LevelBuilder.level[YProj+1][XProj] == null
-		|| LevelBuilder.level[YProj+1][XProj].solid == false) {
+		if(LevelBuilder.level[YProj][XProj] == null
+		|| LevelBuilder.level[YProj][XProj].solid == false) {
+			Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+			waitTimer = 20;
 			vx = 0;
 			dir *= -1;
 		}
 	}
 	
 	public void detect() {
-		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
-		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
-		
-		if(mapX == spelunkerX && mapY == spelunkerY) {
-			if(Frame.Ana.x > x) {
-				dir = 1;
-				Frame.Ana.x = x + w + 10;
-			}else {
-				dir = -1;
-				Frame.Ana.x = x - Frame.Ana.w - 10;
-			}
-			Frame.Ana.y = y - Frame.Ana.h - 10;
-			waitTimer = 60;
-			vx = 0;
+		if(Frame.Ana.x + Frame.Ana.w > x
+		&& Frame.Ana.x < x + w
+		&& Frame.Ana.y + Frame.Ana.h > y
+		&& Frame.Ana.y < y + h) {
+			Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
 		}
 	}
 	
 	public void update() {
-		if(dir == -1)
-			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
-		else
-			tx.setToTranslation(x-Camera.x, y-Camera.y);
+		if(dir == 1) {
+			tx.setToTranslation((int)(x - Camera.x), (int)(y - Camera.y));
+		}else {
+			tx.setToTranslation((int)(x - Camera.x + 128), (int)(y - Camera.y));
+		}
 		tx.scale(dir, 1);
+		
+		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
 				switch(collide(block)) {
 				case 1:
-					vx = 0;
 					dir *= -1;
 					break;
 	
 				case 2:
-					vx = 0;
 					dir *= -1;
 					break;
 	
@@ -108,26 +83,39 @@ public class yeti extends Entity{
 				}
 			}
 		}
-				
+		
+		detect();
+		checkGround();
+		
 		if(!grounded) {
 			vy += 2;
-		}else {
-			if(waitTimer > 0){
-				waitTimer--;
-				if(waitTimer <= 0){
-					vx = 8*dir;
-					moveTimer = 22;
-				}
-			} else if(moveTimer > 0){
-				moveTimer--;
-			} else{
-				vx = 0;
-				waitTimer = 20;
-			}
 		}
 		
-		checkGround();
-		detect();
+		if(waitTimer > 0){
+			waitTimer--;
+			if(waitTimer <= 0){
+				vx = 8*dir;
+				moveTimer = 22;
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
+			}
+		} else if(moveTimer > 0){
+			moveTimer--;
+		} else{
+			vx = 0;
+			waitTimer = 20;
+			Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
+		}
+		
+		if(vx == 0) {
+			Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
+		}else {
+			Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
+		}
+		
+		if(throwTimer > 0) {
+			throwTimer --;
+			Sprite = getImage("/imgs/Monsters/Yeti/yetiThrow.gif");
+		}
 		
 		x += vx;
 		y += vy;
@@ -136,7 +124,7 @@ public class yeti extends Entity{
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 
 	protected Image getImage(String path) {

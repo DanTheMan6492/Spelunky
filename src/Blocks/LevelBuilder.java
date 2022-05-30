@@ -23,8 +23,10 @@ import Entities.shopkeeper;
 import Entities.skeleton;
 import Entities.snake;
 import Entities.spider;
+import Entities.yeti;
 import General.Fade;
 import General.Frame;
+import object.Pot;
 import object.Rock;
 import object.object;
 
@@ -107,14 +109,14 @@ public class LevelBuilder {
 									//spawn snake, delete later
 									case 11:
 										//if((int)(Math.random()*5) == 0) {
-											enemies.add(new spider((x)*128+128, (y)*128+128, 128, 128, true, ""));
+											enemies.add(new yeti((x)*128+128, (y)*128+128, 128, 128, true, ""));
 										//}
 										level[y+1][x+1] = null;
 										break;
 										
 									//spawn rock, delete later
 									case 12:
-										objects.add(new Rock((x)*128+128, (y)*128+128));
+										objects.add(new Pot((x)*128+128, (y)*128+128));
 										level[y+1][x+1] = null;
 										System.out.print("hasRock");
 										break;
