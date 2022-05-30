@@ -19,8 +19,9 @@ In the game, there are a total of 21 player skins that the player can select at 
 ![Doggy](https://github.com/DanTheMan6492/Spelunky/blob/ada204c2fab9a4f0e90c1c6ec8e4f173ea649ab7/src/imgs/Monsters/Damsel/damsel_stun.gif)
 ![Caveman](https://github.com/DanTheMan6492/Spelunky/blob/ada204c2fab9a4f0e90c1c6ec8e4f173ea649ab7/src/imgs/Monsters/Caveman/cavemanStand.gif)
 ![Mummy](https://github.com/DanTheMan6492/Spelunky/blob/ada204c2fab9a4f0e90c1c6ec8e4f173ea649ab7/src/imgs/Monsters/Mummy/mummyWalk.gif)
+![Olmec](https://github.com/DanTheMan6492/Spelunky/blob/ca4d344b87a6dd55fed91a0757528376e314d88b/src/imgs/Monsters/olmec.png)
 
-Thoughout your journey, you will encounter a variety of enemies which impedes your travels downward. These entities all have different actions and behaviors, which the player should do well in avoiding or analysing. Some enemies, like the mantrap, can kill immediately on contact while other entities such as the damsel dog can heal the player should they find the exit of the level. Enemies typically spawn randomly in their corresponding levels, so be careful when descending down into the depths below!
+Thoughout your journey, you will encounter a variety of enemies which impedes your travels downward. These entities all have different actions and behaviors, which the player should do well in avoiding or analysing. Some enemies, like the mantrap, can kill immediately on contact while other entities such as the damsel dog can heal the player should they find the exit of the level. Enemies typically spawn randomly in their corresponding levels (Though there is one exeption deep, deep in the caves...), so be careful when descending down into the depths below!
 
 ##### ***Item Class:***
 
