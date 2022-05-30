@@ -5,7 +5,8 @@ import java.awt.Graphics2D;
 
 import General.Frame;
 
-public class Whip extends Entity{
+public class Whip extends Entity
+{
 	
 	public int whipTimer;
 	

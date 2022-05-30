@@ -4,7 +4,6 @@ import java.awt.Image;
 
 import java.awt.Color;
 import java.lang.*;
-import java.lang.System.Logger.Level;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
