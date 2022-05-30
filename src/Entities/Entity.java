@@ -181,6 +181,7 @@ public class Entity {
         	}
         	result = 1;
         }
+        
         if(x < b.x + b.width
         && x > b.x
         && y + h > b.y
@@ -190,19 +191,19 @@ public class Entity {
         	if(vx < 0) {
         		x -= vx;
         	}
-        result = 2;
+        	result = 2;
         }
        
         if(y < b.y + b.height
-                && y > b.y
-                && x + w > x
-                && x < b.x + b.width
-                && x + w - 20 > b.x
-                && x + 20 < b.x + b.width) {
-                	y = b.y + b.height;
-        	        result = 4;
-        	        vy = 0;
-                }
+        && y > b.y
+        && x + w > x
+        && x < b.x + b.width
+        && x + w - 20 > b.x
+        && x + 20 < b.x + b.width) {
+        	y = b.y + b.height;
+        	result = 4;
+        	vy = 0;
+        }
         
         if(y + h > b.y
         && y + h < b.y + b.height
@@ -211,7 +212,7 @@ public class Entity {
         && x + w - 20 > b.x
         && x + 20 < x + b.width) {
         	y = b.y - h + 1;
-        result = 3;
+        	result = 3;
         }
         
         return result;

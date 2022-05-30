@@ -16,19 +16,17 @@ public class Rock extends object{
 	
     public Rock(int x, int y) {
     	super(x, y);
-		tx = AffineTransform.getTranslateInstance(x, y);
 		fragile = false;
 		w = 50;
 		h = 50;
+		Sprite = getImage("/imgs/Items/Objects/rock.png");
     }
-
-	protected Image getImage(String path) {
-
-		Image tempImage = null;
-		try {
-			URL imageURL = Rock.class.getResource(path);
-			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {e.printStackTrace();}
-		return tempImage;
+    
+    public void paint(Graphics g) {
+		update();
+		Graphics2D g2 = (Graphics2D) g;
+		tx.setToTranslation((int)(x-Camera.x)-40, (int)(y-Camera.y)-40);
+		g2.drawImage(Sprite, tx, null);
+		g.drawRect((int)(x-Camera.x), (int)(y-Camera.y), w, h);
 	}
 }

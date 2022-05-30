@@ -26,6 +26,7 @@ import Entities.spider;
 import Entities.yeti;
 import General.Fade;
 import General.Frame;
+import object.Pot;
 import object.Rock;
 import object.object;
 
@@ -115,7 +116,7 @@ public class LevelBuilder {
 										
 									//spawn rock, delete later
 									case 12:
-										objects.add(new Rock((x)*128+128, (y)*128+128));
+										objects.add(new Pot((x)*128+128, (y)*128+128));
 										level[y+1][x+1] = null;
 										System.out.print("hasRock");
 										break;
