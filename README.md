@@ -67,9 +67,28 @@ A shop is randomly generated within a branching path in a level. In a shop, peop
 Kali alters are special rooms generated like shops, containing a singular alter made by 2 blocks. Players are able to sacrifice stunned living entities or dead entities by placing their bodies on top of the alter, which kills them instantly and gains a favor or two depending on if the entity is alive or not. This favor lasts between levels, and should the player reach 8 favor each additional sacrifice provides a valuable equipment or item. Destroying the alter is also possible, but should be avoided as it results in -16 favor and spawns a hoard of enemies if the final favor value is negative
 
 ##### Other Entities:
-#### Money Class:
+
+![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_blue.png)
+![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_green.png)
+![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_red.png)
+![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gold_nugget.png)
+
+Other entities which appear throughout a level include boxes which spawns items and gold / gems which provide the player differing amounts of money. Gold and Gems are randomly generated throughout the level as entities, in blocks, or in crates / chests. Some entities also drop these entities when dying, such as the shopkeeper. Each gold and gem has different values corresponding to their type. Blood, while mostly decorative, is shot out of living entities taking damage or dying, and quickly disappears. The only use of it is with the Kapala cup (see 1st image of items) which allows the blood to be collected, giving the player an extra health per 8 pellets of blood collected.
+
+
+#### Money/score Class:
+
+The money system mostly revolves around picking up randomly generated gold and treasure from around the level. This collected gold can then be spent in shops in exchange for items without angering the shopkeeper. The money also acts as a score system for the game, with the higher the money the better the score a person gets.
+
 #### Music Class:
-#### HUD Class:
+
+Music which is played in the background of each level. There are a total of 3 music tracks for each world, which is selected randomly at the beginning of each level and looped until the player exits into a level transition stage. The Olmec Boss level has a unique track.
+
+Sound effects vary greatly, and corresponds for an action or reaction by many things be it player, enemy, or item.
+
+#### HUD:
+
+Coded in Frame and stored in Player, the HUD shows off the individual values that the player has, including health, money, time, and the equipment that is in inventory.
 
 ### Support:
 For support, we can try our best in helping to the best we can. We worked hard on our project and take pride in it, but we could always further polish up our own code or help others be better with theirs.
