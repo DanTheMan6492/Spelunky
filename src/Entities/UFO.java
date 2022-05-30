@@ -21,7 +21,6 @@ public class UFO extends Entity{
 		vx = 10;
 		ejected = false;
 		Sprite = getImage("/imgs/Monsters/UFO/UFORoam.gif");
-
 	}
 	
 	public void shoot() {
@@ -46,6 +45,9 @@ public class UFO extends Entity{
 	}
 	
 	public void update() {
+		tx.setToTranslation(x-Camera.x, y-Camera.y+20);
+		tx.scale(1, 1);
+		
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
 				switch(collide(block)) {
@@ -57,7 +59,7 @@ public class UFO extends Entity{
 					vx *= -1;
 					break;
 					
-				case 4:
+				case 3:
 					if(ejected) {
 						//explode
 					}
@@ -66,22 +68,11 @@ public class UFO extends Entity{
 			}
 		}
 		
-		detect();
-		
-		if(shootTimer > 0) {
-			shootTimer --;
-			vx = 0;
-			if(shootTimer == 0) {
-				//make a bullet object
-			}
+		if(!ejected) {
+			detect();
 		}else {
-			if(turnTimer > 0) {
-				turnTimer --;
-				if(turnTimer == 0) {
-					turnTimer = 300;
-					vx *= -1;
-				}
-			}
+			vx = 0;
+			vy += 2;
 		}
 		
 		x += vx;

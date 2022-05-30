@@ -17,19 +17,18 @@ public class giantSpider extends Entity
 	
 	public giantSpider(int x, int y, boolean visible, String path) {
 		super(x, y, 256, 128, visible, path);
-		jumpTimer = 20;
+		jumpTimer = 10;
 		hanging = true;
 		Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderNeutral.png");
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void detect() {
-		int mapX = x/128, spelunkerX = Frame.Ana.x/128;
-		int mapY = y/128, spelunkerY = Frame.Ana.y/128;
-		
-		if((mapX == spelunkerX || mapX + 1 == spelunkerX) && Math.abs(mapY - spelunkerY) <= 6 && mapY < spelunkerY) {
+		if(Frame.Ana.x + Frame.Ana.w > x + w/4
+		&& Frame.Ana.x < x + 3 * w/4
+		&& Math.abs(y - Frame.Ana.y) <= 5 * 128
+		&& y < Frame.Ana.y) {
 			hanging = false;
-			dropTimer = 20;
 		}
 	}
 	
@@ -82,8 +81,31 @@ public class giantSpider extends Entity
 				}
 			}
 		}
-		if(flag == false && hanging == false) {
-			grounded = false;
+		
+		if(hanging) {
+			Sprite = getImage("/imgs/Monsters/Spider/giantSpider_neutral.gif");
+			detect();
+		}else {
+			if(!grounded) {
+				vy += 2;
+				if(vy < 0) {
+					Sprite = getImage("/imgs/Monsters/Spider/giatnSpider_jump.gif");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Spider/giantSpider_fall.gif");
+				}
+				if(dropTimer > 0) {
+					dropTimer --;
+					Sprite = getImage("/imgs/Monsters/Spider/giantSpider_drop.gif");
+				}
+			}else {
+				if(jumpTimer > 0) {
+					jumpTimer --;
+					if(jumpTimer == 0) {
+						jump();
+						jumpTimer = 20;
+					}
+				}
+			}
 		}
 		
 		x += vx;
