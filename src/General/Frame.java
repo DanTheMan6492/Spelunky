@@ -188,9 +188,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			e.collide();
 		}
 		
-		whip.paint(g);
-		Ana.paint(g);
-		
 		for(Entity e : LevelBuilder.enemies) {
 			e.paint(g);
 		}
@@ -198,12 +195,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for(object o : LevelBuilder.objects) {
 			o.paint(g);
 		}
-<<<<<<< HEAD
 
 		whip.paint(g);
 		Ana.paint(g);
-=======
->>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
 
 		for(Block deco : LevelBuilder.decorations){
 			deco.paint(g);
@@ -252,6 +246,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			fps =  (long) (Math.pow(10, 9) / deltaT);
 		}
 
+		System.out.println(fps);
 		oldTime = newTime;
 
 	}

@@ -34,11 +34,7 @@ public class LevelBuilder {
 	public static Block[][] level;
 	public static ArrayList<Entity> enemies = new ArrayList<Entity>();
 	public static ArrayList<object> objects = new ArrayList<object>();
-<<<<<<< HEAD
 	public static ArrayList<Block> decorations = new ArrayList<Block>();
-=======
-	public static ArrayList<object> treasures = new ArrayList<object>();
->>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
 	public static int [][]sectionIDs;
 	public static int levelNum;
 	public static boolean TransistionRoom = false;
@@ -64,7 +60,7 @@ public class LevelBuilder {
 			ready = false;
 
 		TransistionRoom = false;
-		level = new Block[33][42];
+		level = new Block[34][42];
 
 
 		levelNum++;
@@ -74,14 +70,13 @@ public class LevelBuilder {
 		Frame.Tracks[world-1][track].play();
 
 		
-		for(int i = 0; i < 33; i++){
+		for(int i = 0; i < 34; i++){
 			level[i][0] = new Block(0, 0, i*128);
-			level[i][41] = new Block(0, 40*128, i*128);
+			level[i][41] = new Block(0, 41*128, i*128);
 		}
 		for(int i = 0; i < 42; i++){
 			level[0][i] = new Block(0, i*128, 0);
-			if(world != 3)
-				level[32][i] = new Block(0, i*128, 32*128);
+			level[33][i] = new Block(0, i*128, 32*128);
 		}
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);
