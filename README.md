@@ -7,16 +7,29 @@
 
 ### Classes:
 
-#### Physics Class:
-#### Map Generation Class:
-##### Map/Subsection/Block Class:
-##### Kali Alter Class:
-##### Shop Class:
-#### Entity Class:
-##### Player Class:
-##### Enemy Class:
-##### Item Class:
-##### Equipment:
+#### ***Physics Class:***
+The physics class is a universal constant that applies to all generated entities besides the map itself. Be it the player, the enemy, or even item - the physics class applies to them in one form or another. Typically entities all are vulnerable to gravity and the fall damage associated. Entities also get knocked around with attacks; their corpses being flung across the room and acting as a projectile which could collide and damage enemies. 
+
+#### ***Entity Class:***
+A generalized entity class in which the player, enemy, and item class rely heavily upon. This acts as a foundation for each entity's health, size, position on the map, and even some other intricacies such as interacting with level exits for damsels. 
+
+##### ***Player Class:***
+In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs and 4 ropes which they can use to assist in their travels, which they can attain more of along with items and equipment in randomly-generated boxes or purchased from shops. 
+
+##### ***Enemy Class:***
+
+##### ***Item Class:***
+
+##### ***Equipment:***
+
+#### ***Map Generation Class:***
+
+##### ***Map/Subsection/Block Class:***
+
+##### ***Kali Alter Class:***
+
+##### ***Shop Class:***
+
 ##### Other Entities:
 #### Money Class:
 #### Music Class:
