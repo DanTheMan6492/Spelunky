@@ -179,18 +179,27 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"), 30, 30, null);
-		g2.drawImage(getImage("/imgs/Items/HUD/bomb.png"), 130, 30, null);
-		g2.drawImage(getImage("/imgs/Items/HUD/rope.png"), 210, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/Heart.png"),   50, 27, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/bomb.png" ),  140, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/rope.png" ),  210, 30, null);
 		g2.drawImage(getImage("/imgs/Items/HUD/money.png"), 1200, 30, null);
-		g2.drawImage(getImage("/imgs/Items/HUD/time.png"), 1500, 30, null);
+		g2.drawImage(getImage("/imgs/Items/HUD/time.png" ), 1500, 30, null);
 		g2.drawImage(getImage("/imgs/Items/HUD/level.png"), 1700, 30, null);
 
+		AffineTransform tx = AffineTransform.getTranslateInstance(5, 40);
+		tx.scale(0.9, 0.9);
+		g2.drawImage(getImage("/imgs/Items/HUD/kapala/" + Ana.blood + ".png"), tx, null);
+
+
+		for(int i = 0; i < Ana.items.size(); i++){
+			g2.drawImage(getImage("/imgs/Items/HUD/item"  + Ana.items.get(i) + ".png"),  40+40*i, 40, null);
+		}
+		
 		g.setColor(Color.white);
-		g.drawString("" + Ana.HP, 75, 77);
+		g.drawString("" + Ana.HP, 90, 77);
 		g.setFont(sfont);
-		g.drawString("" + Ana.bombs, 165, 58);
-		g.drawString("" + Ana.ropes, 260, 58);
+		g.drawString("" + Ana.bombs, 168, 60);
+		g.drawString("" + Ana.ropes, 253, 60);
 		g.drawString("" + Ana.money, 1240, 52);
 		g.drawString(timer.minutes + ":" + timer.seconds, 1540, 52);
 		g.drawString(LevelBuilder.levelNum/4+1 + "-" + (LevelBuilder.levelNum%4+1), 1740, 52);

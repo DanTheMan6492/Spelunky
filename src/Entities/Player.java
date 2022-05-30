@@ -34,6 +34,7 @@ public class Player extends Entity{
 	public int bombs = 4;
 	public int ropes = 4;
 	public int money = 0;
+	public int blood = 0;
 	public boolean[] equipables = {false, false, false,
 								   false, false, false,
 								   false, false, false};
