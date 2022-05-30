@@ -20,7 +20,7 @@ public class Background{
 	public Background(int x, int y) {
 		img = getImage("/imgs/Background/1.png");
 		tx = AffineTransform.getTranslateInstance(x, y );
-		init(128, 128); 				//initialize the location of the image
+		init(0, 0); 				//initialize the location of the image
 									//use your variables
 	}
 
@@ -42,6 +42,11 @@ public class Background{
 	}
 	/* update the picture variable location */
 	private void update() {
+
+		if(!Frame.character_selected){
+			img = getImage("/imgs/Background/0.jpg");
+			return;
+		}
 
 		img = getImage("/imgs/Background/"  + Integer.toString(1+(LevelBuilder.levelNum/4)) +".png");
 		if(LevelBuilder.TransistionRoom)

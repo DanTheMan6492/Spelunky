@@ -68,6 +68,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Player Ana;
 	static XInputDevice[] devices;
 	static Camera camera;
+	public static Music title;
 	public static Music[][] Tracks;
 
 	static double controllerPos = 0;
@@ -78,7 +79,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 	TimerCount timer = new TimerCount();
-	boolean character_selected = false;
+	static boolean character_selected = false;
 	
 
 	public void paint(Graphics g) {
@@ -88,8 +89,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setFont(font);
 		if(!character_selected){
 			
+			bg.paint(g);
 			g.setColor(Color.black);
-			g.fillRect(0, 0, 5000, 5000);
 			Graphics2D g2 = (Graphics2D) g;
 			AffineTransform tx = AffineTransform.getTranslateInstance(6, 100);
 			for(int i = 1; i <= 21; i++){
@@ -100,7 +101,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 			}
 			g.setColor(Color.white);
-			g.drawString("Select Your Character", 0, 0);
+			g.drawString("Click on Your Character", 770, 50);
 			return;
 		}
 
@@ -232,6 +233,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				{new Music(".\\src\\Music\\3-1.wav", true), new Music(".\\src\\Music\\3-2.wav", true), new Music(".\\src\\Music\\3-3.wav", true)},
 				{new Music(".\\src\\Music\\4-1.wav", true), new Music(".\\src\\Music\\4-2.wav", true), new Music(".\\src\\Music\\4-3.wav", true)}
 			};
+			title = new Music(".\\src\\Music\\title.wav", true);
+			title.play();
 		} catch (UnsupportedAudioFileException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -303,6 +306,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		if(!character_selected){
+			try {
+				title.stop();
+			} catch (UnsupportedAudioFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (LineUnavailableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			int x = arg0.getX();
 			int y = arg0.getY();
 			Ana = new Player(0, 0, 90, 120, true, "");
