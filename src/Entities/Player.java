@@ -30,9 +30,9 @@ public class Player extends Entity{
 	public boolean carrying;
 	public double vxBuffer;
 	public int itemHeld;
-	public int HP = 4;
-	public int bombs = 4;
-	public int ropes = 4;
+	public int HP = 99;
+	public int bombs = 99;
+	public int ropes = 99;
 	public int money = 0;
 	public int blood = 0;
 	public boolean[] equipables = {false, false, false,
@@ -55,6 +55,9 @@ public class Player extends Entity{
 	public ArrayList<Integer> items = new ArrayList<Integer>();
 	public Player(int x, int y, int w, int h, boolean visible, String path) {
 		super(x, y, w, h, visible, path);
+		for(int i = 0; i < 7; i++){
+			items.add(i);
+		}
 		dir = -1;
 		grounded = false;
 		frame = 0;
