@@ -116,9 +116,9 @@ public class Player extends Entity{
 		}
 
 		//update player direction
-		if(vx < -0.5) 
+		if(vx < 0) 
 			dir = -1;
-		else if(vx > 0.5)
+		else if(vx > 0)
 			dir = 1;
 
 	
@@ -217,16 +217,8 @@ public class Player extends Entity{
 				}
 				break;
 			case "Whipping":
-				if(frame < 3){
-					Sprite = splice(4, 0);
-				} else if(frame < 5){
-					Sprite = splice(4, 1);
-				} else if(frame == 5){
-					Sprite = splice(4, 2);
-				} else if(frame < 8){
-					Sprite = splice(4, 3);
-				} else if(frame < 10){
-					Sprite = splice(4, 4);
+				if(frame < 5){
+					Sprite = splice(4, frame);
 				} else{
 					Sprite = splice(4, 5);
 				}

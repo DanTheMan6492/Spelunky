@@ -34,6 +34,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 import Blocks.Block;
 import Blocks.KaliAltar;
@@ -154,7 +155,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				float accelerationDelta = axes.getRTDelta();
 				float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
 				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
-				Ana.vxBuffer -= brakeDelta*20;
+				controllerPos -= brakeDelta*20;
+				if(Math.abs(controllerPos) > 10){
+					Ana.vxBuffer = 20 * Math.abs(controllerPos)/controllerPos;
+				} else{
+					Ana.vxBuffer = 0;
+				}
+				//Ana.vxBuffer -= brakeDelta*20;
 				if(Ana.debug){
 					Ana.vy -= YDelta*20;
 				}

@@ -15,7 +15,7 @@ public class Whip extends Entity{
 	}
 	
 	public void whip() {
-		if(whipTimer == 0) {
+		if(whipTimer <= 5) {
 			whipTimer = 15;
 			Player.whip();
 		}
@@ -32,7 +32,7 @@ public class Whip extends Entity{
 	}
 	
 	public void update() {
-		if(whipTimer > 0) {
+		if(whipTimer > 5) {
 			whipTimer --;
 			if(whipTimer <= 15 && whipTimer > 10) {
 				//backwhip
@@ -56,7 +56,7 @@ public class Whip extends Entity{
 				//frontwhip
 				w = 80;
 				h = 60;
-				if(Frame.Ana.dir == 1) {
+				if(Entity.dir == 1) {
 					x = Frame.Ana.x + Frame.Ana.w - 10;
 					y = Frame.Ana.y + 40;
 				}else {
@@ -75,7 +75,7 @@ public class Whip extends Entity{
 	}
 	
 	public void paint(Graphics g) {
-		if(whipTimer > 0) {
+		if(whipTimer >= 5) {
 			update();
 			Graphics2D g2 = (Graphics2D) g;
 			if(Player.dir == -1)
