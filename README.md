@@ -59,6 +59,11 @@ A shop is randomly generated within a branching path in a level. In a shop, peop
 
 ##### ***Kali Alter Class:***
 
+![Kali](https://github.com/DanTheMan6492/Spelunky/blob/e774222c1e9d28265da727caaf5fb5ab7955f1f0/src/imgs/Tiles/1/9.png)
+![Kali](https://github.com/DanTheMan6492/Spelunky/blob/e774222c1e9d28265da727caaf5fb5ab7955f1f0/src/imgs/Tiles/1/6.png)
+![Kali](https://github.com/DanTheMan6492/Spelunky/blob/e774222c1e9d28265da727caaf5fb5ab7955f1f0/src/imgs/Tiles/1/7.png)
+
+
 Kali alters are special rooms generated like shops, containing a singular alter made by 2 blocks. Players are able to sacrifice stunned living entities or dead entities by placing their bodies on top of the alter, which kills them instantly and gains a favor or two depending on if the entity is alive or not. This favor lasts between levels, and should the player reach 8 favor each additional sacrifice provides a valuable equipment or item. Destroying the alter is also possible, but should be avoided as it results in -16 favor and spawns a hoard of enemies if the final favor value is negative
 
 ##### Other Entities:
