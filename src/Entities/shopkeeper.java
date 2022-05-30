@@ -12,6 +12,7 @@ import General.Frame;
 
 public class shopkeeper extends Entity
 {
+	public int throwTimer;
 	public boolean aggro, angry;
 
 	public shopkeeper(int x, int y, int w, int h, boolean visible, String path) {
@@ -23,6 +24,72 @@ public class shopkeeper extends Entity
 
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void collide() {    
+		if(stunned)
+			return;
+		
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
+			System.out.println("throw");
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
+			System.out.println("throw");
+        }
+        
+        //spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.vy = -20;
+        	Frame.Ana.y = y - Frame.Ana.h - 10;
+        	if(Frame.Ana.equipables[3]) {
+        		die();
+        	}else {
+        		takeDamage(1);
+        	}
+        	stunned = true;
+        	vx = Frame.Ana.dir * 10;
+        	vy = -10;
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
+			System.out.println("throw");
+        }
+    }
 	
 	public void jump() {
 		if(grounded) {
@@ -100,18 +167,57 @@ public class shopkeeper extends Entity
 			grounded = false;
 		}
 		
-		if(angry) {
-			detect();
+		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
+			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunForward.gif");
+				}else if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunBackward.gif");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStun.gif");
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunForward.gif");
+				}else if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunBackward.gif");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStun.gif");
+				}
+			}
+			
+			if(vy < -20) {
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunUpward.gif");
+			}else if(vy > 20) {
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunDownward.gif");
+			}
+		}else {
+			collide();
+			
+			if(angry) {
+				detect();
+			}
+			
+			if(vx == 0) {
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStand.gif");
+			}else {
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepWalk.gif");
+			}
+			
+			if(throwTimer > 0) {
+				throwTimer --;
+				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepThrow.gif");
+			}
 		}
 		
 		if(!grounded) { 
 			vy += 2;
-		}
-		
-		if(vx == 0) {
-			Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStand.gif");
-		}else {
-			Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepWalk.gif");
 		}
 		
 		x += vx;

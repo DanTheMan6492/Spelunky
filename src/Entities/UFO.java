@@ -23,6 +23,51 @@ public class UFO extends Entity{
 		Sprite = getImage("/imgs/Monsters/UFO/UFORoam.gif");
 	}
 	
+	public void collide() {    
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        }
+        
+        //spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.vy = -20;
+        	Frame.Ana.y = y - Frame.Ana.h - 10;
+        	ejected = true;
+        	LevelBuilder.enemies.add(new alien(x, y, 128, 128, true, ""));
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.takeDamage(damage);
+        }
+    }
+	
 	public void shoot() {
 		if(shootTimer == 0) {
 			shootTimer = 30;
@@ -70,6 +115,7 @@ public class UFO extends Entity{
 		
 		if(!ejected) {
 			detect();
+			collide();
 		}else {
 			vx = 0;
 			vy += 2;

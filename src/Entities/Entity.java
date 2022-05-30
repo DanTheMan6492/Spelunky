@@ -88,6 +88,9 @@ public class Entity {
     }
     
     public void collide() {    
+    	if(stunned)
+    		return;
+    	
     	//spelunker is to the left of entity
         if(Frame.Ana.x + Frame.Ana.w > x
         && Frame.Ana.x + Frame.Ana.w < x + w
@@ -122,6 +125,8 @@ public class Entity {
         	}else {
         		takeDamage(1);
         	}
+        	vx = Frame.Ana.dir * 10;
+        	vy = -10;
         }
         
         //spelunker is below entity

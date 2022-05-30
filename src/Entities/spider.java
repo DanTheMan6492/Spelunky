@@ -89,6 +89,8 @@ public class spider extends Entity
 			}
 		}
 		
+		collide();
+		
 		if(hanging) {
 			Sprite = getImage("/imgs/Monsters/Spider/spider_neutral.gif");
 			detect();

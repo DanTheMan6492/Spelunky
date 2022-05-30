@@ -99,36 +99,69 @@ public class crocMan extends Entity{
 			}
 		}
 		
-		detect();
+		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
+			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.png");
+				}else if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.png");
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.png");
+				}else if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.png");
+				}
+			}
+			
+			if(vy < -20) {
+				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunUpward.png");
+			}else if(vy > 20) {
+				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunDownward.png");
+			}
+		}else {
+			detect();
+			collide();
+			
+			if(!frenzy) {
+				if(waitTimer > 0){
+					waitTimer--;
+					if(waitTimer <= 0){
+						vx = 8*dir;
+						moveTimer = 22;
+						Sprite = getImage("/imgs/Monsters/Crocman/crocmanwalk.gif");
+					}
+				} else if(moveTimer > 0){
+					moveTimer--;
+				} else{
+					vx = 0;
+					waitTimer = 20;
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStand.gif");
+				}
+			}else {
+				vx = 16 * dir;
+				jump();
+			}
+			
+			if(vx == 0) {
+				Sprite = getImage("/imgs/Monsters/Crocman/crocman_stand.gif");
+			}else {
+				Sprite = getImage("/imgs/Monsters/Crocman/crocman_walk.gif");
+			}
+		}
 		
 		if(!grounded) {
 			vy += 2;
-		}
-		
-		if(!frenzy) {
-			if(waitTimer > 0){
-				waitTimer--;
-				if(waitTimer <= 0){
-					vx = 8*dir;
-					moveTimer = 22;
-					Sprite = getImage("/imgs/Monsters/Caveman/crocmanwalk.gif");
-				}
-			} else if(moveTimer > 0){
-				moveTimer--;
-			} else{
-				vx = 0;
-				waitTimer = 20;
-				Sprite = getImage("/imgs/Monsters/Caveman/crocmanStand.gif");
-			}
-		}else {
-			vx = 16 * dir;
-			jump();
-		}
-		
-		if(vx == 0) {
-			Sprite = getImage("/imgs/Monsters/Crocman/crocman_stand.gif");
-		}else {
-			Sprite = getImage("/imgs/Monsters/Crocman/crocman_walk.gif");
 		}
 		
 		x += vx;

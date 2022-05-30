@@ -84,7 +84,7 @@ public class bat extends Entity
 			}
 		}
 		
-		
+		collide();
 		
 		if(vx < -0.5) 
 			dir = -1;
