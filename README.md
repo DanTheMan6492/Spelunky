@@ -12,6 +12,8 @@ The physics class is a universal constant that applies to all generated entities
 A generalized entity class in which the player, enemy, and item class rely heavily upon. This acts as a foundation for each entity's health, size, position on the map, and even some other intricacies such as interacting with level exits for damsels. 
 
 ##### ***Player Class:***
+
+![Player Select](https://github.com/DanTheMan6492/Spelunky/blob/89ca23dbf59d1fd8cb6695a2a197fb144b0f2a80/src/imgs/Characters/image.png)
 In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs and 4 ropes which they can use to assist in their travels, which they can attain more of along with items and equipment in randomly-generated boxes or purchased from shops. 
 
 
@@ -24,6 +26,14 @@ In the game, there are a total of 21 player skins that the player can select at 
 Thoughout your journey, you will encounter a variety of enemies which impedes your travels downward. These entities all have different actions and behaviors, which the player should do well in avoiding or analysing. Some enemies, like the mantrap, can kill immediately on contact while other entities such as the damsel dog can heal the player should they find the exit of the level. Enemies typically spawn randomly in their corresponding levels (Though there is one exeption deep, deep in the caves...), so be careful when descending down into the depths below!
 
 ##### ***Item Class:***
+![Pot](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/pot.png)
+![Skull](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/rock.png)
+![Arrow](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/arrow.png)
+
+Entities which falls neither in the weapon / equipment class nor in the player / enemies class. Usually generated in the levels randomly, and typically can be broken with a few exceptions. These usually are to be picked up by the player or opened to gain equipment or other items, which serves to be thrown to hit other enemies. Examples include pots, skulls, bombs, etc.
+
+Activity
+
 
 ##### ***Equipment:***
 
