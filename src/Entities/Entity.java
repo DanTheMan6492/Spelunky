@@ -12,6 +12,7 @@ import java.net.URL;
 import Blocks.Block;
 import Blocks.LevelBuilder;
 import Entities.Camera;
+import General.Frame;
 
 public class Entity {
 	
@@ -27,6 +28,7 @@ public class Entity {
     public AffineTransform tx;
     public boolean grounded = false;
 	public int frame;
+<<<<<<< HEAD
 	public int dir;
 	
 
@@ -162,6 +164,11 @@ public class Entity {
     	}
     	return null;
     }
+=======
+	public static int dir;
+	public int damage;
+	public int health;
+>>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
     
     public int collide(Block b) {
         int result = 0;
@@ -218,6 +225,54 @@ public class Entity {
         return result;
     }
     
+    public void collide() {    
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        }
+        
+        //spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.vy = -20;
+        	Frame.Ana.y = y - Frame.Ana.h - 10;
+        	if(Frame.Ana.equipables[3]) {
+        		die();
+        	}else {
+        		takeDamage(1);
+        	}
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.takeDamage(damage);
+        }
+    }
+    
     
 	public Entity(int x, int y, 
 				  int w, int h, 
@@ -231,6 +286,20 @@ public class Entity {
 		Sprite = getImage(path);
 		tx = AffineTransform.getTranslateInstance(x, y);
 		entities.add(this);
+	}
+	
+	public void takeDamage(int damage) {
+		if(health == 0) {return;}
+		
+		if(health - damage > 0) {
+			health -= damage;
+		}else {
+			die();
+		}
+	}
+	
+	public void die() {
+		health = 0;
 	}
 	
 	public void paint(Graphics g) {

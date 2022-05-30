@@ -34,7 +34,12 @@ public class Player extends Entity{
 	public int bombs = 99;
 	public int ropes = 99;
 	public int money = 0;
+<<<<<<< HEAD
 	public int blood = 6;
+=======
+	public int blood = 0;
+	public int invincibleTimer;
+>>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
 	public boolean[] equipables = {false, false, false,
 								   false, false, false,
 								   false, false, false};
@@ -86,6 +91,21 @@ public class Player extends Entity{
 			}
 		}
 		grounded = false;
+	}
+	
+	public void takeDamage(int damage) {
+		if(health == 0 || invincibleTimer > 0) {return;}
+		
+		if(health - damage > 0) {
+			health -= damage;
+			invincibleTimer = 30;
+		}else {
+			die();
+		}
+	}
+	
+	public void die() {
+		super.die();
 	}
 
 	public void updateD() {
@@ -223,6 +243,15 @@ public class Player extends Entity{
 				}
 				break;
 		}
+<<<<<<< HEAD
+=======
+		
+		if(invincibleTimer > 0) {
+			invincibleTimer --;
+		}
+		
+		Camera.update();
+>>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
 		if(dir == -1)
 			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
 		else

@@ -33,17 +33,65 @@ public class yeti extends Entity{
 		}
 	}
 	
-	public void detect() {
-		if(Frame.Ana.x + Frame.Ana.w > x
-		&& Frame.Ana.x < x + w
-		&& Frame.Ana.y + Frame.Ana.h > y
-		&& Frame.Ana.y < y + h) {
-			Frame.Ana.y -= 1;
+	public void collide() {    
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.y -= 1;
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-		}
-	}
+			System.out.println("throw");
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
+			System.out.println("throw");
+        }
+        
+        //spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.vy = -20;
+        	Frame.Ana.y = y - Frame.Ana.h - 10;
+        	if(Frame.Ana.equipables[3]) {
+        		die();
+        	}else {
+        		takeDamage(1);
+        	}
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+			throwTimer = 10;
+			System.out.println("throw");
+        }
+    }
 	
 	public void update() {
 		if(dir == 1) {
@@ -84,7 +132,7 @@ public class yeti extends Entity{
 			}
 		}
 		
-		detect();
+		collide();
 		checkGround();
 		
 		if(!grounded) {

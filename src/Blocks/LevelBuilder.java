@@ -34,7 +34,11 @@ public class LevelBuilder {
 	public static Block[][] level;
 	public static ArrayList<Entity> enemies = new ArrayList<Entity>();
 	public static ArrayList<object> objects = new ArrayList<object>();
+<<<<<<< HEAD
 	public static ArrayList<Block> decorations = new ArrayList<Block>();
+=======
+	public static ArrayList<object> treasures = new ArrayList<object>();
+>>>>>>> 1db06e10b421c766ef8c1d555f94fb3b97b37740
 	public static int [][]sectionIDs;
 	public static int levelNum;
 	public static boolean TransistionRoom = false;
