@@ -9,12 +9,18 @@
 
 #### Physics Class:
 #### Map Generation Class:
+##### Map/Subsection/Block Class:
+##### Kali Alter Class:
+##### Shop Class:
 #### Entity Class:
 ##### Player Class:
 ##### Enemy Class:
 ##### Item Class:
 ##### Equipment:
-
+##### Other Entities:
+#### Money Class:
+#### Music Class:
+#### HUD Class:
 
 ### Support:
 For support, we can try our best in helping to the best we can. We worked hard on our project and take pride in it, but we could always further polish up our own code or help others be better with theirs.
