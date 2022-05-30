@@ -22,5 +22,6 @@ public class GoldBarStack extends Treasure{
     public GoldBarStack(int x, int y) {
     	super(x,y);
     	value = 500 + LevelBuilder.levelNum * 125;
+    	Sprite = getImage("/imgs/Items/Objects/gold_bar_stack.png");
     }
 }

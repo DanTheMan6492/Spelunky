@@ -22,5 +22,6 @@ public class BigGreenGem extends Treasure{
     public BigGreenGem(int x, int y) {
     	super(x,y);
     	value = 800 + LevelBuilder.levelNum * 200;
+    	Sprite = getImage("/imgs/Items/Objects/big_gem_green.png");
     }
 }

@@ -22,5 +22,6 @@ public class BigRedGem extends Treasure{
     public BigRedGem(int x, int y) {
     	super(x,y);
     	value = 1600 + LevelBuilder.levelNum * 400;
+    	Sprite = getImage("/imgs/Items/Objects/big_gem_red.png");
     }
 }

@@ -22,5 +22,6 @@ public class SmallBlueGem extends Treasure{
     public SmallBlueGem(int x, int y) {
     	super(x,y);
     	value = 300 + LevelBuilder.levelNum * 75;
+    	Sprite = getImage("/imgs/Items/Objects/small_gem_blue.png");
     }
 }

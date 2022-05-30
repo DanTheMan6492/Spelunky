@@ -22,5 +22,6 @@ public class GoldBar extends Treasure{
     public GoldBar(int x, int y) {
     	super(x,y);
     	value = 1500 + LevelBuilder.levelNum * 375;
+    	Sprite = getImage("/imgs/Items/Objects/gold_bar.png");
     }
 }

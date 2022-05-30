@@ -24,6 +24,7 @@ public class Idol extends object{
     	grounded = false;
     	collected = false;
     	value = 5000 + LevelBuilder.levelNum * 5000;
+    	Sprite = getImage("/imgs/Items/Objects/gold_idol.png");
     }
     
     public void checkCollision() {

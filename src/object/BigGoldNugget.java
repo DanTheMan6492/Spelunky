@@ -22,5 +22,6 @@ public class BigGoldNugget extends Treasure{
     public BigGoldNugget(int x, int y) {
     	super(x,y);
     	value = 500 + LevelBuilder.levelNum * 125;
+    	Sprite = getImage("/imgs/Items/Objects/big_gold_nugget.png");
     }
 }
