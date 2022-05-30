@@ -1,11 +1,13 @@
 # ***Quarter 4 Final Project: Spelunky***
 *Created by Danial Waseem, Ryan Lerdworatawee, & Alan Wu*
 
-### Game Description:
+### ***Game Description:***
 
-### Classes:
+Our game seeks to be a recreated copy of the classic game Spelunky in Java. The game seeks a spelunker traveling down a deeper and deeper cave in search of some unnamable treasure. The player jumps, dodges, fights, bombs, and ropes their way deeper and deeper, eventually facing off against harder and harder opponent. On the way, the spelunker can encounter traps, shops, and forgotten alters for a frightfully appearing yet fair deity. Will the spelunker see to their treasure, and be forever remembered?
 
-#### ***Physics Class:***
+### ***Classes:***
+
+#### ***Physics:***
 The physics class is a universal constant that applies to all generated entities besides the map itself. Be it the player, the enemy, or even item - the physics class applies to them in one form or another. Typically entities all are vulnerable to gravity and the fall damage associated. Entities also get knocked around with attacks; their corpses being flung across the room and acting as a projectile which could collide and damage enemies. 
 
 #### ***Entity Class:***
@@ -66,7 +68,7 @@ A shop is randomly generated within a branching path in a level. In a shop, peop
 
 Kali alters are special rooms generated like shops, containing a singular alter made by 2 blocks. Players are able to sacrifice stunned living entities or dead entities by placing their bodies on top of the alter, which kills them instantly and gains a favor or two depending on if the entity is alive or not. This favor lasts between levels, and should the player reach 8 favor each additional sacrifice provides a valuable equipment or item. Destroying the alter is also possible, but should be avoided as it results in -16 favor and spawns a hoard of enemies if the final favor value is negative
 
-##### Other Entities:
+##### ***Other Entities:***
 
 ![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_blue.png)
 ![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_green.png)
@@ -76,30 +78,30 @@ Kali alters are special rooms generated like shops, containing a singular alter 
 Other entities which appear throughout a level include boxes which spawns items and gold / gems which provide the player differing amounts of money. Gold and Gems are randomly generated throughout the level as entities, in blocks, or in crates / chests. Some entities also drop these entities when dying, such as the shopkeeper. Each gold and gem has different values corresponding to their type. Blood, while mostly decorative, is shot out of living entities taking damage or dying, and quickly disappears. The only use of it is with the Kapala cup (see 1st image of items) which allows the blood to be collected, giving the player an extra health per 8 pellets of blood collected.
 
 
-#### Money/score Class:
+#### ***Money/score Class:***
 
 The money system mostly revolves around picking up randomly generated gold and treasure from around the level. This collected gold can then be spent in shops in exchange for items without angering the shopkeeper. The money also acts as a score system for the game, with the higher the money the better the score a person gets.
 
-#### Music Class:
+#### ***Music / SFX Class:***
 
 Music which is played in the background of each level. There are a total of 3 music tracks for each world, which is selected randomly at the beginning of each level and looped until the player exits into a level transition stage. The Olmec Boss level has a unique track.
 
 Sound effects vary greatly, and corresponds for an action or reaction by many things be it player, enemy, or item.
 
-#### HUD:
+#### ***HUD:***
 
 Coded in Frame and stored in Player, the HUD shows off the individual values that the player has, including health, money, time, and the equipment that is in inventory.
 
-### Support:
+### ***Support:***
 For support, we can try our best in helping to the best we can. We worked hard on our project and take pride in it, but we could always further polish up our own code or help others be better with theirs.
 
-### Roadmap:
+### ***Roadmap:***
 We believe that we have done what we could utilizing Java to create the game of Spelunky. Nearly all of the base game's system was imported and created in our own way, and the only way we could continue working on the game is to maybe fix some minor bugs or to implement entirely new concepts of our own. Maybe some day if we have time we'll come back and polish the project up. 
 
-### Contributing:
+### ***Contributing:***
 
 Though we hold no credit to creating the Spelunky game idea, if anyone is interested in modifying our code for their own purposes then by all means feel free to do so.
 
-### Acknowledgement:
+### ***Acknowledgement:***
 
 The assets and music utilized in this project were all produced by the talented minds at Mossmouth, LLC. Without their hard work and inspiration, our game could never have been dreamnt up and created, nor would we hold a special place in our hearts of lazy afternoons relaxing while playing their game. Special thanks to Mr. David in being the best teacher we could've had, and as a guide in assisting us in our code. 
