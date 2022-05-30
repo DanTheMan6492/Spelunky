@@ -34,6 +34,19 @@ public class Block {
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id + "_" + index + ".png");
 			solid = true;
 			break;
+			case 6:
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
+			solid = true;
+			break;
+			case 7:
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
+			solid = true;
+			break;
+			case 8:
+			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
+			solid = true;
+			break;
+			
 			default:
 			Sprite = getImage("/imgs/Tiles/" + Integer.toString(1 + LevelBuilder.levelNum/4) + "/" + id  + ".png");
 			solid = false;

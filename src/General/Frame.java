@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import java.awt.Color;
 import java.lang.*;
+import java.lang.System.Logger.Level;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -190,8 +191,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		for(object o : LevelBuilder.objects) {
 			o.paint(g);
 		}
+
 		whip.paint(g);
 		Ana.paint(g);
+
+		for(Block deco : LevelBuilder.decorations){
+			deco.paint(g);
+		}
+
 
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;

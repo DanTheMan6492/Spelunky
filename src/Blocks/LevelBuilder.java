@@ -34,6 +34,7 @@ public class LevelBuilder {
 	public static Block[][] level;
 	public static ArrayList<Entity> enemies = new ArrayList<Entity>();
 	public static ArrayList<object> objects = new ArrayList<object>();
+	public static ArrayList<Block> decorations = new ArrayList<Block>();
 	public static int [][]sectionIDs;
 	public static int levelNum;
 	public static boolean TransistionRoom = false;
@@ -42,7 +43,7 @@ public class LevelBuilder {
 	public static boolean ready = true;
 	public static boolean damsel =  false;
 	public static int track;
-	public static int[][] SECTIONSTATS = {{6, 1, 2, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}, {6, 1, 3, 1, 1, 1, 1}};
+	public static int[][] SECTIONSTATS = {{6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}};
 	
 	
 	public static void start(){
@@ -50,6 +51,9 @@ public class LevelBuilder {
 		nextLevel();
 	}
 	public static void nextLevel(){
+		enemies = new ArrayList<Entity>();
+		objects = new ArrayList<object>();
+		decorations = new ArrayList<Block>();
 		if(levelNum != -1)
 			transition();
 		else
@@ -106,24 +110,21 @@ public class LevelBuilder {
 									Y = (y)*128+128;
 									break;
 									
-									//spawn snake, delete later
-									case 11:
-										//if((int)(Math.random()*5) == 0) {
-											enemies.add(new yeti((x)*128+128, (y)*128+128, 128, 128, true, ""));
-										//}
-										level[y+1][x+1] = null;
-										break;
-										
-									//spawn rock, delete later
+									//shopkeep
 									case 12:
-										objects.add(new Pot((x)*128+128, (y)*128+128));
+										decorations.add(new Block(11, x*128+128, y*128+128));
+										enemies.add(new shopkeeper((x)*128+128, (y)*128+128, 128, 128, true, ""));
 										level[y+1][x+1] = null;
-										System.out.print("hasRock");
 										break;
-										
+									
+									//shop sign
+									case 14:
+										decorations.add(new Block(blockID, x*128+128, y*128+128));
+										level[y+1][x+1] = new Block(1, x*128+128, y*128+128);
+										break;
 									default:
-									level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
-									break;
+										level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
+										break;
 								}
 
 							}

@@ -34,7 +34,7 @@ public class Player extends Entity{
 	public int bombs = 99;
 	public int ropes = 99;
 	public int money = 0;
-	public int blood = 0;
+	public int blood = 6;
 	public boolean[] equipables = {false, false, false,
 								   false, false, false,
 								   false, false, false};
@@ -93,7 +93,6 @@ public class Player extends Entity{
 		visible = true;
 		x += vxBuffer*5;
 		y -= vy*5;
-		Camera.update();
 		tx.setToTranslation(x-Camera.x, y-Camera.y);
 		frame++;
 	}
@@ -144,7 +143,7 @@ public class Player extends Entity{
 			}
 		} else{
 			state = "Whipping";
-			if(frame == 15)
+			if(frame == 10)
 				whipping = false;
 		}
 		boolean flag = false;
@@ -224,7 +223,6 @@ public class Player extends Entity{
 				}
 				break;
 		}
-		Camera.update();
 		if(dir == -1)
 			tx.setToTranslation(x-Camera.x+128, y-Camera.y);
 		else

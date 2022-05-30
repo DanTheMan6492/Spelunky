@@ -10,9 +10,9 @@ public class LevelGen {
 		int col = (int) (Math.random() * 4);
 		int row = 0;
 
-		indexes[row][col] = 4;
+		indexes[row][col] = 5;
 		boolean prevDown = false;
-		boolean Overriding = false;
+		boolean shop = false;
 
 		while(true){
 			if(prevDown || indexes[row][col] == 3){
@@ -42,9 +42,7 @@ public class LevelGen {
 					}
 						
 				} else{
-					if(indexes[row][col] > 3)
-						indexes[row][col] = 5;
-					else if(indexes[row][col] == 0)
+					if(indexes[row][col] == 0)
 						indexes[row][col] = 1;
 					
 					
@@ -54,7 +52,31 @@ public class LevelGen {
 						dir = -1;
 					
 					col += dir;
+
+					if(indexes[row][col] != 0){
+						if(!shop){
+							shop = true;
+							if(dir == 1){
+								indexes[row][col-1] = 8;
+							} else{
+								indexes[row][col+1] = 9;
+							}
+						}
+					}
 				}
+			}
+		}
+
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				if(indexes[i][j] == 0){
+					int rand = (int) (Math.random() * 12);
+					System.out.println(rand);
+					if(rand == 0){
+						indexes[i][j] = 7;
+						return;
+					}
+				} 
 			}
 		}
 		
