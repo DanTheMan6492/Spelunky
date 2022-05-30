@@ -141,18 +141,7 @@ public class LevelBuilder {
 		TransistionRoom = true;
 		buildRoom = false;
 		ready = false;
-		try {
-			Frame.Tracks[levelNum/4][track].stop();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Frame.Tracks[levelNum/4][track].pause();
 		Fade.fade();
 		while(!ready){
 			System.out.print("");
