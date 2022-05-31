@@ -3,13 +3,10 @@ package object;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-<<<<<<< HEAD:src/object/Whip.java
 import Entities.Camera;
 import Entities.Entity;
 import Entities.Player;
-=======
 import Blocks.LevelBuilder;
->>>>>>> 30d30724d48bb3b456f4a87b246ef3b0a7d4d030:src/Entities/Whip.java
 import General.Frame;
 
 public class Whip extends Entity
