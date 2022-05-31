@@ -14,6 +14,7 @@ import Entities.Entity;
 import Entities.alien;
 import Entities.bat;
 import Entities.blueFrog;
+import Entities.bomb;
 import Entities.caveman;
 import Entities.crocMan;
 import Entities.ghost;
@@ -62,6 +63,7 @@ public class LevelBuilder {
 		TransistionRoom = false;
 		level = new Block[34][42];
 
+	
 
 		levelNum++;
 		int world = levelNum/4+1;

@@ -49,6 +49,7 @@ import object.Rock;
 import object.Whip;
 import object.object;
 import Entities.bat;
+import Entities.bomb;
 
 import com.github.strikerx3.jxinput.XInputAxes;
 import com.github.strikerx3.jxinput.XInputAxesDelta;
@@ -76,6 +77,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Music title;
 	public static Music[][] Tracks;
 
+	Entities.bomb bomb;
 	static double controllerPos = 0;
 
 	public static int WIDTH = 1920;
@@ -205,6 +207,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 
 
+		bomb.paint(g);
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(getImage("/imgs/Items/HUD/bar.png"),  50, 50, null);
@@ -359,11 +362,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Ana = new Player(0, 0, 90, 120, true, "");
 			camera = new Camera(Ana);
 			Ana.character = 1 + (x/272) + (y/327)*7;
+			
 			LevelBuilder.start();
 
 			while(!LevelBuilder.ready){
 				System.out.print("");
 			}
+			bomb = new bomb(Ana.x, Ana.y, 10, 10, true, "");
 			character_selected = true;
 		}
 	}
