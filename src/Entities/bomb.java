@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
+import Blocks.Block;
 import Blocks.LevelBuilder;
 
 public class bomb extends Entity{
@@ -21,6 +22,41 @@ public class bomb extends Entity{
 	
 	public void update() {
 		tx.setToTranslation(x - Camera.x, y - Camera.y);
+		
+		boolean flag = false;
+		for(Block[] blockArray : LevelBuilder.level) {
+			for(Block block : blockArray) {
+				switch(collide(block)) {
+				case 1:
+					dir *= -1;
+					break;
+	
+				case 2:
+					dir *= -1;
+					break;
+	
+				case 3:
+					vy = 0;
+					grounded = true;
+					flag = true;
+				    break;
+	
+				case 4:
+					break;
+					
+				case 0:
+					if(flag == false) {
+						grounded = false;
+					}
+					break;
+				}
+			}
+		}
+		
+		if(!grounded) {
+			vy += 2;
+		}
+		
 		x += vx;
 		y += vy;
 		
