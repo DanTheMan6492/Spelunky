@@ -1,4 +1,4 @@
-package object;
+package Entities;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,9 +8,8 @@ import java.net.URL;
 
 import Blocks.Block;
 import Blocks.LevelBuilder;
-import Entities.Camera;
-import Entities.Entity;
 import General.Frame;
+import object.object;
 
 public class bomb extends object{
 

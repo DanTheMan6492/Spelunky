@@ -49,7 +49,7 @@ import object.Rock;
 import object.Whip;
 import object.object;
 import Entities.bat;
-import object.bomb;
+import Entities.bomb;
 
 import com.github.strikerx3.jxinput.XInputAxes;
 import com.github.strikerx3.jxinput.XInputAxesDelta;

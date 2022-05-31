@@ -3,6 +3,7 @@ package Blocks;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.spi.CharsetProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,15 +12,18 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import Entities.Entity;
+import Entities.Olmec;
 import Entities.alien;
 import Entities.bat;
 import Entities.blueFrog;
-import object.bomb;
+import Entities.bomb;
 import Entities.caveman;
 import Entities.crocMan;
 import Entities.ghost;
 import Entities.giantSpider;
 import Entities.mantrap;
+import Entities.monkey;
+import Entities.mummy;
 import Entities.skeleton;
 import Entities.snake;
 import Entities.spider;
@@ -154,22 +158,45 @@ public class LevelBuilder {
 
 									//jungle regular enemy
 									case 26:
+									rand = (int) (Math.random() * 20);
+									if(rand >= 18)
+										// orange frog
+									if(rand >= 16)
+										enemies.add(new blueFrog(X, Y));
+									if(rand >= 11)
+										enemies.add(new caveman(X, Y));
+									else if(rand >= 7)
+										enemies.add(new mantrap(X, Y));
+									else if(rand >= 3)
+										enemies.add(new monkey(X, Y));
 									break;
 
-									//ice caves regular enemy
+									//ice caves yeti
 									case 27:
+									rand = (int) (Math.random() * 3);
+									if(rand > 0)
+										enemies.add(new yeti(X, Y));
 									break;
 
 									//temple regular enemy
 									case 28:
+										rand = (int) (Math.random() * 10);
+										if(rand >= 7)
+											enemies.add(new caveman(X, Y));
+										else if(rand >= 3)
+											enemies.add(new crocMan(X, Y));
 									break;
 
 									//temple mummy
 									case 29:
+									rand = (int) (Math.random() * 3);
+									if(rand == 0)
+										enemies.add(new mummy(X, Y));
 									break;
 
 									//olmec
 									case 30:
+									enemies.add(new Olmec(X, Y));
 									break;
 
 									//misc. blocks

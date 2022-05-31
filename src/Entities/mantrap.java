@@ -18,9 +18,9 @@ public class mantrap extends Entity
 	public int waitTimer;
 	public int moveTimer;
 
-	public mantrap(int x, int y, int w, int h, boolean visible, String path) 
+	public mantrap(int x, int y) 
 	{
-		super(x, y, w, h, visible, path);
+		super(x, y, 128, 128, true, "");
 		dir = 1;
 		vx = 8;
 		vy = 0;

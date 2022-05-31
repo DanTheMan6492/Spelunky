@@ -15,9 +15,9 @@ public class crocMan extends Entity{
 	public int waitTimer, moveTimer;
 	public boolean frenzy;
 	
-	public crocMan(int x, int y, int w, int h, boolean visible, String path) 
+	public crocMan(int x, int y) 
 	{
-		super(x, y, w, h, visible, path);
+		super(x, y, 128, 128, true, "");
 		frenzy = false;
 		Sprite = getImage("/imgs/Monsters/CrocMan/crocman_stand.gif");
 		dir = 1;

@@ -14,8 +14,8 @@ public class blueFrog extends Entity
 {
 	public int jumpTimer;
 
-	public blueFrog(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public blueFrog(int x, int y) {
+		super(x, y, 128, 128, true, "/imgs/Monsters/BlueFrog/blueFrogStand.gif");
 		Sprite = getImage("/imgs/Monsters/BlueFrog/blueFrogStand.gif");
 		dir = 1;
 		jumpTimer = 60;

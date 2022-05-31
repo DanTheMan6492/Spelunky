@@ -15,8 +15,8 @@ public class monkey extends Entity
 	public int jumpTimer, robTimer, robCoolDownTimer;
 	public boolean robbing;
 
-	public monkey(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public monkey(int x, int y) {
+		super(x, y, 128, 128, true, "");
 		// TODO Auto-generated constructor stub
 		dir = 1;
 		jumpTimer = 10;

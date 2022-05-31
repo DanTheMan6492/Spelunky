@@ -15,8 +15,8 @@ public class mummy extends Entity{
 	public int waitTimer, vomitTimer;
 	public boolean shooting;
 	
-	public mummy(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public mummy(int x, int y) {
+		super(x, y, 256, 256, true, "");
 		// TODO Auto-generated constructor stub
 		vx = 5;
 		Sprite = getImage("/imgs/Monsters/Mummy/mummyStand.gif");

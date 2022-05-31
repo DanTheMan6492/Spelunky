@@ -14,8 +14,8 @@ public class yeti extends Entity{
 	
 	public int waitTimer, moveTimer, throwTimer;
 
-	public yeti(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public yeti(int x, int y) {
+		super(x, y, 128, 128, true, "");
 		dir = 1;
 		// TODO Auto-generated constructor stub
 	}
