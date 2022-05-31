@@ -16,7 +16,7 @@ A generalized entity class in which the player, enemy, and item class rely heavi
 ##### ***Player Class:***
 
 ![Player Select](https://github.com/DanTheMan6492/Spelunky/blob/89ca23dbf59d1fd8cb6695a2a197fb144b0f2a80/src/imgs/Characters/image.png)
-In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs and 4 ropes which they can use to assist in their travels, which they can attain more of along with items and equipment in randomly-generated boxes or purchased from shops. 
+In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs which they can use to assist in their travels. 
 
 
 ##### ***Enemy Class:***
