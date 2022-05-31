@@ -123,6 +123,13 @@ public class caveman extends Entity{
 			}else if(vy > 20) {
 				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunDownward.png");
 			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
 		}else {
 			detect();
 			collide();

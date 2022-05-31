@@ -74,6 +74,7 @@ public class shopkeeper extends Entity
         	stunned = true;
         	vx = Frame.Ana.dir * 10;
         	vy = -10;
+        	stunTimer = 180;
         }
         
         //spelunker is below entity
@@ -113,7 +114,7 @@ public class shopkeeper extends Entity
 		}else{
 			if(Math.abs(mapX - spelunkerX) <= 3 && Math.abs(mapY - spelunkerY) < 4) {
 				System.out.println("shoot");
-			}else if(Math.abs(mapX - spelunkerX) > 6 && Math.abs(mapY - spelunkerY) < 4) {
+			}else if(Math.abs(mapX - spelunkerX) > 6) {
 				jump();
 			}
 		}
@@ -196,6 +197,14 @@ public class shopkeeper extends Entity
 				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunUpward.gif");
 			}else if(vy > 20) {
 				Sprite = getImage("/imgs/Monsters/Shopkeep/shopkeepStunDownward.gif");
+			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+					vx = dir * 15;
+				}
 			}
 		}else {
 			collide();

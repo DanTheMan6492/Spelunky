@@ -129,6 +129,13 @@ public class crocMan extends Entity{
 			}else if(vy > 20) {
 				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunDownward.png");
 			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
 		}else {
 			detect();
 			collide();

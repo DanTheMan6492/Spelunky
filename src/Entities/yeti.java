@@ -78,6 +78,7 @@ public class yeti extends Entity{
         		takeDamage(1);
         	}
         	stunned = true;
+        	stunTimer = 240;
         	vx = Frame.Ana.dir * 10;
         	vy = -10;
         }
@@ -165,6 +166,13 @@ public class yeti extends Entity{
 				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunUpward.png");
 			}else if(vy > 20) {
 				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunDownward.png");
+			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
 			}
 		}else {
 			collide();
