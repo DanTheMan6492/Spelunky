@@ -368,7 +368,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			while(!LevelBuilder.ready){
 				System.out.print("");
 			}
-			bomb = new bomb(Ana.x, Ana.y, 10, 10, true, "");
+			bomb = new bomb(Ana.x, Ana.y);
 			character_selected = true;
 		}
 	}
