@@ -19,7 +19,6 @@ import Entities.crocMan;
 import Entities.ghost;
 import Entities.giantSpider;
 import Entities.mantrap;
-import Entities.shopkeeper;
 import Entities.skeleton;
 import Entities.snake;
 import Entities.spider;
@@ -29,6 +28,7 @@ import General.Frame;
 import object.Pot;
 import object.Rock;
 import object.object;
+import object.shopkeeper;
 
 public class LevelBuilder {
 	public static Block[][] level;
@@ -43,7 +43,7 @@ public class LevelBuilder {
 	public static boolean ready = true;
 	public static boolean damsel =  false;
 	public static int track;
-	public static int[][] SECTIONSTATS = {{6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}, {6, 1, 2, 1, 1, 1, 1, 1, 1, 1}};
+	public static int[][] SECTIONSTATS = {{6, 3, 4, 1, 3, 1, 1, 1, 1, 1}, {2, 5, 3, 1, 1, 2, 1, 1, 1, 1}, {3, 2, 2, 2, 2, 1, 1, 1, 1, 1}, {3, 3, 3, 3, 1, 1, 1, 1, 1, 1}};
 	
 	
 	public static void start(){
@@ -76,7 +76,8 @@ public class LevelBuilder {
 		}
 		for(int i = 0; i < 42; i++){
 			level[0][i] = new Block(0, i*128, 0);
-			level[33][i] = new Block(0, i*128, 32*128);
+			if(world != 3)
+				level[33][i] = new Block(0, i*128, 33*128);
 		}
 		sectionIDs = new int[4][4];
 		LevelGen.generateSections(sectionIDs);

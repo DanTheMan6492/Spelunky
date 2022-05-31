@@ -28,6 +28,7 @@ public class LevelGen {
 				prevDown = false;
 			} else{
 				int dir = (int) (Math.random() * 3)-1;
+				
 				if(dir == 0){
 					if(row == 3){
 						indexes[row][col] = 4;
@@ -44,7 +45,6 @@ public class LevelGen {
 				} else{
 					if(indexes[row][col] == 0)
 						indexes[row][col] = 1;
-					
 					
 					if(col == 0)
 						dir = 1;

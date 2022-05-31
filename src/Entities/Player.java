@@ -25,7 +25,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	static BufferedImage spriteSheet;
 	public static int character = 14;
-	public boolean debug = false;
+	public boolean debug = true;
 	public boolean ready = false;
 	public boolean carrying;
 	public double vxBuffer;
@@ -273,6 +273,7 @@ public class Player extends Entity{
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);
 		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+		
 	}
 	
 	

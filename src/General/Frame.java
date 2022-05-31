@@ -43,11 +43,11 @@ import Blocks.LevelBuilder;
 import Blocks.LevelGen;
 import Entities.Camera;
 import Entities.Entity;
-import Entities.Item;
 import Entities.Player;
-import Entities.Whip;
 import Entities.snake;
+import object.Item;
 import object.Rock;
+import object.Whip;
 import object.object;
 import Entities.bat;
 
@@ -164,6 +164,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 				//Ana.vxBuffer -= brakeDelta*20;
 				if(Ana.debug){
+					Ana.vxBuffer = controllerPos;
 					Ana.vy -= YDelta*20;
 				}
 			} else {
@@ -246,7 +247,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			fps =  (long) (Math.pow(10, 9) / deltaT);
 		}
 
-		System.out.println(fps);
 		oldTime = newTime;
 
 	}

@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.net.URL;
 
 import General.Frame;
+import object.Item;
 
 public class parachute extends Item
 {
