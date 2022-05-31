@@ -54,11 +54,12 @@ public class bomb extends Entity{
 				}
 			}
 		}
-		
-		if(!grounded) {
-			vy += 2;
+
+		if(timer <= 140 && timer > 20) {
+			if(!grounded) {
+				vy += 2;
+			}
 		}
-		System.out.println(grounded);
 		
 		x += vx;
 		y += vy;
