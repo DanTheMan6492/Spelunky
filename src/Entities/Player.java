@@ -200,7 +200,7 @@ public class Player extends Entity{
 				}else {
 					Sprite = splice(0, 9);
 				}
-			}else {
+			}else { 
 				if(vx < 0) {
 					Sprite = splice(2, 0);
 				}else if(vx > 0) {
