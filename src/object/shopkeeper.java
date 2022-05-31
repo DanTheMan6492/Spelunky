@@ -42,7 +42,6 @@ public class shopkeeper extends Entity
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-			System.out.println("throw");
         }
         
         //spelunker is to the right of entity
@@ -56,7 +55,6 @@ public class shopkeeper extends Entity
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-			System.out.println("throw");
         }
         
         //spelunker is above entity
@@ -90,7 +88,6 @@ public class shopkeeper extends Entity
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-			System.out.println("throw");
         }
     }
 	
@@ -115,7 +112,6 @@ public class shopkeeper extends Entity
 			}
 		}else{
 			if(Math.abs(mapX - spelunkerX) <= 3 && Math.abs(mapY - spelunkerY) < 4) {
-				System.out.println("shoot");
 			}else if(Math.abs(mapX - spelunkerX) > 6) {
 				jump();
 			}

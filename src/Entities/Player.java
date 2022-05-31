@@ -117,7 +117,7 @@ public class Player extends Entity{
 		ready = false;
 
 		//accelerate downwards if not on ground
-		if(!grounded) { 
+		if(!grounded && !state.equals("Climbing")) { 
 			if(parachuting == false || (parachuting && vy < 2)) {
 				vy += 2;
 			}else {
@@ -206,7 +206,8 @@ public class Player extends Entity{
 		if(!flag) {
 			grounded = false;
 		}
-		x += vx;
+		if(!state.equals("Climbing"))
+			x += vx;
 		y += vy;
 
 		
@@ -332,6 +333,25 @@ public class Player extends Entity{
 			transition.start();
 		if(LevelBuilder.level[Y+1][X+1].id == 2)
 			transition.start();
+
+	}
+
+	public void climb(float yDelta) {
+		int X = (int) (x+64) / 128;
+		int Y = (int) (y+64) / 128;
+
+		System.out.println("poggersq");
+		if(LevelBuilder.level[Y][X] == null || LevelBuilder.level[Y][X].id != 4){
+			System.out.println("poggersn");
+			if(state.equals("Climbing")){
+				state = "Falling";
+			}
+			return;
+		} else{
+			System.out.println("poggers1");
+			state = "Climbing";
+			vy -= yDelta * 5;
+		}
 
 	}
 

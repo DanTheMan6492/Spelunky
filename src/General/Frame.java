@@ -142,6 +142,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					}
 				}
 
+				if(Math.abs(YDelta) > 0.1){
+	
+					Ana.climb(YDelta);
+				}
 				if(buttons.isPressed(XInputButton.RIGHT_SHOULDER)){
 					Ana.door();
 				}
