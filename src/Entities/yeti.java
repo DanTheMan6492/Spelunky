@@ -18,6 +18,7 @@ public class yeti extends Entity{
 		super(x, y, 128, 128, true, "");
 		dir = 1;
 		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public void checkGround() {

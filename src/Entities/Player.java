@@ -101,7 +101,8 @@ public class Player extends Entity{
 	}
 	
 	public void die() {
-		super.die();
+		health = 0;
+		stunTimer = 60;
 	}
 
 	public void updateD() {
@@ -185,7 +186,42 @@ public class Player extends Entity{
 		y += vy;
 		
 		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
 			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = splice(2, 0);
+				}else if(vx < 0) {
+					Sprite = splice(2, 1);
+				}else {
+					Sprite = splice(0, 9);
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = splice(2, 0);
+				}else if(vx > 0) {
+					Sprite = splice(2, 1);
+				}else {
+					Sprite = splice(0, 9);
+				}
+			}
+			
+			if(vy < -20) {
+				Sprite = splice(2, 3);
+			}else if(vy > 20) {
+				Sprite = splice(2, 4);
+			}
+			
+			if(stunTimer > 0 && health > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
 		}else {
 			//update player animation and state
 			if(!whipping){
@@ -213,44 +249,6 @@ public class Player extends Entity{
 					whipping = false;
 			}
 			
-			if(stunned) {
-				if(vx > 0) {
-					vx --;
-				}else if(vx < 0) {
-					vx ++;
-				}
-				
-				if(dir == 1) {
-					if(vx > 0) {
-						Sprite = splice(2, 0);
-					}else if(vx < 0) {
-						Sprite = splice(2, 1);
-					}else {
-						Sprite = splice(0, 9);
-					}
-				}else {
-					if(vx < 0) {
-						Sprite = splice(2, 0);
-					}else if(vx > 0) {
-						Sprite = splice(2, 1);
-					}else {
-						Sprite = splice(0, 9);
-					}
-				}
-				
-				if(vy < -20) {
-					Sprite = splice(2, 3);
-				}else if(vy > 20) {
-					Sprite = splice(2, 4);
-				}
-				
-				if(stunTimer > 0 && health > 0) {
-					stunTimer --;
-					if(stunTimer == 0) {
-						stunned = false;
-					}
-				}
-			} else{
 			switch(state) {
 			case "Standing":
 				Sprite = splice(0, 0);
@@ -281,7 +279,6 @@ public class Player extends Entity{
 				break;
 			}
 			vx = vxBuffer;
-		}
 		}
 		
 		if(invincibleTimer > 0) {

@@ -153,6 +153,7 @@ public class Entity {
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		damage = 1;
 		this.visible = visible;
 		Sprite = getImage(path);
 		tx = AffineTransform.getTranslateInstance(x, y);
@@ -171,6 +172,7 @@ public class Entity {
 	
 	public void die() {
 		health = 0;
+		Frame.Ana.money += 500;
 	}
 	
 	public void paint(Graphics g) {
