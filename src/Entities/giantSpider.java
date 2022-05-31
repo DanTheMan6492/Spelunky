@@ -15,8 +15,8 @@ public class giantSpider extends Entity
 	public int jumpTimer, dropTimer;
 	public boolean hanging;
 	
-	public giantSpider(int x, int y, boolean visible, String path) {
-		super(x, y, 256, 128, visible, path);
+	public giantSpider(int x, int y) {
+		super(x, y, 256, 128, true, "/imgs/Monsters/GiantSpider/giantSpiderNeutral.png");
 		jumpTimer = 10;
 		hanging = true;
 		Sprite = getImage("/imgs/Monsters/GiantSpider/giantSpiderNeutral.png");

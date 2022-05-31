@@ -16,8 +16,8 @@ public class spider extends Entity
 	public int jumpTimer, dropTimer;
 	public boolean hanging;
 
-	public spider(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public spider(int x, int y) {
+		super(x, y, 128, 128, true, "/imgs/Monsters/Spider/spider_neutral.gif");
 		jumpTimer = 10;
 		hanging = true;
 		// TODO Auto-generated constructor stub

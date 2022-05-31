@@ -17,9 +17,9 @@ public class snake extends Entity
 	public int waitTimer;
 	public int moveTimer;
 
-	public snake(int x, int y, int w, int h, boolean visible, String path) 
+	public snake(int x, int y) 
 	{
-		super(x, y, w, h, visible, path);
+		super(x, y, 128, 128, true, "/imgs/Monsters/Snake/snakeStand.gif");
 		dir = 1;
 		vx = 8;
 		vy = 0;

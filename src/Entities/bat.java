@@ -13,9 +13,9 @@ public class bat extends Entity
 {
 	public boolean hanging, aggro;
 
-	public bat(int x, int y, int w, int h, boolean visible, String path) 
+	public bat(int x, int y) 
 	{
-		super(x, y, w, h, visible, path);
+		super(x, y, 128, 128, true, "/imgs/Monsters/Bat/batIdle.gif");
 		hanging = true;
 		Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
 		dir = 1;

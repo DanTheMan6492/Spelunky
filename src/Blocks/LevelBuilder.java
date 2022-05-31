@@ -87,7 +87,6 @@ public class LevelBuilder {
 			System.out.println(Arrays.toString(arr));
 		}
 
-		Entity.entities = new ArrayList<Entity>();
 		int X = 0;
 		int Y = 0;
 		for(int r = 0; r < 4; r++){
@@ -102,35 +101,55 @@ public class LevelBuilder {
 								int blockID = scnnr.nextInt();
 								int x = c*10 + j;
 								int y = r*8  + i;
+								X = (x)*128+128;
+								Y = (y)*128+128;
+								int rand;
 								switch(blockID){
+
+									//air
 									case 0:
-									level[y+1][x+1] = null;
+										level[y+1][x+1] = null;
 									break;
+
+									//entrance
 									case 3:
-									level[y+1][x+1] = null;
-									X = (x)*128+128;
-									Y = (y)*128+128;
+										level[y+1][x+1] = null;
+										Frame.Ana.x = X;
+										Frame.Ana.y = Y;
 									break;
 									
 									//shopkeep
 									case 12:
-										decorations.add(new Block(11, x*128+128, y*128+128));
+										decorations.add(new Block(11, X, Y));
 										enemies.add(new shopkeeper((x)*128+128, (y)*128+128, 128, 128, true, ""));
 										level[y+1][x+1] = null;
 										break;
 									
 									//shop sign
 									case 14:
-										decorations.add(new Block(blockID, x*128+128, y*128+128));
-										level[y+1][x+1] = new Block(1, x*128+128, y*128+128);
+										decorations.add(new Block(blockID, X, Y));
+										level[y+1][x+1] = new Block(1, X, Y);
 										break;
 
 									//caves regular enemy
 									case 24:
+										rand = (int) (Math.random() * 10);
+										if(rand >= 7)
+											enemies.add(new caveman(X, Y));
+										else if(rand >= 3)
+											enemies.add(new snake(X, Y));
 									break;
 
 									//caves hanging enemy
 									case 25:
+										rand = (int) (Math.random() * 20);
+										if(rand == 20)
+											enemies.add(new giantSpider(X, Y));
+										else if(rand >= 13)
+											enemies.add(new bat(X, Y));
+										else if(rand >= 8){
+											enemies.add(new spider(X, Y));
+										}
 									break;
 
 									//jungle regular enemy
@@ -148,6 +167,12 @@ public class LevelBuilder {
 									//temple mummy
 									case 29:
 									break;
+
+									//olmec
+									case 30:
+									break;
+
+									//misc. blocks
 									default:
 										level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
 										break;
@@ -163,8 +188,6 @@ public class LevelBuilder {
 			}
 		}
 		ready = true;
-		Frame.Ana.x = X;
-		Frame.Ana.y = Y;
 	}
 	private static void transition() {
 		TransistionRoom = true;
@@ -225,17 +248,7 @@ public class LevelBuilder {
 		}
 	}
 
-	public static void BombThrow(){
-
-	}
-
-	public static void BombLob(){
-
-	}
-
-	public static void BombDrop(){
-		
-	}
+	
 
 	
 }

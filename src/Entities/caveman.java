@@ -15,9 +15,9 @@ public class caveman extends Entity{
 	public int waitTimer, moveTimer;
 	public boolean frenzy;
 	
-	public caveman(int x, int y, int w, int h, boolean visible, String path) 
+	public caveman(int x, int y) 
 	{
-		super(x, y, w, h, visible, path);
+		super(x, y, 128, 128, true, "/imgs/Monsters/Caveman/cavemanStand.gif");
 		frenzy = false;
 		Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
 		dir = 1;
@@ -102,26 +102,26 @@ public class caveman extends Entity{
 			
 			if(dir == 1) {
 				if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.gif");
 				}else if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.gif");
 				}
 			}else {
 				if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.gif");
 				}else if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.png");
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.gif");
 				}
 			}
 			
 			if(vy < -20) {
-				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunUpward.png");
+				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunUpward.gif");
 			}else if(vy > 20) {
-				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunDownward.png");
+				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunDownward.gif");
 			}
 			
 			if(stunTimer > 0) {

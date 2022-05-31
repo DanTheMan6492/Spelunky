@@ -204,7 +204,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		for(Entity e : LevelBuilder.enemies) {
-			e.paint(g);
+			if(e != null){
+				e.paint(g);
+			}
 		}
 		
 		for(object o : LevelBuilder.objects) {

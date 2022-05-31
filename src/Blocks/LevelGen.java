@@ -34,7 +34,7 @@ public class LevelGen {
 						indexes[row][col] = 4;
 						break;
 					} else{
-						if(indexes[row][col] > 3)
+						if(indexes[row][col] == 5 || indexes[row][col] ==6)
 							indexes[row][col] = 6;
 						else
 							indexes[row][col] = 2;
