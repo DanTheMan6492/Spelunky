@@ -103,6 +103,8 @@ public class Block {
 	}
 	
 	public void Break() {
+		if(id == 0)
+			return;
 		if(toString().equals("block")) {
 			int mapX = x /128, mapY = y / 128;
 			LevelBuilder.level[mapY][mapX] = null;

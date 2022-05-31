@@ -185,7 +185,28 @@ public class Player extends Entity{
 		y += vy;
 		
 		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
 			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = splice(2, 0);
+				}else if(vx < 0) {
+					Sprite = splice(2, 1);
+				}else {
+					Sprite = splice(0, 9);
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = splice(2, 0);
+				}else if(vx > 0) {
+					Sprite = splice(2, 1);
+				}else {
+					Sprite = splice(0, 9);
+				}
 		}else {
 			//update player animation and state
 			if(!whipping){
@@ -214,28 +235,7 @@ public class Player extends Entity{
 			}
 			
 			if(stunned) {
-				if(vx > 0) {
-					vx --;
-				}else if(vx < 0) {
-					vx ++;
-				}
 				
-				if(dir == 1) {
-					if(vx > 0) {
-						Sprite = splice(2, 0);
-					}else if(vx < 0) {
-						Sprite = splice(2, 1);
-					}else {
-						Sprite = splice(0, 9);
-					}
-				}else {
-					if(vx < 0) {
-						Sprite = splice(2, 0);
-					}else if(vx > 0) {
-						Sprite = splice(2, 1);
-					}else {
-						Sprite = splice(0, 9);
-					}
 				}
 				
 				if(vy < -20) {
