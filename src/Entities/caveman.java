@@ -52,9 +52,7 @@ public class caveman extends Entity{
 			tx.setToTranslation((int)(x - Camera.x + 128), (int)(y - Camera.y));
 		}
 		tx.scale(dir, 1);
-		
-		System.out.println(dir);
-		
+				
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
@@ -95,29 +93,69 @@ public class caveman extends Entity{
 			}
 		}
 		
-		detect();
+		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
+			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.png");
+				}else if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.png");
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunForward.png");
+				}else if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStun.png");
+				}
+			}
+			
+			if(vy < -20) {
+				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunUpward.png");
+			}else if(vy > 20) {
+				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunDownward.png");
+			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
+		}else {
+			detect();
+			collide();
+			
+			if(!frenzy) {
+				if(waitTimer > 0){
+					waitTimer--;
+					if(waitTimer <= 0){
+						vx = 8*dir;
+						moveTimer = 22;
+						Sprite = getImage("/imgs/Monsters/Caveman/cavemanWalk.gif");
+					}
+				} else if(moveTimer > 0){
+					moveTimer--;
+				} else{
+					vx = 0;
+					waitTimer = 20;
+					Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
+				}
+			}else {
+				vx = 16 * dir;
+			}
+		}
 		
 		if(!grounded) {
 			vy += 2;
-		}
-		
-		if(!frenzy) {
-			if(waitTimer > 0){
-				waitTimer--;
-				if(waitTimer <= 0){
-					vx = 8*dir;
-					moveTimer = 22;
-					Sprite = getImage("/imgs/Monsters/Caveman/cavemanWalk.gif");
-				}
-			} else if(moveTimer > 0){
-				moveTimer--;
-			} else{
-				vx = 0;
-				waitTimer = 20;
-				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
-			}
-		}else {
-			vx = 16 * dir;
 		}
 		
 		x += vx;

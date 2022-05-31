@@ -98,6 +98,8 @@ public class monkey extends Entity
 			}
 		}
 		
+		collide();
+		
 		if(robbing) {
 			x = Frame.Ana.x;
 			y = Frame.Ana.y;

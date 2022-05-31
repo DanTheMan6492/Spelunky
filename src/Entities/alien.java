@@ -87,6 +87,9 @@ public class alien extends Entity
 				}
 			}
 		}
+		
+		collide();
+		
 		if(!flag) {
 			grounded = false;
 		}

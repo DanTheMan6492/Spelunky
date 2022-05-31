@@ -97,6 +97,8 @@ public class blueFrog extends Entity
 			}
 		}
 		
+		collide();
+		
 		if(flag == false) {
 			grounded = false;
 		}

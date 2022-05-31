@@ -33,7 +33,10 @@ public class yeti extends Entity{
 		}
 	}
 	
-	public void collide() {    
+	public void collide() {  
+		if(stunned)
+			return;
+		
     	//spelunker is to the left of entity
         if(Frame.Ana.x + Frame.Ana.w > x
         && Frame.Ana.x + Frame.Ana.w < x + w
@@ -45,7 +48,6 @@ public class yeti extends Entity{
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-			System.out.println("throw");
         }
         
         //spelunker is to the right of entity
@@ -59,7 +61,6 @@ public class yeti extends Entity{
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-			System.out.println("throw");
         }
         
         //spelunker is above entity
@@ -76,6 +77,10 @@ public class yeti extends Entity{
         	}else {
         		takeDamage(1);
         	}
+        	stunned = true;
+        	stunTimer = 240;
+        	vx = Frame.Ana.dir * 10;
+        	vy = -10;
         }
         
         //spelunker is below entity
@@ -132,37 +137,76 @@ public class yeti extends Entity{
 			}
 		}
 		
-		collide();
-		checkGround();
+		if(stunned) {
+			if(vx > 0) {
+				vx --;
+			}else if(vx < 0) {
+				vx ++;
+			}
+			
+			if(dir == 1) {
+				if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.png");
+				}else if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.png");
+				}
+			}else {
+				if(vx < 0) {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.png");
+				}else if(vx > 0) {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.png");
+				}else {
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.png");
+				}
+			}
+			
+			if(vy < -20) {
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunUpward.png");
+			}else if(vy > 20) {
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunDownward.png");
+			}
+			
+			if(stunTimer > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
+		}else {
+			collide();
+			checkGround();
+			
+			if(waitTimer > 0){
+				waitTimer--;
+				if(waitTimer <= 0){
+					vx = 8*dir;
+					moveTimer = 22;
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
+				}
+			} else if(moveTimer > 0){
+				moveTimer--;
+			} else{
+				vx = 0;
+				waitTimer = 20;
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
+			}
+			
+			if(vx == 0) {
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
+			}else {
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
+			}
+			
+			if(throwTimer > 0) {
+				throwTimer --;
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiThrow.gif");
+			}
+		}
 		
 		if(!grounded) {
 			vy += 2;
-		}
-		
-		if(waitTimer > 0){
-			waitTimer--;
-			if(waitTimer <= 0){
-				vx = 8*dir;
-				moveTimer = 22;
-				Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
-			}
-		} else if(moveTimer > 0){
-			moveTimer--;
-		} else{
-			vx = 0;
-			waitTimer = 20;
-			Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
-		}
-		
-		if(vx == 0) {
-			Sprite = getImage("/imgs/Monsters/Yeti/yetiStand.gif");
-		}else {
-			Sprite = getImage("/imgs/Monsters/Yeti/yetiWalk.gif");
-		}
-		
-		if(throwTimer > 0) {
-			throwTimer --;
-			Sprite = getImage("/imgs/Monsters/Yeti/yetiThrow.gif");
 		}
 		
 		x += vx;

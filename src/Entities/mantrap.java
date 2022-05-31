@@ -29,6 +29,48 @@ public class mantrap extends Entity
 		Sprite = getImage("/imgs/Monsters/mantrap/mantrap_stand.gif");
 	}
 	
+	public void collide() {    
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.die();
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.die();
+        }
+        
+        //spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	die();
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	die();
+        }
+    }
+	
 	public void detect() {
 		if(Frame.Ana.x + Frame.Ana.w > x
 		&& Frame.Ana.x < x + w
@@ -92,32 +134,37 @@ public class mantrap extends Entity
 				}
 			}
 		}
+		
 		if(!flag) {
 			grounded = false;
 		}
 		
-		checkGround();
-		
-		
-		
-		if(!grounded) {
-			vy += 2;
-			waitTimer = 20;
-			//vx = 0;
+		if(stunned) {
+			Sprite = getImage("/imgs/Monsters/Mantrap/mantrap_stun.gif");
 		}else {
-			if(waitTimer > 0){
-				waitTimer--;
-				if(waitTimer <= 0){
-					vx = 8*dir;
-					moveTimer = 22;
-				}
-			} else if(moveTimer > 0){
-				Sprite = getImage("/imgs/Monsters/mantrap/mantrap_walk.gif");
-				moveTimer--;
-			} else{
-				Sprite = getImage("/imgs/Monsters/mantrap/mantrap_stand.gif");
-				vx = 0;
+			checkGround();
+			
+			collide();
+			
+			if(!grounded) {
+				vy += 2;
 				waitTimer = 20;
+				//vx = 0;
+			}else {
+				if(waitTimer > 0){
+					waitTimer--;
+					if(waitTimer <= 0){
+						vx = 8*dir;
+						moveTimer = 22;
+					}
+				} else if(moveTimer > 0){
+					Sprite = getImage("/imgs/Monsters/mantrap/mantrap_walk.gif");
+					moveTimer--;
+				} else{
+					Sprite = getImage("/imgs/Monsters/mantrap/mantrap_stand.gif");
+					vx = 0;
+					waitTimer = 20;
+				}
 			}
 		}
 		

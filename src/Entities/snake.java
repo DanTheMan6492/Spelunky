@@ -87,8 +87,7 @@ public class snake extends Entity
 		}
 		
 		checkGround();
-		
-		
+		collide();
 		
 		if(!grounded) {
 			vy += 2;

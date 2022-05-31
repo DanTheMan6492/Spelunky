@@ -92,6 +92,7 @@ public class skeleton extends Entity
 			}
 		}else {
 			Sprite = getImage("/imgs/Monsters/Skeleton/skeletonWalk.gif");
+			collide();
 		}
 		
 		x += vx;

@@ -54,6 +54,8 @@ public class piranha extends Entity{
 			}
 		}
 		
+		collide();
+		
 		x += vx;
 		if(vy < 0 && !LevelBuilder.level[(int) (x/128)][(int) (y/128 - 1)].toString().equals("water")) {
 			

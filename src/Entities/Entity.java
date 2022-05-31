@@ -22,8 +22,10 @@ public class Entity {
 	public double vx;
 	public double vy;
 	public int w, h;
+	public int stunTimer;
 	public boolean visible, stunned;
 	public boolean interactable;
+	public boolean whipImmunity = false;
     public Image Sprite;
     public AffineTransform tx;
     public boolean grounded = false;
@@ -88,6 +90,9 @@ public class Entity {
     }
     
     public void collide() {    
+    	if(stunned || stunTimer > 0)
+    		return;
+    	
     	//spelunker is to the left of entity
         if(Frame.Ana.x + Frame.Ana.w > x
         && Frame.Ana.x + Frame.Ana.w < x + w
@@ -122,6 +127,9 @@ public class Entity {
         	}else {
         		takeDamage(1);
         	}
+        	vx = Frame.Ana.dir * 10;
+        	vy = -10;
+        	stunTimer = 240;
         }
         
         //spelunker is below entity

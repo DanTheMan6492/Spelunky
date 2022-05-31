@@ -3,12 +3,17 @@ package object;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+<<<<<<< HEAD:src/object/Whip.java
 import Entities.Camera;
 import Entities.Entity;
 import Entities.Player;
+=======
+import Blocks.LevelBuilder;
+>>>>>>> 30d30724d48bb3b456f4a87b246ef3b0a7d4d030:src/Entities/Whip.java
 import General.Frame;
 
-public class Whip extends Entity{
+public class Whip extends Entity
+{
 	
 	public int whipTimer;
 	
@@ -24,14 +29,19 @@ public class Whip extends Entity{
 		}
 	}
 	
-	public boolean checkCollision(Entity e) {
+	public void checkCollision(Entity e) {
 		if(x + w > e.x
 		&& x < e.x + e.w
 		&& y + h > e.y
 		&& y < e.y + e.h) {
-			return true;
+			if(!e.stunned && !e.whipImmunity) {
+				e.takeDamage(1);
+				e.vx = Frame.Ana.dir * 10;
+				e.vy = -10;
+				e.stunned = true;
+				e.stunTimer = 240;
+			}
 		}
-		return false;
 	}
 	
 	public void update() {
@@ -57,7 +67,7 @@ public class Whip extends Entity{
 				}
 			}else{
 				//frontwhip
-				w = 80;
+				w = 100;
 				h = 60;
 				if(Frame.Ana.dir == 1) {
 					x = Frame.Ana.x + Frame.Ana.w - 10;
@@ -73,6 +83,10 @@ public class Whip extends Entity{
 					Sprite = Player.splice(12, 15);
 				}
 			}
+			
+			for(Entity e : LevelBuilder.enemies) {
+				checkCollision(e);
+			}
 		}
 	}
 	
@@ -86,6 +100,7 @@ public class Whip extends Entity{
 				tx.setToTranslation(x-Camera.x, y-Camera.y);
 			tx.scale(Frame.Ana.dir * 0.8, 0.8);
 			g2.drawImage(Sprite, tx, null);
+			g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
 		}
 	}
 }
