@@ -17,9 +17,12 @@ public class piranha extends Entity{
 		// TODO Auto-generated constructor stub
 	}
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		health = 1;
 	}
 	
 	public void detect() {
@@ -63,14 +66,4 @@ public class piranha extends Entity{
 			y += vy;
 		}
 	}
-
-	protected Image getImage(String path) {
-
-		Image tempImage = null;
-		try {
-			URL imageURL = Entity.class.getResource(path);
-			tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {e.printStackTrace();}
-		return tempImage;
-	}	
 }

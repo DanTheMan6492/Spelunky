@@ -67,6 +67,7 @@ public class Player extends Entity{
 		dir = -1;
 		grounded = false;
 		frame = 0;
+		health = 4;
 	}
 	
 	public void jump() {
@@ -272,9 +273,12 @@ public class Player extends Entity{
 			return;
 		}
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
+		if(invincibleTimer > 0 && invincibleTimer % 4 == 0) {
+			
+		}else {
+			g2.drawImage(Sprite, tx, null);
+		}
 		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
-		
 	}
 	
 	

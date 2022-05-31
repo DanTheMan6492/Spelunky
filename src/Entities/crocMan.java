@@ -21,7 +21,7 @@ public class crocMan extends Entity{
 		frenzy = false;
 		Sprite = getImage("/imgs/Monsters/CrocMan/crocman_stand.gif");
 		dir = 1;
-
+		health = 4;
 	}
 	
 	public void detect() {
@@ -99,7 +99,7 @@ public class crocMan extends Entity{
 			}
 		}
 		
-		if(stunned) {
+		if(stunned || health == 0) {
 			if(vx > 0) {
 				vx --;
 			}else if(vx < 0) {

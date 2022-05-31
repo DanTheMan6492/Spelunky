@@ -21,6 +21,7 @@ public class caveman extends Entity{
 		frenzy = false;
 		Sprite = getImage("/imgs/Monsters/Caveman/cavemanStand.gif");
 		dir = 1;
+		health = 4;
 
 	}
 	

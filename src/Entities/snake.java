@@ -26,6 +26,7 @@ public class snake extends Entity
 		grounded = true;
 		waitTimer = 20;
 		Sprite = getImage("/imgs/Monsters/Snake/snakeStand.gif");
+		health = 1;
 	}
 	
 	public void checkGround() {
@@ -115,6 +116,8 @@ public class snake extends Entity
 	}
 
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null); 

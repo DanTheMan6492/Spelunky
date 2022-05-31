@@ -25,6 +25,7 @@ public class alien extends Entity
 		parachuting = true;
 		grounded = false;
 		Sprite = getImage("/imgs/Monsters/Alien/alienEject.gif");
+		health = 1;
 	}
 	
 	public void jump() 
@@ -114,6 +115,8 @@ public class alien extends Entity
 		y += vy;
 	}
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);
