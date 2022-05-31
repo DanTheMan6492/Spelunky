@@ -16,7 +16,7 @@ A generalized entity class in which the player, enemy, and item class rely heavi
 ##### ***Player Class:***
 
 ![Player Select](https://github.com/DanTheMan6492/Spelunky/blob/89ca23dbf59d1fd8cb6695a2a197fb144b0f2a80/src/imgs/Characters/image.png)
-In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs and 4 ropes which they can use to assist in their travels, which they can attain more of along with items and equipment in randomly-generated boxes or purchased from shops. 
+In the game, there are a total of 21 player skins that the player can select at the start of the game. The character is controlled by a controller, and can do a variety of things on their journey further and further deeper. They can walk, jump, attack, and even use items from their inventories or in their hands. The player also have 4 bombs which they can use to assist in their travels. 
 
 
 ##### ***Enemy Class:***
@@ -51,16 +51,6 @@ A shop is randomly generated within a branching path in a level. Purely decorati
 
 
 Kali alters are special rooms generated like shops, which also acts as decoraition to the levels.
-
-##### ***Other Entities:***
-
-![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_blue.png)
-![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_green.png)
-![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gem_red.png)
-![gems](https://github.com/DanTheMan6492/Spelunky/blob/cc46d4cb7527a832310a7dd1b6489046591f074c/src/imgs/Items/Objects/big_gold_nugget.png)
-
-Other entities which appear throughout a level include boxes which spawns items and gold / gems which provide the player differing amounts of money. Gold and Gems are randomly generated throughout the level as entities, in blocks, or in crates / chests. Some entities also drop these entities when dying, such as the shopkeeper. Each gold and gem has different values corresponding to their type. Blood, while mostly decorative, is shot out of living entities taking damage or dying, and quickly disappears. The only use of it is with the Kapala cup (see 1st image of items) which allows the blood to be collected, giving the player an extra health per 8 pellets of blood collected.
-
 
 #### ***Money/score Class:***
 
