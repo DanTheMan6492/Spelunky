@@ -168,7 +168,7 @@ public class yeti extends Entity{
 				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunDownward.png");
 			}
 			
-			if(stunTimer > 0) {
+			if(stunTimer > 0 && health > 0) {
 				stunTimer --;
 				if(stunTimer == 0) {
 					stunned = false;

@@ -130,7 +130,7 @@ public class crocMan extends Entity{
 				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunDownward.png");
 			}
 			
-			if(stunTimer > 0) {
+			if(stunTimer > 0 && health > 0) {
 				stunTimer --;
 				if(stunTimer == 0) {
 					stunned = false;

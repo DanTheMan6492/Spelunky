@@ -114,6 +114,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		for(int i =0 ; i < devices.length; i++) {
 			XInputDevice device = devices[i];
+			if(Ana.stunned || Ana.health == 0)
+				break;
+			
 			if (device.poll()) {
 				// Retrieve the delta
 				XInputComponentsDelta delta = device.getDelta();
@@ -459,14 +462,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 
 	public static void BombThrow(){
-		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 50, -20));
+		if(Ana.bombs > 0) {
+			LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 50, -20));
+			Ana.bombs --;
+		}
 	}
 
 	public static void BombLob(){
-		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 25, -40));
+		if(Ana.bombs > 0) {
+			LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 25, -40));
+			Ana.bombs --;
+		}
 	}
 
 	public static void BombDrop(){
+		if(Ana.bombs > 0) {
 		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 10, 0));
+			Ana.bombs --;
+		}
 	}
 }

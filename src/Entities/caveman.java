@@ -125,7 +125,7 @@ public class caveman extends Entity{
 				Sprite = getImage("/imgs/Monsters/Caveman/cavemanStunDownward.gif");
 			}
 			
-			if(stunTimer > 0) {
+			if(stunTimer > 0 && health > 0) {
 				stunTimer --;
 				if(stunTimer == 0) {
 					stunned = false;
