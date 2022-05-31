@@ -146,7 +146,8 @@ public class LevelBuilder {
 									break;
 
 									//temple mummy
-									case 29;
+									case 29:
+									break;
 									default:
 										level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
 										break;
@@ -222,6 +223,18 @@ public class LevelBuilder {
 			loading = true;
 			Fade.fade();
 		}
+	}
+
+	public static void BombThrow(){
+
+	}
+
+	public static void BombLob(){
+
+	}
+
+	public static void BombDrop(){
+		
 	}
 
 	

@@ -121,11 +121,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				XInputButtonsDelta buttons = delta.getButtons();
 				XInputAxesDelta axes = delta.getAxes();
 
+				float accelerationDelta = axes.getRTDelta();
+				float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
+				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
 
 				// Retrieve button state change
 				if (buttons.isPressed(XInputButton.A)) {
 					Ana.jump();
-				} else if (buttons.isReleased(XInputButton.A)) {
+				} 
+
+				if (buttons.isPressed(XInputButton.B)) {
+					if(Math.abs(YDelta) > 0.1){
+						if(YDelta > 0){
+							BombLob();
+						} else{
+							BombDrop();
+						}
+					} else{
+						BombThrow();
+					}
 				}
 
 				if(buttons.isPressed(XInputButton.RIGHT_SHOULDER)){
@@ -155,9 +169,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 				// Retrieve axis state change.
 				// The class provides methods for each axis and a method for providing an XInputAxis
-				float accelerationDelta = axes.getRTDelta();
-				float brakeDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_X);
-				float YDelta = axes.getDelta(XInputAxis.LEFT_THUMBSTICK_Y);
+
 				controllerPos -= brakeDelta*20;
 				if(Math.abs(controllerPos) > 10){
 					Ana.vxBuffer = 20 * Math.abs(controllerPos)/controllerPos;
@@ -439,6 +451,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
             e.printStackTrace();
         }
         return sprite;
+		
+	}
+
+
+	public static void BombThrow(){
+
+	}
+
+	public static void BombLob(){
+
+	}
+
+	public static void BombDrop(){
 		
 	}
 }
