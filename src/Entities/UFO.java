@@ -68,6 +68,11 @@ public class UFO extends Entity{
         }
     }
 	
+	public void die() {
+		ejected = true;
+    	LevelBuilder.enemies.add(new alien(x, y, 128, 128, true, ""));
+	}
+	
 	public void shoot() {
 		if(shootTimer == 0) {
 			shootTimer = 30;
@@ -78,14 +83,18 @@ public class UFO extends Entity{
 		int mapX = (int) (x / 128), spelunkerX = (int) (Frame.Ana.x / 128);
 		int mapY = (int) (y / 128), spelunkerY = (int) (Frame.Ana.y / 128);
 		
-		if(mapX == spelunkerX && spelunkerY - mapY <= 7) {
-			shoot();
-		}
-		
-		if(Math.abs(mapX - spelunkerX) <= 10 && spelunkerY - mapY > 4) {
-			vy = 15;
-		}else {
-			vy = 0;
+		if(Math.abs(mapX - spelunkerX) <= 8 && Math.abs(mapY - spelunkerY) <= 8) {
+			if(mapY < spelunkerY - 4) {
+				vy = 5;
+			}else if(mapY > spelunkerY - 4) {
+				vy = -5;
+			}else {
+				vy = 0;
+			}
+			
+			if(mapX == spelunkerX) {
+				shoot();
+			}
 		}
 	}
 	
@@ -116,9 +125,19 @@ public class UFO extends Entity{
 		if(!ejected) {
 			detect();
 			collide();
+			Sprite = getImage("/imgs/Monsters/UFO/UFOEject.gif");
 		}else {
 			vx = 0;
 			vy += 2;
+			Sprite = getImage("/imgs/Monsters/UFO/UFORoam.gif");
+			
+			if(shootTimer > 0) {
+				shootTimer --;
+				Sprite = getImage("/imgs/Monsters/UFO/UFOCharge.gif");
+				if(shootTimer == 0) {
+					//spawn a bullet
+				}
+			}
 		}
 		
 		x += vx;
@@ -128,6 +147,6 @@ public class UFO extends Entity{
 	public void paint(Graphics g) {
 		update();
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, (int) (x-Camera.x), (int) (y-Camera.y), dir * (int) w, (int) h, null);
+		g2.drawImage(Sprite, tx, null);
 	}
 }

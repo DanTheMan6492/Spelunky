@@ -25,7 +25,7 @@ public class Player extends Entity{
 	String state = "Walk";
 	static BufferedImage spriteSheet;
 	public static int character = 14;
-	public boolean debug = true;
+	public boolean debug = false;
 	public boolean ready = false;
 	public boolean carrying;
 	public double vxBuffer;

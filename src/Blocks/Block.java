@@ -19,6 +19,7 @@ public class Block {
 	public Entity item;
     public Image Sprite;
 	public boolean solid;
+	//public object obj;
     public AffineTransform tx;
     public static ArrayList<Block> blocks = new ArrayList<Block>();
 	
@@ -102,7 +103,10 @@ public class Block {
 	}
 	
 	public void Break() {
-		//something to spawn the item that it carries
+		if(toString().equals("block")) {
+			int mapX = x /128, mapY = y / 128;
+			LevelBuilder.level[mapY][mapX] = null;
+		}
 	}
 	
 	public void update() {
