@@ -13,15 +13,17 @@ public class bomb extends Entity{
 
 	public int timer;
 	
-	public bomb(int x, int y, int w, int h, boolean visible, String path) {
-		super(x, y, w, h, visible, path);
+	public bomb(int x, int y) {
+		super(x, y, 60, 60, true, "");
 		// TODO Auto-generated constructor stub
 		timer = 120;
-		Sprite = getImage("/img/Items/Objects/bomb_1.png");
+		Sprite = getImage("/imgs/Items/Objects/bomb_1.png");
+		grounded = false;
+		vy = 0;
 	}
 	
 	public void update() {
-		tx.setToTranslation(x - Camera.x, y - Camera.y);
+		tx.setToTranslation(x - Camera.x - 33, y - Camera.y - 39);
 		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
@@ -56,6 +58,7 @@ public class bomb extends Entity{
 		if(!grounded) {
 			vy += 2;
 		}
+		System.out.println(grounded);
 		
 		x += vx;
 		y += vy;
@@ -101,40 +104,17 @@ public class bomb extends Entity{
 					
 					//starts from the top
 					for(int i = mapY - 2; i <= mapY + 2; i ++) {
-						//the rows of the diamond are thinned with the offset to achieve diamond shape
-						for(int j = i + offset; i <= mapY + 2 - offset; j ++) {
-							count ++;
-							
-							//checks if the block exploding isn't the barrier or out of bounds
-							if(i != -1 && i != 0 && i != 33 && i != 34
-							&& j != -1 && j != 0 && j != 41 && j != 42) {
-								//breaks the block
+						for(int j = mapX - 2; j <= mapX + 2; j ++) {
+							if(i >= 0 && i < LevelBuilder.level.length
+							&& j >= 0 && j < LevelBuilder.level[0].length
+							&& LevelBuilder.level[i][j] != null) {
 								LevelBuilder.level[i][j].Break();
-							}
-							
-							//reduces the offset then increases it to achive diamond shape
-							switch(count) {
-							case 1:
-								offset = 1;
-								break;
-								
-							case 2:
-								offset = 0;
-								break;
-								
-							case 3:
-								offset = 1;
-								break;
-								
-							case 4: 
-								offset = 2;
-								break;
 							}
 						}
 					}
 				}
-				tx.setToTranslation(x - Camera.x - 128, y - Camera.y - 128);
-				Sprite = getImage("/imgs/Items/Objects/bomb_explode");
+				tx.setToTranslation(x - Camera.x - 128/2, y - Camera.y - 128/2);
+				Sprite = getImage("/imgs/Items/Objects/bomb_explode.gif");
 			}
 		}
 	}
@@ -142,9 +122,10 @@ public class bomb extends Entity{
 	public void paint(Graphics g) {
 		if(timer > 0) {
 			update();
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(Sprite, tx, null);
+			g.drawRect((int) (x - Camera.x), (int) (y - Camera.y), w, h);
 		}
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
 	}
 
 	protected Image getImage(String path) {
