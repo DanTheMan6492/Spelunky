@@ -207,7 +207,21 @@ public class Player extends Entity{
 				}else {
 					Sprite = splice(0, 9);
 				}
-		}else {
+			}
+
+			if(vy < -20) {
+				Sprite = splice(2,3);
+			}else if(vy > 20) {
+				Sprite = getImage(gs/Monsters/Caveman/cavemanStunDownward.gif");
+			}
+			
+			if(stunTimer > 0 && health > 0) {
+				stunTimer --;
+				if(stunTimer == 0) {
+					stunned = false;
+				}
+			}
+		} else {
 			//update player animation and state
 			if(!whipping){
 				if(!grounded) {
@@ -234,54 +248,7 @@ public class Player extends Entity{
 					whipping = false;
 			}
 			
-			if(stunned) {
-				
-				}
-				
-				if(vy < -20) {
-					Sprite = splice(2, 3);
-				}else if(vy > 20) {
-					Sprite = splice(2, 4);
-				}
-				
-				if(stunTimer > 0 && health > 0) {
-					stunTimer --;
-					if(stunTimer == 0) {
-						stunned = false;
-					}
-				}
-			} else{
-			switch(state) {
-			case "Standing":
-				Sprite = splice(0, 0);
-				break;
-				case "Falling":
-				if(frame < 6) {
-					Sprite = splice(9, 4+frame/2);
-				} else {
-					Sprite = splice(9, 7);
-				}
-				break;
-			case "Walking":
-				Sprite = splice(0, 1 + (frame/2)%7);
-				break;
-			case "Jumping":
-				if(frame < 3) {
-					Sprite = splice(9, frame);
-				} else {
-					Sprite = splice(9, 3);
-				}
-				break;
-			case "Whipping":
-				if(frame < 5){
-					Sprite = splice(4, frame);
-				} else{
-					Sprite = splice(4, 5);
-				}
-				break;
-			}
 			vx = vxBuffer;
-		}
 		}
 		
 		if(invincibleTimer > 0) {
