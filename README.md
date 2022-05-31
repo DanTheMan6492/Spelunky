@@ -25,22 +25,7 @@ In the game, there are a total of 21 player skins that the player can select at 
 ![Mummy](https://github.com/DanTheMan6492/Spelunky/blob/ada204c2fab9a4f0e90c1c6ec8e4f173ea649ab7/src/imgs/Monsters/Mummy/mummyWalk.gif)
 ![Olmec](https://github.com/DanTheMan6492/Spelunky/blob/ca4d344b87a6dd55fed91a0757528376e314d88b/src/imgs/Monsters/olmec.png)
 
-Thoughout your journey, you will encounter a variety of enemies which impedes your travels downward. These entities all have different actions and behaviors, which the player should do well in avoiding or analysing. Some enemies, like the mantrap, can kill immediately on contact while other entities such as the damsel dog can heal the player should they find the exit of the level. Enemies typically spawn randomly in their corresponding levels (Though there is one exeption deep, deep in the caves...), so be careful when descending down into the depths below!
-
-##### ***Item Class:***
-![Pot](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/pot.png)
-![Skull](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/rock.png)
-![Arrow](https://github.com/DanTheMan6492/Spelunky/blob/3eff2d5c8b3a34940d3e597a811f817b3e9c83cf/src/imgs/Items/Objects/arrow.png)
-
-Entities which falls neither in the weapon / equipment class nor in the player / enemies class. Usually generated in the levels randomly, and typically can be broken with a few exceptions. These usually are to be picked up by the player or opened to gain equipment or other items, which serves to be thrown to hit other enemies. Examples include pots, skulls, bombs, and many more.
-
-##### ***Equipment:***
-![Kapala Cup](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/kapala/0.png)
-![Spike Shoes](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_3.png)
-![Sticky Paste](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_4.png)
-![Spring Shoes](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Items/HUD/item_2.png)
-
-Equipment entities typically spawn in shops or crates, though can also drop from enemies dying. They typically change the character's interactions with the world when picked up, such as gaining the ability to climb vertical walls or to be able to safely bounce on certain enemies which would otherwise kill you for it.
+Thoughout your journey, you will encounter a variety of enemies which impedes your travels downward. These entities all have different actions and behaviors, which the player should do well in avoiding or analysing. Some enemies, like the mantrap, can kill immediately on contact while other entities such as the damsel dog can heal the player should they find the exit of the level. Enemies typically spawn randomly in their corresponding levels, so be careful when descending down into the depths below!
 
 ##### ***Map/Subsection/Block Class:***
 In summary, a level consists of 16 total subsections arranged in a 4x4 grid. These individual subsections arranged into a randomly generated path from the top to the bottom of the 2d array. Branching paths that lead to dead-ends or shops also exist. Each of these subsections are further broken up into 10 x 8 grids of blocks, which can vary in type, from blocks, water, lava, or nothing at all. These blocks create the template rooms used for the map, and can be broken / mined through using bombs or pickaxes. The blocks, finally, could also have gold or gems in them and can be broken for them by the player.
@@ -56,8 +41,7 @@ Each of the 4 worlds have a total of 4 levels, each with their own unique block 
 
 ![Shopkeeper](https://github.com/DanTheMan6492/Spelunky/blob/12ee22e59214b739edc947bc626fa3385670974f/src/imgs/Monsters/Shopkeep/shopkeepStand.gif)
 
-A shop is randomly generated within a branching path in a level. In a shop, people can either spend money to directly buy items, or choose to rob the store by taking the items out of it without paying or attacking the shopkeeper, which causes him to be angry and start shooting his shotgun and for armed shopkeepers to appear in most subsequent levels. Shopkeepers have an anger system based on whether the player kills or steals, and drops by 1 value for every level progressed until the level reaches back to 0, where they would stay neutral until the player once again does something.
-
+A shop is randomly generated within a branching path in a level. Purely decorative with a shopkeeper inside.
 
 ##### ***Kali Alter Class:***
 
@@ -66,7 +50,7 @@ A shop is randomly generated within a branching path in a level. In a shop, peop
 ![Kali](https://github.com/DanTheMan6492/Spelunky/blob/e774222c1e9d28265da727caaf5fb5ab7955f1f0/src/imgs/Tiles/1/7.png)
 
 
-Kali alters are special rooms generated like shops, containing a singular alter made by 2 blocks. Players are able to sacrifice stunned living entities or dead entities by placing their bodies on top of the alter, which kills them instantly and gains a favor or two depending on if the entity is alive or not. This favor lasts between levels, and should the player reach 8 favor each additional sacrifice provides a valuable equipment or item. Destroying the alter is also possible, but should be avoided as it results in -16 favor and spawns a hoard of enemies if the final favor value is negative
+Kali alters are special rooms generated like shops, which also acts as decoraition to the levels.
 
 ##### ***Other Entities:***
 
@@ -80,7 +64,7 @@ Other entities which appear throughout a level include boxes which spawns items 
 
 #### ***Money/score Class:***
 
-The money system mostly revolves around picking up randomly generated gold and treasure from around the level. This collected gold can then be spent in shops in exchange for items without angering the shopkeeper. The money also acts as a score system for the game, with the higher the money the better the score a person gets.
+The money system mostly revolves around killing enemies. It mainly acts as the score system for the game.
 
 #### ***Music / SFX Class:***
 
