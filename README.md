@@ -80,7 +80,7 @@ Other entities which appear throughout a level include boxes which spawns items 
 
 #### ***Money/score Class:***
 
-The money system mostly revolves around picking up randomly generated gold and treasure from around the level. This collected gold can then be spent in shops in exchange for items without angering the shopkeeper. The money also acts as a score system for the game, with the higher the money the better the score a person gets.
+The money system mostly revolves around killing enemies. It mainly acts as the score system for the game.
 
 #### ***Music / SFX Class:***
 
