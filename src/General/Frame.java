@@ -49,7 +49,7 @@ import object.Rock;
 import object.Whip;
 import object.object;
 import Entities.bat;
-import Entities.bomb;
+import object.bomb;
 
 import com.github.strikerx3.jxinput.XInputAxes;
 import com.github.strikerx3.jxinput.XInputAxesDelta;
@@ -77,7 +77,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static Music title;
 	public static Music[][] Tracks;
 
-	Entities.bomb bomb;
+	bomb b;
 	static double controllerPos = 0;
 
 	public static int WIDTH = 1920;
@@ -220,8 +220,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			deco.paint(g);
 		}
 
-
-		bomb.paint(g);
 		//Hud
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(getImage("/imgs/Items/HUD/bar.png"),  50, 50, null);
@@ -382,7 +380,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			while(!LevelBuilder.ready){
 				System.out.print("");
 			}
-			bomb = new bomb(Ana.x, Ana.y);
 			character_selected = true;
 		}
 	}
@@ -458,14 +455,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 
 	public static void BombThrow(){
-
+		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 50, -20));
 	}
 
 	public static void BombLob(){
-
+		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 25, -40));
 	}
 
 	public static void BombDrop(){
-		
+		LevelBuilder.objects.add( new bomb(Ana.x, Ana.y, Ana.dir * 10, 0));
 	}
 }

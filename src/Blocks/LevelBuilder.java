@@ -14,7 +14,7 @@ import Entities.Entity;
 import Entities.alien;
 import Entities.bat;
 import Entities.blueFrog;
-import Entities.bomb;
+import object.bomb;
 import Entities.caveman;
 import Entities.crocMan;
 import Entities.ghost;
