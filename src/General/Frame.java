@@ -277,7 +277,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.setFont(bfont);
 			g.drawString("You Died!", 770, 300);
 			g.setFont(font);
-			g.drawString("Final Score:" + Ana.money, 720, 500);
+			g.drawString("Final Score: " + Ana.money, 720, 500);
+			g.drawString("High Score : " + Ana.max, 720, 700);
 		}
 	}
 	

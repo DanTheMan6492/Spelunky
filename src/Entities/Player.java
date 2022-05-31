@@ -6,9 +6,13 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -34,6 +38,7 @@ public class Player extends Entity{
 	public int ropes = 4;
 	public int money = 0;
 	public int blood = 0;
+	public static int max = 0;
 	public int invincibleTimer;
 	public boolean[] equipables = {false, false, false,
 								   false, false, false,
@@ -103,6 +108,30 @@ public class Player extends Entity{
 	public void die() {
 		health = 0;
 		stunTimer = 60;
+		max = 0;
+		File myObj;
+		try {
+			myObj = new File("Highscores");
+			Scanner myReader = new Scanner(myObj);
+			max = myReader.nextInt();
+			myReader.close();
+			if(money > max){
+				max = money;
+				try {
+					PrintWriter writer = new PrintWriter(myObj);
+					writer.print(money);
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("An error occurred.");
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public void updateD() {
@@ -200,11 +229,7 @@ public class Player extends Entity{
 				}else {
 					Sprite = splice(0, 9);
 				}
-<<<<<<< HEAD
-			}else {
-=======
 			}else { 
->>>>>>> 992bea7a63e268f34d9b2b308f0bc5e9ed9ce96a
 				if(vx < 0) {
 					Sprite = splice(2, 0);
 				}else if(vx > 0) {
@@ -213,19 +238,11 @@ public class Player extends Entity{
 					Sprite = splice(0, 9);
 				}
 			}
-<<<<<<< HEAD
-
-			if(vy < -20) {
-				Sprite = splice(2,3);
-			}else if(vy > 20) {
-				Sprite = getImage(gs/Monsters/Caveman/cavemanStunDownward.gif");
-=======
 			
 			if(vy < -20) {
 				Sprite = splice(2, 3);
 			}else if(vy > 20) {
 				Sprite = splice(2, 4);
->>>>>>> 992bea7a63e268f34d9b2b308f0bc5e9ed9ce96a
 			}
 			
 			if(stunTimer > 0 && health > 0) {
@@ -234,11 +251,7 @@ public class Player extends Entity{
 					stunned = false;
 				}
 			}
-<<<<<<< HEAD
-		} else {
-=======
 		}else {
->>>>>>> 992bea7a63e268f34d9b2b308f0bc5e9ed9ce96a
 			//update player animation and state
 			if(!whipping){
 				if(!grounded) {
@@ -265,8 +278,6 @@ public class Player extends Entity{
 					whipping = false;
 			}
 			
-<<<<<<< HEAD
-=======
 			switch(state) {
 			case "Standing":
 				Sprite = splice(0, 0);
@@ -296,7 +307,6 @@ public class Player extends Entity{
 				}
 				break;
 			}
->>>>>>> 992bea7a63e268f34d9b2b308f0bc5e9ed9ce96a
 			vx = vxBuffer;
 		}
 		
