@@ -43,9 +43,9 @@ public class snake extends Entity
 	
 	public void update() {
 		if(dir == -1)
-			tx.setToTranslation(x-Camera.x+128-40, y-Camera.y-85);
+			tx.setToTranslation(x-Camera.x+128-40, y-Camera.y);
 		else
-			tx.setToTranslation(x-Camera.x-40, y-Camera.y-85);
+			tx.setToTranslation(x-Camera.x-40, y-Camera.y);
 		tx.scale(dir, 1);
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {

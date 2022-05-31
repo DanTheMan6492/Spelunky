@@ -129,6 +129,7 @@ public class Entity {
         	}
         	vx = Frame.Ana.dir * 10;
         	vy = -10;
+        	stunned = true;
         	stunTimer = 240;
         }
         
