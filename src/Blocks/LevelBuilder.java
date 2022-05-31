@@ -124,6 +124,29 @@ public class LevelBuilder {
 										decorations.add(new Block(blockID, x*128+128, y*128+128));
 										level[y+1][x+1] = new Block(1, x*128+128, y*128+128);
 										break;
+
+									//caves regular enemy
+									case 24:
+									break;
+
+									//caves hanging enemy
+									case 25:
+									break;
+
+									//jungle regular enemy
+									case 26:
+									break;
+
+									//ice caves regular enemy
+									case 27:
+									break;
+
+									//temple regular enemy
+									case 28:
+									break;
+
+									//temple mummy
+									case 29;
 									default:
 										level[y+1][x+1] = new Block(blockID, x*128+128, y*128+128);
 										break;
