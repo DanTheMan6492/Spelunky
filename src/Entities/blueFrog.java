@@ -19,6 +19,7 @@ public class blueFrog extends Entity
 		Sprite = getImage("/imgs/Monsters/BlueFrog/blueFrogStand.gif");
 		dir = 1;
 		jumpTimer = 60;
+		health = 1;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -121,10 +122,12 @@ public class blueFrog extends Entity
 	}
 
 	public void paint(Graphics g) {
-		update();
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
-		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+		if(health > 0) {
+			update();
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(Sprite, tx, null);
+			g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+		}
 	}
 
 	protected Image getImage(String path) {

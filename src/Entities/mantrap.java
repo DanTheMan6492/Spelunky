@@ -27,6 +27,7 @@ public class mantrap extends Entity
 		grounded = true;
 		waitTimer = 20;
 		Sprite = getImage("/imgs/Monsters/mantrap/mantrap_stand.gif");
+		health = 3;
 	}
 	
 	public void collide() {    
@@ -173,6 +174,8 @@ public class mantrap extends Entity
 	}
 
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null); 

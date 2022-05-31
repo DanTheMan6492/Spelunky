@@ -21,6 +21,7 @@ public class skeleton extends Entity
 		dir = 1;
 		vx = 0;
 		awakened = false;
+		health = 1;
 	}
 	
 	public void detect() {
@@ -100,6 +101,8 @@ public class skeleton extends Entity
 	}
 
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);

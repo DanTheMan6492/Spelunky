@@ -21,6 +21,7 @@ public class monkey extends Entity
 		dir = 1;
 		jumpTimer = 10;
 		Sprite = getImage("/imgs/Monsters/Monkey/monkeyStand.gif");
+		health = 1;
 	}
 	
 	public void checkRobbing() {
@@ -139,6 +140,8 @@ public class monkey extends Entity
 	}
 	
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);

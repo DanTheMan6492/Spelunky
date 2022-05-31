@@ -21,6 +21,7 @@ public class spider extends Entity
 		jumpTimer = 10;
 		hanging = true;
 		// TODO Auto-generated constructor stub
+		health = 1;
 	}
 	
 	public void detect() {
@@ -122,6 +123,8 @@ public class spider extends Entity
 	}
 	
 	public void paint(Graphics g) {
+		if(health <= 0)
+			return;
 		update();
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Sprite, tx, null);

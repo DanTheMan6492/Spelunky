@@ -67,6 +67,7 @@ public class Player extends Entity{
 		dir = -1;
 		grounded = false;
 		frame = 0;
+		health = 4;
 	}
 	
 	public void jump() {
@@ -135,33 +136,7 @@ public class Player extends Entity{
 			dir = -1;
 		else if(vx > 0)
 			dir = 1;
-
-	
-		//update player animation and state
-		if(!whipping){
-			if(!grounded) {
-				state = "Falling";
-
-				//reset animation frame if when switching animations
-				if((vy+2)/vy <= 0) 
-					frame = 0;
-
-				if(vy > 0) 
-					state = "Falling";
-				else
-					state = "Jumping";
-
-			} else {
-				if(Math.abs(vx) < 2)
-					state = "Standing";
-				else
-					state = "Walking";
-			}
-		} else{
-			state = "Whipping";
-			if(frame == 10)
-				whipping = false;
-		}
+		
 		boolean flag = false;
 		for(Block[] blockArray : LevelBuilder.level) {
 			for(Block block : blockArray) {
@@ -209,9 +184,37 @@ public class Player extends Entity{
 		if(!state.equals("Climbing"))
 			x += vx;
 		y += vy;
-
 		
-		switch(state) {
+		if(stunned) {
+			
+		}else {
+			//update player animation and state
+			if(!whipping){
+				if(!grounded) {
+					state = "Falling";
+
+					//reset animation frame if when switching animations
+					if((vy+2)/vy <= 0) 
+						frame = 0;
+
+					if(vy > 0) 
+						state = "Falling";
+					else
+						state = "Jumping";
+
+				} else {
+					if(Math.abs(vx) < 2)
+						state = "Standing";
+					else
+						state = "Walking";
+				}
+			} else{
+				state = "Whipping";
+				if(frame == 10)
+					whipping = false;
+			}
+			
+			switch(state) {
 			case "Standing":
 				Sprite = splice(0, 0);
 				break;
@@ -239,6 +242,8 @@ public class Player extends Entity{
 					Sprite = splice(4, 5);
 				}
 				break;
+			}
+			vx = vxBuffer;
 		}
 		
 		if(invincibleTimer > 0) {
@@ -250,7 +255,6 @@ public class Player extends Entity{
 		else
 			tx.setToTranslation(x-Camera.x, y-Camera.y);
 		tx.scale(dir, 1);
-		vx = vxBuffer;
 		frame++;
 		ready = true;
 	}
@@ -272,9 +276,12 @@ public class Player extends Entity{
 			return;
 		}
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
+		if(invincibleTimer > 0 && invincibleTimer % 4 == 0) {
+			
+		}else {
+			g2.drawImage(Sprite, tx, null);
+		}
 		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
-		
 	}
 	
 	

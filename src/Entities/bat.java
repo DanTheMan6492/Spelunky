@@ -19,6 +19,7 @@ public class bat extends Entity
 		hanging = true;
 		Sprite = getImage("/imgs/Monsters/Bat/batIdle.gif");
 		dir = 1;
+		health = 1;
 	}
 	
 	public void detect() 
@@ -104,10 +105,12 @@ public class bat extends Entity
 	}
 	
 	public void paint(Graphics g) {
-		update();
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Sprite, tx, null);
-		g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+		if(health > 0) {
+			update();
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(Sprite, tx, null);
+			g.drawRect((int)(x - Camera.x), (int)(y - Camera.y), w, h);
+		}
 	}
 
 	protected Image getImage(String path) {
