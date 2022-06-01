@@ -18,7 +18,7 @@ public class yeti extends Entity{
 		super(x, y, 128, 128, true, "");
 		dir = 1;
 		// TODO Auto-generated constructor stub
-		
+		whipImmunity = true;
 	}
 	
 	public void checkGround() {
@@ -38,6 +38,28 @@ public class yeti extends Entity{
 		if(stunned)
 			return;
 		
+		//spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	if(!Frame.Ana.stunned) {
+	        	Frame.Ana.vy = -20;
+	        	Frame.Ana.y = y - Frame.Ana.h - 10;
+	        	if(Frame.Ana.equipables[3]) {
+	        		die();
+	        	}else {
+	        		takeDamage(1);
+	        	}
+	        	stunned = true;
+	        	stunTimer = 240;
+	        	vx = Frame.Ana.dir * 10;
+	        	vy = -10;
+        	}
+        }
+		
     	//spelunker is to the left of entity
         if(Frame.Ana.x + Frame.Ana.w > x
         && Frame.Ana.x + Frame.Ana.w < x + w
@@ -45,6 +67,9 @@ public class yeti extends Entity{
         && Frame.Ana.y < y + h
         && Frame.Ana.y + Frame.Ana.h - 20 > y
         && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        	Frame.Ana.stunned = true;
+        	Frame.Ana.stunTimer = 240;
         	Frame.Ana.y -= 1;
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
@@ -58,30 +83,13 @@ public class yeti extends Entity{
         && Frame.Ana.y < y + h
         && Frame.Ana.y + Frame.Ana.h - 20 > y
         && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        	Frame.Ana.stunned = true;
+        	Frame.Ana.stunTimer = 240;
         	Frame.Ana.y -= 1;
 			Frame.Ana.vy = -30;
 			Frame.Ana.vx = dir * 30;
 			throwTimer = 10;
-        }
-        
-        //spelunker is above entity
-        if(Frame.Ana.y + Frame.Ana.h > y
-        && Frame.Ana.y + Frame.Ana.h < y + h
-        && Frame.Ana.x + Frame.Ana.w > x
-        && Frame.Ana.x < x + w
-        && Frame.Ana.x + Frame.Ana.w - 20 > x
-        && Frame.Ana.x + 20 < x + w) {
-        	Frame.Ana.vy = -20;
-        	Frame.Ana.y = y - Frame.Ana.h - 10;
-        	if(Frame.Ana.equipables[3]) {
-        		die();
-        	}else {
-        		takeDamage(1);
-        	}
-        	stunned = true;
-        	stunTimer = 240;
-        	vx = Frame.Ana.dir * 10;
-        	vy = -10;
         }
         
         //spelunker is below entity
@@ -147,26 +155,26 @@ public class yeti extends Entity{
 			
 			if(dir == 1) {
 				if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.gif");
 				}else if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.gif");
 				}
 			}else {
 				if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunForward.gif");
 				}else if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.png");
+					Sprite = getImage("/imgs/Monsters/Yeti/yetiStun.gif");
 				}
 			}
 			
 			if(vy < -20) {
-				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunUpward.png");
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunUpward.gif");
 			}else if(vy > 20) {
-				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunDownward.png");
+				Sprite = getImage("/imgs/Monsters/Yeti/yetiStunDownward.gif");
 			}
 			
 			if(stunTimer > 0 && health > 0) {

@@ -1,3 +1,10 @@
+//me likes
+//cool game
+//very interesting
+//fun more instructions pls
+//crazy game!
+//cool game, don't really get the objective tho
+
 package Entities;
 
 import java.awt.Graphics;

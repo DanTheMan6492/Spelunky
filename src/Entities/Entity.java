@@ -93,6 +93,27 @@ public class Entity {
     	if(stunned || stunTimer > 0)
     		return;
     	
+    	//spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.vy = -20;
+        	Frame.Ana.y = y - Frame.Ana.h - 10;
+        	if(Frame.Ana.equipables[3]) {
+        		die();
+        	}else {
+        		takeDamage(1);
+        	}
+        	vx = Frame.Ana.dir * 10;
+        	vy = -10;
+        	stunned = true;
+        	stunTimer = 240;
+        	return;
+        }
+    	
     	//spelunker is to the left of entity
         if(Frame.Ana.x + Frame.Ana.w > x
         && Frame.Ana.x + Frame.Ana.w < x + w
@@ -111,26 +132,6 @@ public class Entity {
         && Frame.Ana.y + Frame.Ana.h - 20 > y
         && Frame.Ana.y + 20 < y + h) {
         	Frame.Ana.takeDamage(damage);
-        }
-        
-        //spelunker is above entity
-        if(Frame.Ana.y + Frame.Ana.h > y
-        && Frame.Ana.y + Frame.Ana.h < y + h
-        && Frame.Ana.x + Frame.Ana.w > x
-        && Frame.Ana.x < x + w
-        && Frame.Ana.x + Frame.Ana.w - 20 > x
-        && Frame.Ana.x + 20 < x + w) {
-        	Frame.Ana.vy = -20;
-        	Frame.Ana.y = y - Frame.Ana.h - 10;
-        	if(Frame.Ana.equipables[3]) {
-        		die();
-        	}else {
-        		takeDamage(1);
-        	}
-        	vx = Frame.Ana.dir * 10;
-        	vy = -10;
-        	stunned = true;
-        	stunTimer = 240;
         }
         
         //spelunker is below entity

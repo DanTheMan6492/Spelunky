@@ -49,6 +49,75 @@ public class crocMan extends Entity{
 		}
 	}
 	
+	public void collide() {  
+		if(stunned)
+			return;
+		
+		//spelunker is above entity
+        if(Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y + Frame.Ana.h < y + h
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + Frame.Ana.w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	if(!Frame.Ana.stunned) {
+	        	Frame.Ana.vy = -20;
+	        	Frame.Ana.y = y - Frame.Ana.h - 10;
+	        	if(Frame.Ana.equipables[3]) {
+	        		die();
+	        	}else {
+	        		takeDamage(1);
+	        	}
+	        	stunned = true;
+	        	stunTimer = 240;
+	        	vx = Frame.Ana.dir * 10;
+	        	vy = -10;
+        	}
+        }
+		
+    	//spelunker is to the left of entity
+        if(Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x + Frame.Ana.w < x + w
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        	Frame.Ana.stunned = true;
+        	Frame.Ana.stunTimer = 240;
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+        }
+        
+        //spelunker is to the right of entity
+        if(Frame.Ana.x < x + w
+        && Frame.Ana.x > x
+        && Frame.Ana.y + Frame.Ana.h > y
+        && Frame.Ana.y < y + h
+        && Frame.Ana.y + Frame.Ana.h - 20 > y
+        && Frame.Ana.y + 20 < y + h) {
+        	Frame.Ana.takeDamage(damage);
+        	Frame.Ana.stunned = true;
+        	Frame.Ana.stunTimer = 240;
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+        }
+        
+        //spelunker is below entity
+        if(Frame.Ana.y < y + h
+        && Frame.Ana.y > y
+        && Frame.Ana.x + Frame.Ana.w > x
+        && Frame.Ana.x < x + w
+        && Frame.Ana.x + w - 20 > x
+        && Frame.Ana.x + 20 < x + w) {
+        	Frame.Ana.y -= 1;
+			Frame.Ana.vy = -30;
+			Frame.Ana.vx = dir * 30;
+        }
+    }
+	
 	public void update() {
 		if(dir == 1) {
 			tx.setToTranslation((int)(x - Camera.x), (int)(y - Camera.y));
@@ -108,26 +177,26 @@ public class crocMan extends Entity{
 			
 			if(dir == 1) {
 				if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.gif");
 				}else if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.gif");
 				}
 			}else {
 				if(vx < 0) {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunForward.gif");
 				}else if(vx > 0) {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunBackward.gif");
 				}else {
-					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.png");
+					Sprite = getImage("/imgs/Monsters/Crocman/crocmanStun.gif");
 				}
 			}
 			
 			if(vy < -20) {
-				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunUpward.png");
+				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunUpward.gif");
 			}else if(vy > 20) {
-				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunDownward.png");
+				Sprite = getImage("/imgs/Monsters/Crocman/crocmanStunDownward.gif");
 			}
 			
 			if(stunTimer > 0 && health > 0) {
